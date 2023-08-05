@@ -23,36 +23,6 @@
       fsType = "vfat";
     };
 
- fileSystems."/mnt/b" =
-    { device = "/dev/dev/sda2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/c" =
-    { device = "/dev/sdc3";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/d" =
-    { device = "/dev/nvme0n1p2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/g" =
-    { device = "/dev/sdd1";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/e" =
-    { device = "/dev/sdd2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/17fd6741-48bb-4b8b-b652-e58e6f1d24a2"; }
     ];

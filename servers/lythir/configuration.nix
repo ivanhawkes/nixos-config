@@ -13,8 +13,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "socks"; # Define your hostname.
+  networking.hostName = "lythir"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -56,29 +57,29 @@
   };
 
   # Make sure opengl is enabled
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  #hardware.opengl = {
+  #   enable = true;
+  #   driSupport = true;
+  #   driSupport32Bit = true;
+  # };
 
   # Tell Xorg to use the nvidia driver (also valid for Wayland)
-  services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.nvidia = {
-    # Modesetting is needed for most Wayland compositors
-    modesetting.enable = true;
+  # hardware.nvidia = {
+  #   # Modesetting is needed for most Wayland compositors
+  #   modesetting.enable = true;
 
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
-    open = false;
+  #   # Use the open source version of the kernel module
+  #   # Only available on driver 515.43.04+
+  #   open = false;
 
-    # Enable the nvidia settings menu
-    nvidiaSettings = true;
+  #   # Enable the nvidia settings menu
+  #   nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  #   # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -131,6 +132,36 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   ];
+
+# fileSystems."/mnt/b" =
+#    { device = "/dev/dev/sda2";
+#      fsType = "ntfs-3g"; 
+#      options = [ "rw" "uid=1000"];
+#    };
+
+# fileSystems."/mnt/c" =
+#    { device = "/dev/sdc3";
+#      fsType = "ntfs-3g"; 
+#      options = [ "rw" "uid=1000"];
+#    };
+
+# fileSystems."/mnt/d" =
+#    { device = "/dev/nvme0n1p2";
+#      fsType = "ntfs-3g"; 
+#      options = [ "rw" "uid=1000"];
+#    };
+
+# fileSystems."/mnt/g" =
+#    { device = "/dev/sdd1";
+#      fsType = "ntfs-3g"; 
+#      options = [ "rw" "uid=1000"];
+#    };
+
+# fileSystems."/mnt/e" =
+#    { device = "/dev/sdd2";
+#      fsType = "ntfs-3g"; 
+#      options = [ "rw" "uid=1000"];
+#    };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
