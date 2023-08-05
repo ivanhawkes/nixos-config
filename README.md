@@ -26,11 +26,11 @@ git config --global init.defaultBranch main
 
 # Reload the OS.
 ```
-sudo nano ~/nixos-config/servers/lythir/hardware-configuration.nix
-sudo cp ~/nixos-config/servers/lythir/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+sudo nano /etc/nixos/hardware-configuration.nix
+cp /etc/nixos/hardware-configuration.nix ~/nixos-config/servers/lythir/hardware-configuration.nix
 
-sudo nano ~/nixos-config/servers/lythir/configuration.nix
-sudo cp ~/nixos-config/servers/lythir/configuration.nix /etc/nixos/configuration.nix
+sudo nano /etc/nixos/configuration.nix
+cp /etc/nixos/configuration.nix ~/nixos-config/servers/lythir/configuration.nix
 
 sudo nixos-rebuild switch
 
@@ -40,7 +40,7 @@ sudo nixos-generate-config
 # Mount the drives.
 ```
 sudo mkdir /mnt/b
-sudo mkdir /mnt/c
+sudo mkdir /mnt/ce
 sudo mkdir /mnt/d
 sudo mkdir /mnt/e
 sudo mkdir /mnt/g
@@ -84,4 +84,13 @@ sudo mount -t ntfs /dev/sdd2 /mnt/e
       options = [ "rw" "uid=1000"];
     };
 
+```
+
+# Home manager.
+
+Your configuration is stored in ~/.config/nixpkgs/home.nix. Each time you modify it, rerun home-manager switch for changes to have effect.
+
+```
+nano ~/.config/nixpkgs/home.nix
+home-manager switch
 ```
