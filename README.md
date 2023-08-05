@@ -25,6 +25,7 @@ git config --global init.defaultBranch main
 ```
 
 # Reload the OS.
+```
 sudo nano ~/nixos-config/servers/lythir/hardware-configuration.nix
 sudo cp ~/nixos-config/servers/lythir/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
 
@@ -34,8 +35,10 @@ sudo cp ~/nixos-config/servers/lythir/configuration.nix /etc/nixos/configuration
 sudo nixos-rebuild switch
 
 sudo nixos-generate-config
+```
 
 # Mount the drives.
+```
 sudo mkdir /mnt/b
 sudo mkdir /mnt/c
 sudo mkdir /mnt/d
@@ -52,32 +55,33 @@ sudo mount -t ntfs /dev/sdd2 /mnt/e
 
 
  fileSystems."/mnt/b" =
-    { device = "/dev/x";
+    { device = "/dev/dev/sda2";
       fsType = "ntfs-3g"; 
       options = [ "rw" "uid=1000"];
     };
 
  fileSystems."/mnt/c" =
-    { device = "/dev/x";
+    { device = "/dev/sdc3";
       fsType = "ntfs-3g"; 
       options = [ "rw" "uid=1000"];
     };
 
  fileSystems."/mnt/d" =
-    { device = "/dev/x";
+    { device = "/dev/nvme0n1p2";
       fsType = "ntfs-3g"; 
       options = [ "rw" "uid=1000"];
     };
 
  fileSystems."/mnt/g" =
-    { device = "/dev/x";
+    { device = "/dev/sdd1";
       fsType = "ntfs-3g"; 
       options = [ "rw" "uid=1000"];
     };
 
  fileSystems."/mnt/e" =
-    { device = "/dev/x";
+    { device = "/dev/sdd2";
       fsType = "ntfs-3g"; 
       options = [ "rw" "uid=1000"];
     };
 
+```
