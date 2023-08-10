@@ -8,5 +8,6 @@
     ../roles/productivity.nix
     ../roles/user.nix
     ../roles/utility.nix
+    ../roles/electronic-design.nix
   ];
 }

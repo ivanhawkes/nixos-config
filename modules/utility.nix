@@ -9,5 +9,6 @@
     wget
     curl
     htop
+    direnv
   ];  
 }

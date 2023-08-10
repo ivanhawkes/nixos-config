@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../modules/productivity.nix
+    ../modules/electronic-design.nix
   ];
 }
