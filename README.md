@@ -1,5 +1,36 @@
 # My personal configuration files for NixOS.
 
+# Finish installing NixOS
+
+	* Open up Firefox.
+	* Log into my password manager.
+	* Use that to log into Google, Firefox.
+	* Sync my Firefox account.
+	
+# Update the OS.
+
+Follow the steps in the (guide)[https://nixos.org/manual/nixos/stable/#sec-upgrading].
+
+Alternatively - quick steps.
+
+Check which channel you are using.
+
+```
+sudo nix-channel --list
+```
+
+Upgrade it and switch.
+
+```
+sudo nixos-rebuild switch --upgrade
+```
+You can have it auto update periodically using this:
+
+```
+system.autoUpgrade.enable = true;
+system.autoUpgrade.allowReboot = false;
+```
+
 # Get my SSH keys.
 
 ```
@@ -14,13 +45,16 @@ export MACHINE=<<MACHINE_NAME>>
 echo $MACHINE
 ```
 
+# Start a Nix shell so I can use Git and VSCodium for editing.
+```
+nix-shell -p vscodium git
+```
+
 # Clone the repository.
 
 ```
-cd ~
 git clone --recursive git@github.com:ivanhawkes/nixos-config.git
 cd nixos-config
-nix-shell -p vscodium git
 ```
 
 # First run...
@@ -28,6 +62,10 @@ nix-shell -p vscodium git
 If you don't already have a folder and configuration files for this machine you will need to make some and copy the existing configuration. It's highly reccomended you make backups of the configuration files prior to rebuilding.
 
 ```
+# Force it to create new definitions if desired.
+sudo nixos-generate-config --force
+
+# Make a new configuration set for this machine.
 cp /etc/nixos/configuration.nix machines/$MACHINE/configuration.nix
 cp /etc/nixos/hardware-configuration.nix machines/$MACHINE/hardware-configuration.nix
 ```
