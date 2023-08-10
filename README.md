@@ -3,18 +3,76 @@
 # Get my SSH keys.
 
 ```
-scp ivan@odroid-hc2:/home/ivan/.ssh/* ~/.ssh
+cd ~
+scp ivan@<<SECRETS>>:/home/ivan/.ssh/* ~/.ssh
 ```
 
-# TODO:
+# Start by selecting a machine name.
 
-Pretty much all of it.
-	* dotfiles
-	* vscode config
-	* bin folder
-	* git config in home folder
-	* bash enhancements e.g. ll isn't listing -al
-	* 
+```
+export MACHINE=<<MACHINE_NAME>>
+echo $MACHINE
+```
+
+# Clone the repository.
+
+```
+cd ~
+git clone --recursive git@github.com:ivanhawkes/nixos-config.git
+cd nixos-config
+nix-shell -p vscodium git
+```
+
+# First run...
+
+If you don't already have a folder and configuration files for this machine you will need to make some and copy the existing configuration. It's highly reccomended you make backups of the configuration files prior to rebuilding.
+
+```
+cp /etc/nixos/configuration.nix machines/$MACHINE/configuration.nix
+cp /etc/nixos/hardware-configuration.nix machines/$MACHINE/hardware-configuration.nix
+```
+
+# Replace the existing NixOS configuration.
+
+```
+# Just have a peek first.
+ls -al /etc/nixos/
+
+# Remove the existing files.
+sudo rm -f /etc/nixos/configuration.nix
+sudo rm -f /etc/nixos/hardware-configuration.nix
+
+# Replace with our versions.
+sudo ln -s ~/nixos-config/machines/$MACHINE/configuration.nix /etc/nixos/configuration.nix
+sudo ln -s ~/nixos-config/machines/$MACHINE/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+
+# Test the new build.
+sudo nixos-rebuild test
+```
+
+# XXX.
+
+```
+```
+
+
+# XXX.
+
+```
+```
+
+
+# XXX.
+
+```
+```
+
+
+# XXX.
+
+```
+```
+
 
 # Git config
 
@@ -27,10 +85,10 @@ git config --global init.defaultBranch main
 # Reload the OS.
 ```
 sudo nano /etc/nixos/hardware-configuration.nix
-cp /etc/nixos/hardware-configuration.nix ~/nixos-config/servers/lythir/hardware-configuration.nix
+cp /etc/nixos/hardware-configuration.nix ~/nixos-config/servers/$MACHINE/hardware-configuration.nix
 
 sudo nano /etc/nixos/configuration.nix
-cp /etc/nixos/configuration.nix ~/nixos-config/servers/lythir/configuration.nix
+cp /etc/nixos/configuration.nix ~/nixos-config/servers/$MACHINE/configuration.nix
 
 sudo nixos-rebuild switch
 
@@ -85,6 +143,19 @@ sudo mount -t ntfs /dev/sdd2 /mnt/e
     };
 
 ```
+
+
+
+# TODO:
+
+Pretty much all of it.
+	* dotfiles
+	* vscode config
+	* bin folder
+	* git config in home folder
+	* bash enhancements e.g. ll isn't listing -al
+
+
 
 # Home manager.
 
