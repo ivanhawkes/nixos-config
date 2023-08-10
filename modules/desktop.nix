@@ -5,13 +5,21 @@
     ./fonts.nix
   ];
 
-  environment.systemPackages = with pkgs; [
+  # Discord is an unfree application.
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "discord"
+  ];
+  
+environment.systemPackages = with pkgs; [
     # Typical desktop packages.
     firefox
     google-chrome
     krita
     inkscape
     vlc
+
+    # Communications.
+    discord
   ];  
 
 
