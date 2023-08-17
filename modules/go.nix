@@ -3,8 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     go
+    gopls
   ];
-  # my-config.vscodeExtensions = with (import ../vscode-extensions.nix pkgs); [
-  #   Go
-  # ];
 }

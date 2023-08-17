@@ -88,11 +88,29 @@ sudo ln -s ~/nixos-config/machines/$MACHINE/hardware-configuration.nix /etc/nixo
 sudo nixos-rebuild test
 ```
 
-## XXX.
+## Move in my typical shell scripts.
 
 ```
+# Shell configuration.
+ln -s nixos-config/users/ivan/.bashrc .bashrc
+ln -s nixos-config/users/ivan/.profile .profile
+ln -s nixos-config/users/ivan/.imwheel .imwheel
 ```
 
+# Handy scripts I use.
+```
+# Fast logins to SSH servers.
+ln -s $HOME/nixos-config/users/ivan/bin/de10-nano $HOME/bin/de10-nano
+ln -s $HOME/nixos-config/users/ivan/bin/dns-server $HOME/bin/dns-server
+ln -s $HOME/nixos-config/users/ivan/bin/mercury $HOME/bin/mercury
+ln -s $HOME/nixos-config/users/ivan/bin/venus $HOME/bin/venus
+
+# Janky backup.
+ln -s $HOME/nixos-config/users/ivan/bin/backup.sh $HOME/bin/backup.sh
+
+# Set the mouse speed and scrolling speed.
+ln -s $HOME/nixos-config/users/ivan/bin/mousespeed.sh $HOME/bin/mousespeed.sh
+```
 
 ## XXX.
 

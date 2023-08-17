@@ -19,6 +19,7 @@
     gcc-arm-embedded
     clang
     llvm
+    gnumake
 
     # Debugging / static analysis.
     valgrind
