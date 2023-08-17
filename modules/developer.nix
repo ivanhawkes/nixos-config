@@ -16,10 +16,23 @@
     
     # Compilers.
     gcc
-    gcc-arm-embedded
     clang
     llvm
     gnumake
+
+    # Debuggers
+    gdb
+
+    # Raspberry Pi Pico
+    gcc-arm-embedded
+    libtool
+    automake
+    autoconf
+    texinfo
+    libtool
+    libftdi
+    libusb1
+    pkg-config
 
     # Debugging / static analysis.
     valgrind

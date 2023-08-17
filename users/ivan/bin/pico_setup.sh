@@ -19,8 +19,7 @@ OUTDIR="$(pwd)/pico"
 GIT_DEPS="git"
 SDK_DEPS="cmake gcc-arm-none-eabi gcc g++"
 OPENOCD_DEPS="gdb-multiarch automake autoconf build-essential texinfo libtool libftdi-dev libusb-1.0-0-dev"
-# Wget to download the deb
-VSCODE_DEPS="wget"
+VSCODE_DEPS="code"
 UART_DEPS="minicom"
 
 # Build full list of dependencies
@@ -30,12 +29,6 @@ if [[ "$SKIP_OPENOCD" == 1 ]]; then
     echo "Skipping OpenOCD (debug support)"
 else
     DEPS="$DEPS $OPENOCD_DEPS"
-fi
-
-if [[ "$SKIP_VSCODE" == 1 ]]; then
-    echo "Skipping VSCODE"
-else
-    DEPS="$DEPS $VSCODE_DEPS"
 fi
 
 echo "Installing Dependencies"
@@ -106,6 +99,7 @@ do
 
     # Build both
     cd $DEST
+    git submodule update --init
     mkdir build
     cd build
     cmake ../
@@ -132,10 +126,9 @@ else
     cd $OUTDIR
     # Should we include picoprobe support (which is a Pico acting as a debugger for another Pico)
     INCLUDE_PICOPROBE=1
-    OPENOCD_BRANCH="rp2040"
+    OPENOCD_BRANCH="rp2040-v0.12.0"
     OPENOCD_CONFIGURE_ARGS="--enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio"
     if [[ "$INCLUDE_PICOPROBE" == 1 ]]; then
-        OPENOCD_BRANCH="picoprobe"
         OPENOCD_CONFIGURE_ARGS="$OPENOCD_CONFIGURE_ARGS --enable-picoprobe"
     fi
 
@@ -149,30 +142,16 @@ fi
 
 cd $OUTDIR
 
-# Liam needed to install these to get it working
-EXTRA_VSCODE_DEPS="libx11-xcb1 libxcb-dri3-0 libdrm2 libgbm1 libegl-mesa0"
 if [[ "$SKIP_VSCODE" == 1 ]]; then
-    echo "Won't include VSCODE"
+    echo "Skipping VSCODE"
 else
-    if [ -f vscode.deb ]; then
-        echo "Skipping vscode as vscode.deb exists"
-    else
-        echo "Installing VSCODE"
-        if uname -m | grep -q aarch64; then
-            VSCODE_DEB="https://aka.ms/linux-arm64-deb"
-        else
-            VSCODE_DEB="https://aka.ms/linux-armhf-deb"
-        fi
+    echo "Installing VSCODE"
+    sudo apt install -y $VSCODE_DEPS
 
-        wget -O vscode.deb $VSCODE_DEB
-        sudo apt install -y ./vscode.deb
-        sudo apt install -y $EXTRA_VSCODE_DEPS
-
-        # Get extensions
-        code --install-extension marus25.cortex-debug
-        code --install-extension ms-vscode.cmake-tools
-        code --install-extension ms-vscode.cpptools
-    fi
+    # Get extensions
+    code --install-extension marus25.cortex-debug
+    code --install-extension ms-vscode.cmake-tools
+    code --install-extension ms-vscode.cpptools
 fi
 
 # Enable UART

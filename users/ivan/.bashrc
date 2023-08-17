@@ -116,10 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PICO_EXAMPLES_PATH=~/Projects/pico/pico-examples
-export PICO_EXTRAS_PATH=~/Projects/pico/pico-extras
-export PICO_PLAYGROUND_PATH=~/Projects/pico/pico-playground
-export PICO_SDK_PATH=~/Projects/pico/pico-sdk
+export PICO_EXAMPLES_PATH=~/Projects/pico-examples
+export PICO_EXTRAS_PATH=~/Projects/pico-extras
+export PICO_PLAYGROUND_PATH=~/Projects/pico-playground
+export PICO_SDK_PATH=~/Projects/pico-sdk
 
 # Minicom
 export MINICOM='-con'
