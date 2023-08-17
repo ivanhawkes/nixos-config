@@ -4,12 +4,19 @@
   imports = [
   ];
 
+  # Allow unfree applications.
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "vscode"
+  ];
+  
+
   environment.systemPackages = with pkgs; [
     # IDE.
-    vscodium
+    vscode
     
     # Compilers.
     gcc
+    gcc-arm-embedded
     clang
     llvm
 

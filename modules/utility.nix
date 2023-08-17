@@ -10,5 +10,11 @@
     curl
     htop
     direnv
+
+    # Make use of the USB utilities.
+    usbutils
+    
+    # Load firmware into devices in user space.
+    fxload
   ];  
 }

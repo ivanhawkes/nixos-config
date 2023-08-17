@@ -20,6 +20,10 @@ environment.systemPackages = with pkgs; [
 
     # Communications.
     discord
+
+    # File sharing.
+    #dropbox
+    # Needs updating / work to install.
   ];  
 
 
