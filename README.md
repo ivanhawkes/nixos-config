@@ -120,9 +120,9 @@ ln -s $HOME/nixos-config/users/ivan/.local/bin/backup.sh $HOME/.local/bin/backup
 ln -s $HOME/nixos-config/users/ivan/.local/bin/mousespeed.sh $HOME/.local/bin/mousespeed.sh
 ```
 
-## Fish shell.
+## Extra shells.
 ```
-sudo apt install fish
+sudo apt install zsh fish
 ```
 
 
