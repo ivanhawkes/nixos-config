@@ -120,26 +120,23 @@ ln -s $HOME/nixos-config/users/ivan/.local/bin/backup.sh $HOME/.local/bin/backup
 ln -s $HOME/nixos-config/users/ivan/.local/bin/mousespeed.sh $HOME/.local/bin/mousespeed.sh
 ```
 
-## XXX.
-
+## Fish shell.
 ```
-```
-
-
-## XXX.
-
-```
+sudo apt install fish
 ```
 
 
 ## XXX.
+```
+```
 
+
+## XXX.
 ```
 ```
 
 
 ## Git config
-
 ```
 git config --global user.email "ivan.hawkes@gmail.com"
 git config --global user.name "Ivan Hawkes"
@@ -208,8 +205,6 @@ sudo mount -t ntfs /dev/sdd2 /mnt/e
 
 ```
 
-
-
 ## TODO:
 
 Pretty much all of it.
@@ -218,8 +213,6 @@ Pretty much all of it.
 	* bin folder
 	* git config in home folder
 	* bash enhancements e.g. ll isn't listing -al
-
-
 
 ## Home manager.
 
