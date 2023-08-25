@@ -90,26 +90,34 @@ sudo nixos-rebuild test
 
 ## Move in my typical shell scripts.
 
+Use the shell script for this:
+```
+$HOME/nixos-config/users/ivan/.local/bin/install-scripts.sh
+```
+
+Or do it the long way.
+
 ```
 # Shell configuration.
-ln -s nixos-config/users/ivan/.bashrc .bashrc
-ln -s nixos-config/users/ivan/.profile .profile
-ln -s nixos-config/users/ivan/.imwheel .imwheel
+ln -s $HOME/nixos-config/users/ivan/.bashrc .bashrc
+ln -s $HOME/nixos-config/users/ivan/.profile .profile
+ln -s $HOME/nixos-config/users/ivan/.imwheel .imwheel
 ```
 
 # Handy scripts I use.
 ```
 # Fast logins to SSH servers.
-ln -s $HOME/nixos-config/users/ivan/bin/de10-nano $HOME/bin/de10-nano
-ln -s $HOME/nixos-config/users/ivan/bin/dns-server $HOME/bin/dns-server
-ln -s $HOME/nixos-config/users/ivan/bin/mercury $HOME/bin/mercury
-ln -s $HOME/nixos-config/users/ivan/bin/venus $HOME/bin/venus
+ln -s $HOME/nixos-config/users/ivan/.local/bin/odroid-hc2 $HOME/.local/bin/odroid-hc2
+ln -s $HOME/nixos-config/users/ivan/.local/bin/de10-nano $HOME/.local/bin/de10-nano
+ln -s $HOME/nixos-config/users/ivan/.local/bin/dns-server $HOME/.local/bin/dns-server
+ln -s $HOME/nixos-config/users/ivan/.local/bin/mercury $HOME/.local/bin/mercury
+ln -s $HOME/nixos-config/users/ivan/.local/bin/venus $HOME/.local/bin/venus
 
 # Janky backup.
-ln -s $HOME/nixos-config/users/ivan/bin/backup.sh $HOME/bin/backup.sh
+ln -s $HOME/nixos-config/users/ivan/.local/bin/backup.sh $HOME/.local/bin/backup.sh
 
 # Set the mouse speed and scrolling speed.
-ln -s $HOME/nixos-config/users/ivan/bin/mousespeed.sh $HOME/bin/mousespeed.sh
+ln -s $HOME/nixos-config/users/ivan/.local/bin/mousespeed.sh $HOME/.local/bin/mousespeed.sh
 ```
 
 ## XXX.
