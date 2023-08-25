@@ -104,7 +104,7 @@ ln -s $HOME/nixos-config/users/ivan/.profile .profile
 ln -s $HOME/nixos-config/users/ivan/.imwheel .imwheel
 ```
 
-# Handy scripts I use.
+## Handy scripts I use.
 ```
 # Fast logins to SSH servers.
 ln -s $HOME/nixos-config/users/ivan/.local/bin/odroid-hc2 $HOME/.local/bin/odroid-hc2
