@@ -6,9 +6,12 @@
 ## Move in my typical shell scripts.
 
 # Shell configuration.
-ln -s $HOME/nixos-config/users/ivan/.bashrc .bashrc
-ln -s $HOME/nixos-config/users/ivan/.profile .profile
-ln -s $HOME/nixos-config/users/ivan/.imwheel .imwheel
+ln -s $HOME/nixos-config/users/ivan/.bashrc $HOME/.bashrc
+ln -s $HOME/nixos-config/users/ivan/.profile $HOME/.profile
+ln -s $HOME/nixos-config/users/ivan/.imwheel $HOME/.imwheel
+
+# Clang formatting rules for VS Code C++.
+ln -s $HOME/nixos-config/users/ivan/.clang-format $HOME/.clang-format
 
 # Fast logins to SSH servers.
 ln -s $HOME/nixos-config/users/ivan/.local/bin/de10-nano $HOME/.local/bin/de10-nano

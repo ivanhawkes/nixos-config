@@ -85,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -129,3 +129,6 @@ export OPENOCD_SCRIPTS=/usr/local/share/openocd/scripts/	# Built from code versi
 #export OPENOCD_SCRIPTS=/usr/share/openocd/scripts		# re-installed version.
 
 export QSYS_ROOTDIR="/home/ivan/intelFPGA_lite/21.1/quartus/sopc_builder/bin"
+
+# Hint that CMake should use Ninja as the build system.
+export CMAKE_GENERATOR="Ninja"
