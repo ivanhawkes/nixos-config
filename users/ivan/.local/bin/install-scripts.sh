@@ -4,9 +4,14 @@
 
 
 ## Move in my typical shell scripts.
-mkdir $HOME/.local/bin
+
+# Get Alacritty configured.
+mkdir $HOME/.config/alacritty/
+rm $HOME/.config/alacritty/alacritty.yml
+ln -s $HOME/nixos-config/users/ivan/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 # Shell configuration.
+mkdir $HOME/.local/bin
 rm $HOME/{.bashrc,.profile,.imwheel}
 ln -s $HOME/nixos-config/users/ivan/.bashrc $HOME/.bashrc
 ln -s $HOME/nixos-config/users/ivan/.profile $HOME/.profile
