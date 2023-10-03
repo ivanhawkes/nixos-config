@@ -23,11 +23,12 @@ rm $HOME/.clang-format
 ln -s $HOME/nixos-config/users/ivan/.clang-format $HOME/.clang-format
 
 # Fast logins to SSH servers.
-rm $HOME/.local/bin/{de10-nano,dns-server,mercury,venus}
+rm $HOME/.local/bin/{de10-nano,dns-server,mercury,venus,odroid-hc2}
 ln -s $HOME/nixos-config/users/ivan/.local/bin/de10-nano $HOME/.local/bin/de10-nano
 ln -s $HOME/nixos-config/users/ivan/.local/bin/dns-server $HOME/.local/bin/dns-server
 ln -s $HOME/nixos-config/users/ivan/.local/bin/mercury $HOME/.local/bin/mercury
 ln -s $HOME/nixos-config/users/ivan/.local/bin/venus $HOME/.local/bin/venus
+ln -s $HOME/nixos-config/users/ivan/.local/bin/odroid-hc2 $HOME/.local/bin/odroid-hc2
 
 # Janky backup.
 rm $HOME/.local/bin/backup.sh
