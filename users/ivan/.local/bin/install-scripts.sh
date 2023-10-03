@@ -6,6 +6,7 @@
 ## Move in my typical shell scripts.
 
 # Get Alacritty configured.
+mkdir $HOME/.config
 mkdir $HOME/.config/alacritty/
 rm $HOME/.config/alacritty/alacritty.yml
 ln -s $HOME/nixos-config/users/ivan/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
