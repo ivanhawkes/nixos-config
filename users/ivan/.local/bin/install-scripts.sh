@@ -15,6 +15,10 @@ if [ ! -d "$HOME/.local/bin" ]; then
     mkdir $HOME/.local/bin
 fi
 
+if [ ! -d "$HOME/projects" ]; then
+    mkdir $HOME/projects
+fi
+
 # Get Alacritty configured.
 if [ ! -d "$HOME/.config/alacritty" ]; then
     mkdir $HOME/.config/alacritty
