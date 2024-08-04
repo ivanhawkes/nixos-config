@@ -16,5 +16,8 @@
     
     # Load firmware into devices in user space.
     fxload
+
+    # Manage your dotfiles.
+    stow
   ];  
 }
