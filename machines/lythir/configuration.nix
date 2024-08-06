@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
+      # My user is included.
       ../../users/ivan/ivan.nix
     ];
 
@@ -74,7 +75,7 @@
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
@@ -90,7 +91,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -125,7 +126,7 @@
   users.users.ivan = {
     isNormalUser = true;
     description = "Ivan Hawkes";
-    extraGroups = [ "networkmanager" "wheel" "dialout" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
     packages = with pkgs; [
       wget
       curl      

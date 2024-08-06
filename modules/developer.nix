@@ -42,6 +42,7 @@
 
     # Build utilities.
     cmake
+    ninja
 
     # Scripting.
     python3

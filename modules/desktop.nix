@@ -17,6 +17,7 @@ environment.systemPackages = with pkgs; [
     krita
     inkscape
     vlc
+    transmission-remote-gtk
 
     # Communications.
     discord

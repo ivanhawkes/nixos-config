@@ -11,6 +11,9 @@
     htop
     direnv
 
+    # Pretty print machine info at the command line.
+    neofetch
+
     # Make use of the USB utilities.
     usbutils
     
