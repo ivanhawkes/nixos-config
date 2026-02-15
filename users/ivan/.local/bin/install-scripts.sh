@@ -56,6 +56,6 @@ rm -f $HOME/.local/bin/clone-pico-libraries.sh
 ln -s $HOME/nixos-config/users/ivan/.local/bin/clone-pico-libraries.sh $HOME/.local/bin/clone-pico-libraries.sh
 
 # Media file renaming utility. Only needed on the media server.
-rm -f $HOME/.local/bin/renamer.sh
-ln -s $HOME/nixos-config/users/ivan/.local/bin/renamer.sh $HOME/.local/bin/renamer.sh
+rm -f $HOME/.local/bin/rename.sh
+ln -s $HOME/nixos-config/users/ivan/.local/bin/rename.sh $HOME/.local/bin/rename.sh
 
