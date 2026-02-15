@@ -45,6 +45,7 @@ ln -s $HOME/nixos-config/users/ivan/.local/bin/mister $HOME/.local/bin/mister
 ln -s $HOME/nixos-config/users/ivan/.local/bin/odroid-hc2 $HOME/.local/bin/odroid-hc2
 ln -s $HOME/nixos-config/users/ivan/.local/bin/velma $HOME/.local/bin/velma
 ln -s $HOME/nixos-config/users/ivan/.local/bin/venus $HOME/.local/bin/venus
+ln -s $HOME/nixos-config/users/ivan/.local/bin/veronica $HOME/.local/bin/veronica
 
 # Janky backup.
 rm -f $HOME/.local/bin/backup.sh

@@ -21,9 +21,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Causes an error when run here.
-#imwheel --kill
-
 # Setup the SDK environment for Vulkan.
 #. vulkan-sdk/setup-env.sh
 
