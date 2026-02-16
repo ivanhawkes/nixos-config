@@ -10,7 +10,7 @@
 	
 ## Update the OS.
 
-Follow the steps in the (guide)[https://nixos.org/manual/nixos/stable/#sec-upgrading].
+Follow the steps in the [guide](https://nixos.org/manual/nixos/stable/#sec-upgrading).
 
 Alternatively - quick steps.
 
@@ -89,53 +89,18 @@ sudo ln -s ~/nixos-config/machines/$MACHINE/hardware-configuration.nix /etc/nixo
 sudo nixos-rebuild test
 ```
 
-## Move in my typical shell scripts.
+##### Move in our dot files.
 
-Use the shell script for this:
-```
-$HOME/nixos-config/users/ivan/.local/bin/install-scripts.sh
-```
+Instructions are in the original [post](https://github.com/ivanhawkes/dotfiles) on this subject.
 
-Or do it the long way.
-
+```bash
+cd ~
+sudo apt install stow git git-lfs
+git clone git@github.com:ivanhawkes/dotfiles.git
+cd ~/dotfiles
+stow --adopt .
+cd ~
 ```
-# Shell configuration.
-ln -s $HOME/nixos-config/users/ivan/.bashrc .bashrc
-ln -s $HOME/nixos-config/users/ivan/.profile .profile
-ln -s $HOME/nixos-config/users/ivan/.imwheel .imwheel
-```
-
-## Handy scripts I use.
-```
-# Fast logins to SSH servers.
-ln -s $HOME/nixos-config/users/ivan/.local/bin/odroid-hc2 $HOME/.local/bin/odroid-hc2
-ln -s $HOME/nixos-config/users/ivan/.local/bin/de10-nano $HOME/.local/bin/de10-nano
-ln -s $HOME/nixos-config/users/ivan/.local/bin/dns-server $HOME/.local/bin/dns-server
-ln -s $HOME/nixos-config/users/ivan/.local/bin/mercury $HOME/.local/bin/mercury
-ln -s $HOME/nixos-config/users/ivan/.local/bin/venus $HOME/.local/bin/venus
-
-# Janky backup.
-ln -s $HOME/nixos-config/users/ivan/.local/bin/backup.sh $HOME/.local/bin/backup.sh
-
-# Set the mouse speed and scrolling speed.
-ln -s $HOME/nixos-config/users/ivan/.local/bin/mousespeed.sh $HOME/.local/bin/mousespeed.sh
-```
-
-## Extra shells.
-```
-sudo apt install zsh fish
-```
-
-
-## XXX.
-```
-```
-
-
-## XXX.
-```
-```
-
 
 ## Git config
 ```
@@ -208,12 +173,7 @@ sudo mount -t ntfs /dev/sdd2 /mnt/e
 
 ## TODO:
 
-Pretty much all of it.
-	* dotfiles
 	* vscode config
-	* bin folder
-	* git config in home folder
-	* bash enhancements e.g. ll isn't listing -al
 
 ## Home manager.
 
