@@ -6,6 +6,7 @@
 	* Log into my password manager.
 	* Use that to log into Google, Firefox.
 	* Sync my Firefox account.
+  * Check the [post](https://ivanhawkes.github.io/post/moving-into-ubuntu/) on setting up a new Ubuntu machine.
 	
 ## Update the OS.
 
