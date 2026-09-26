@@ -124,8 +124,9 @@
 
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
+    (pkgs.nvtopPackages.nvidia)
   ];
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
