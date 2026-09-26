@@ -20,7 +20,16 @@
   networking.hostName = "lythir"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
+  # Enable the official Nvidia driver
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false; # Set to true if you prefer Nvidia's open-source kernel modules (Turing+ GPUs)
+  };
+  
+    # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -85,6 +94,7 @@
       wget
       curl      
       git
+      git-lfs
       firefox
     ];
   };
@@ -97,10 +107,9 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+  environment.systemPackages = [
+    (pkgs.llama-cpp.override { cudaSupport = true; })
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
