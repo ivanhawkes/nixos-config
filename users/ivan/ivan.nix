@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../../roles/desktop.nix
     ../../roles/user.nix
+    ../../roles/desktop.nix
     ../../roles/utility.nix
 #    ../../roles/developer.nix
 #    ../../roles/media.nix

@@ -15,6 +15,12 @@ environment.systemPackages = with pkgs; [
     firefox
 #    google-chrome
 
+    # Decent editor for getting started
+    vscodium
+
+    # Git is too useful to not have by default
+    git
+
     # Manage your dotfiles
     stow
     

@@ -9,6 +9,7 @@
     wget
     curl
     htop
+    btop
     direnv
 
     # Make use of the USB utilities.
