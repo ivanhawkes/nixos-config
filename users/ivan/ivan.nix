@@ -3,11 +3,11 @@
 {
   imports = [
     ../../roles/desktop.nix
-    ../../roles/developer.nix
-    ../../roles/media.nix
-    ../../roles/productivity.nix
     ../../roles/user.nix
     ../../roles/utility.nix
-    ../../roles/electronic-design.nix
+#    ../../roles/developer.nix
+#    ../../roles/media.nix
+#    ../../roles/productivity.nix
+#    ../../roles/electronic-design.nix
   ];
 }

@@ -6,26 +6,26 @@
   ];
 
   # Discord is an unfree application.
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "discord"
-  ];
+#  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+#      "discord"
+#  ];
   
 environment.systemPackages = with pkgs; [
     # Typical desktop packages.
     firefox
-    google-chrome
-    krita
-    inkscape
-    vlc
+#    google-chrome
 
     # Manage your dotfiles
     stow
     
+    # Pretty print machine info at the command line.
+    #neofetch
+
     #kicad
     #freecad
 
     # Communications.
-    discord
+ #   discord
 
     # Shiny new terminal
     alacritty

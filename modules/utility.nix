@@ -11,16 +11,10 @@
     htop
     direnv
 
-    # Pretty print machine info at the command line.
-    #neofetch
-
     # Make use of the USB utilities.
-    usbutils
+#    usbutils
     
     # Load firmware into devices in user space.
-    fxload
-
-    # Manage your dotfiles.
-    stow
+ #   fxload
   ];  
 }
