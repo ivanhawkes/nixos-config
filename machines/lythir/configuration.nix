@@ -20,16 +20,33 @@
   networking.hostName = "lythir"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable the official Nvidia driver
-  hardware.graphics.enable = true;
+  # Enable OpenGL / hardware graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Recommended for Steam / wine 32-bit games
+  };
+
+  # Tell Xserver/Wayland to use the nvidia driver alongside modesetting
   services.xserver.videoDrivers = [ "nvidia" ];
-  
+
   hardware.nvidia = {
+    # Modesetting is required for most modern WMs/DEs (Wayland and X11)
     modesetting.enable = true;
-    open = false; # Set to true if you prefer Nvidia's open-source kernel modules (Turing+ GPUs)
+
+    # Set to false to use the fully proprietary kernel module instead of the open-source kernel module variant.
+    # Note: RTX 40-series and 50-series support the open kernel modules (`open = true`), 
+    # but setting `open = false` strictly forces the completely proprietary kernel module.
+    open = true;
+
+    # Enable the nvidia-settings utility
+    nvidiaSettings = true;
+
+    # Select the stable driver package (or switch to another like config.boot.kernelPackages.nvidiaPackages.stable)
+#    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   
-    # Configure network proxy if necessary
+  # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -105,12 +122,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = [
     (pkgs.llama-cpp.override { cudaSupport = true; })
   ];
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
