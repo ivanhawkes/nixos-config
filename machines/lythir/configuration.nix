@@ -73,11 +73,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  # 1. Enable the Docker daemon
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."ivan" = {
     isNormalUser = true;
     description = "Ivan Hawkes";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "docker" ];
     packages = with pkgs; [
       wget
       curl      
@@ -142,4 +145,34 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "26.05"; # Did you read the comment?
 
+   # Set Zsh as the default shell for your user
+  users.users.ivan = {
+    shell = pkgs.zsh;
+  };
+
+  # Make sure Zsh is listed in valid system shells
+  environment.shells = [ pkgs.zsh ];
+
+  # Enable and configure Zsh + Oh My Zsh
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
+        "docker-compose"
+        "history"
+        "alias-finder"
+        "colored-man-pages"
+        "command-not-found"
+      ];
+    };
+  };
 }

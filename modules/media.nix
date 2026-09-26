@@ -14,9 +14,9 @@
     vlc
 
     # Audio production.
-    jack2
-    qjackctl
-    reaper
+#    jack2
+#    qjackctl
+#    reaper
 
     # Video production.
     handbrake

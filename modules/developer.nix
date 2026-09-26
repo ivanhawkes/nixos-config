@@ -12,7 +12,7 @@
 
   environment.systemPackages = with pkgs; [
     # IDE.
-    vscode
+    #vscode
     vscodium
     
     # Compilers.
@@ -21,29 +21,29 @@
     llvm
     gnumake
 
-    # Debuggers
-    gdb
-
-    # Raspberry Pi Pico
-    gcc-arm-embedded
-    libtool
-    automake
-    autoconf
-    texinfo
-    libtool
-    libftdi
-    libusb1
-    pkg-config
-
-    # Debugging / static analysis.
-    valgrind
-
-    # Source control.
-    git
-
     # Build utilities.
     cmake
     ninja
+
+    # Debuggers
+    gdb
+
+    # Makes Docker far easier to manage.
+    docker-compose
+
+    # Raspberry Pi Pico
+    #gcc-arm-embedded
+    #libtool
+    #automake
+    #autoconf
+    #texinfo
+    #libtool
+    #libftdi
+    #libusb1
+    #pkg-config
+
+    # Debugging / static analysis.
+    #valgrind
 
     # Scripting.
     python3
