@@ -20,6 +20,9 @@
   networking.hostName = "lythir"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Allow experimental settings so I can use flake.
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Enable OpenGL / hardware graphics
   hardware.graphics = {
     enable = true;

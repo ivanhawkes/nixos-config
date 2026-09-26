@@ -9,6 +9,10 @@
       "vscode"
   ];
   
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     # IDE.
@@ -16,17 +20,17 @@
     vscodium
     
     # Compilers.
-    gcc
-    clang
-    llvm
-    gnumake
+    #gcc
+    #clang
+    #llvm
+    #gnumake
 
     # Build utilities.
-    cmake
-    ninja
+    #cmake
+    #ninja
 
     # Debuggers
-    gdb
+    #gdb
 
     # Makes Docker far easier to manage.
     docker-compose
@@ -46,9 +50,9 @@
     #valgrind
 
     # Scripting.
-    python3
+    #python3
 
     # Static web pages.
-    hugo
+    #hugo
   ];  
 }
