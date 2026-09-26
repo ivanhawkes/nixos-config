@@ -95,11 +95,19 @@ Instructions are in the original [post](https://github.com/ivanhawkes/dotfiles) 
 
 ```bash
 cd ~
-sudo apt install stow git git-lfs
-git clone git@github.com:ivanhawkes/dotfiles.git
-cd ~/dotfiles
-stow --adopt .
-cd ~
+git clone git@github.com:ivanhawkes/dotfiles.git ~/.dotfiles
+
+## Remove any files that typically prevent the stow command from working.
+rm ~/.bashrc ~/.profile ~/.zshrc
+
+cd ~/.dotfiles
+stow .
+
+# Import all the ZSH environment variables into our working environment.
+source ~/.zshrc
+
+# If you want to start using it right away. You will not to log in and out again if you don't.
+zsh
 ```
 
 ## Git config

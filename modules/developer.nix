@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     # IDE.
     vscode
+    vscodium
     
     # Compilers.
     gcc
@@ -48,8 +49,6 @@
     python3
 
     # Static web pages.
-    nodejs_20
     hugo
-    nodePackages.gulp-cli
   ];  
 }
