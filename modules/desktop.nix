@@ -10,33 +10,41 @@
 #      "discord"
 #  ];
   
-environment.systemPackages = with pkgs; [
-    # Typical desktop packages.
+  environment.systemPackages = with pkgs; [
+    # Browsers.
     firefox
-#    google-chrome
+    google-chrome
 
-    # Decent editor for getting started
+    # Code editor.
     vscodium
 
-    # Git is too useful to not have by default
-    git
-
-    # Manage your dotfiles
+    # Dotfile management.
     stow
     
-    # Pretty print machine info at the command line.
-    #neofetch
-
-    #kicad
-    #freecad
-
     # Communications.
- #   discord
+    #discord
 
     # Shiny new terminal
     alacritty
-];  
 
+    # Artwork.
+    krita
+    inkscape
+    blender
+
+    # Video playback.
+    vlc
+
+    # Audio production.
+#    jack2
+#    qjackctl
+#    reaper
+
+    # Video production.
+    handbrake
+    #ffmpeg
+    #obs-studio
+  ];  
 
   hardware.enableAllFirmware = true;
 

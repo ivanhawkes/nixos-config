@@ -15,10 +15,15 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # We can install the tools ad hoc if the devenv package is available.
+    devenv
+
     # IDE.
-    #vscode
     vscodium
     
+    # Makes Docker far easier to manage.
+    docker-compose
+
     # Compilers.
     #gcc
     #clang
@@ -31,9 +36,6 @@
 
     # Debuggers
     #gdb
-
-    # Makes Docker far easier to manage.
-    docker-compose
 
     # Raspberry Pi Pico
     #gcc-arm-embedded
@@ -51,8 +53,5 @@
 
     # Scripting.
     #python3
-
-    # Static web pages.
-    #hugo
-  ];  
+  ];
 }

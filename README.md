@@ -1,5 +1,16 @@
 # My personal configuration files for NixOS.
 
+## Quick Start
+
+Clone this repo and just switch immediately to this configuration.
+
+```bash
+cd ~
+git@github.com:ivanhawkes/nixos-config.git
+cd nixos-config
+sudo nixos-rebuild switch --flake .#lythir
+```
+
 ## Finish installing NixOS
 
 	* Open up Firefox.
@@ -44,6 +55,7 @@ scp ivan@<<SECRETS>>:/home/ivan/.ssh/* ~/.ssh
 ```
 export MACHINE=<<MACHINE_NAME>>
 echo $MACHINE
+mkdir -p hosts/$MACHINE
 ```
 
 ## Start a Nix shell so I can use Git and VSCodium for editing.
@@ -82,8 +94,8 @@ sudo rm -f /etc/nixos/configuration.nix
 sudo rm -f /etc/nixos/hardware-configuration.nix
 
 ## Replace with our versions.
-sudo ln -s ~/nixos-config/machines/$MACHINE/configuration.nix /etc/nixos/configuration.nix
-sudo ln -s ~/nixos-config/machines/$MACHINE/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+sudo ln -s ~/nixos-config/hosts/$MACHINE/configuration.nix /etc/nixos/configuration.nix
+sudo ln -s ~/nixos-config/hosts/$MACHINE/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
 
 ## Test the new build.
 sudo nixos-rebuild test
