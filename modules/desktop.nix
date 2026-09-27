@@ -19,6 +19,7 @@
     # Browsers.
     firefox
     google-chrome
+    brave
 
     # Code editor.
     vscodium
