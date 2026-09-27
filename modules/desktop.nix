@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -6,10 +11,10 @@
   ];
 
   # Discord is an unfree application.
-#  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-#      "discord"
-#  ];
-  
+  #  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  #      "discord"
+  #  ];
+
   environment.systemPackages = with pkgs; [
     # Browsers.
     firefox
@@ -20,7 +25,7 @@
 
     # Dotfile management.
     stow
-    
+
     # Communications.
     #discord
 
@@ -36,15 +41,15 @@
     vlc
 
     # Audio production.
-#    jack2
-#    qjackctl
-#    reaper
+    #    jack2
+    #    qjackctl
+    #    reaper
 
     # Video production.
     handbrake
     #ffmpeg
     #obs-studio
-  ];  
+  ];
 
   hardware.enableAllFirmware = true;
 

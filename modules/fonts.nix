@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   fonts.fontconfig = {
@@ -15,5 +20,5 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     hack-font
-];
+  ];
 }

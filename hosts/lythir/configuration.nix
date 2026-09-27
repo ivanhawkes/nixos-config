@@ -5,13 +5,13 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # My user is included.
-      ../../users/ivan/ivan.nix
-    ];
+    # My user is included.
+    ../../users/ivan/ivan.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -21,7 +21,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Allow experimental settings so I can use flake.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable OpenGL / hardware graphics
   hardware.graphics = {
@@ -37,7 +40,7 @@
     modesetting.enable = true;
 
     # Set to false to use the fully proprietary kernel module instead of the open-source kernel module variant.
-    # Note: RTX 40-series and 50-series support the open kernel modules (`open = true`), 
+    # Note: RTX 40-series and 50-series support the open kernel modules (`open = true`),
     # but setting `open = false` strictly forces the completely proprietary kernel module.
     open = true;
 
@@ -45,10 +48,10 @@
     nvidiaSettings = true;
 
     # Select the stable driver package (or switch to another like config.boot.kernelPackages.nvidiaPackages.stable)
-#    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    #    package = config.boot.kernelPackages.nvidiaPackages.stable;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
-  
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

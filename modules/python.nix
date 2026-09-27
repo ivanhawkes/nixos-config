@@ -2,11 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    (python39.withPackages (ps: with ps; [
-      pip
-      pygments
-      pylint # used by the Python VSCode extension
-      virtualenvwrapper
-    ]))
+    (python39.withPackages (
+      ps: with ps; [
+        pip
+        pygments
+        pylint # used by the Python VSCode extension
+        virtualenvwrapper
+      ]
+    ))
   ];
 }

@@ -1,14 +1,21 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
   ];
 
   # Allow unfree applications.
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
       "vscode"
-  ];
-  
+    ];
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -20,7 +27,7 @@
 
     # IDE.
     vscodium
-    
+
     # Makes Docker far easier to manage.
     docker-compose
 

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -12,7 +17,13 @@
   users.users."ivan" = {
     isNormalUser = true;
     description = "Ivan Hawkes";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "dialout"
+      "plugdev"
+      "docker"
+    ];
     packages = with pkgs; [
       firefox
       kicad
@@ -24,7 +35,7 @@
     ];
   };
 
-   # Set Zsh as the default shell for your user
+  # Set Zsh as the default shell for your user
   users.users.ivan = {
     shell = pkgs.zsh;
   };
