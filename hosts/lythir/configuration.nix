@@ -39,6 +39,10 @@
     # Modesetting is required for most modern WMs/DEs (Wayland and X11)
     modesetting.enable = true;
 
+    # Enable power management (optional, but recommended for laptops/desktops)
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+
     # Set to false to use the fully proprietary kernel module instead of the open-source kernel module variant.
     # Note: RTX 40-series and 50-series support the open kernel modules (`open = true`),
     # but setting `open = false` strictly forces the completely proprietary kernel module.
