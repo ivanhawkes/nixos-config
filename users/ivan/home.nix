@@ -4,7 +4,7 @@
   # ── State Version & User Metadata ────────────────────────
   home.stateVersion = "26.05";
   home.username = "ivan";
-  home.homeDirectory = lib.mkForce "/home/ivan";
+  home.homeDirectory = "/home/ivan";
 
   # ── Imports ───────────────────────────────────────────────
   # Import Noctalia's official home-manager module from flake inputs
@@ -17,18 +17,6 @@
     ../../modules/fuzzel.nix
     ../../modules/noctalia.nix
     ../../modules/tmog.nix
+    ../../modules/theme.nix
   ];
-
-  # ── Optional Retro GTK & Icon configurations ──────────────
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Gruvbox-Dark";
-      package = pkgs.gruvbox-gtk-theme;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-  };
 }
