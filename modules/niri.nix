@@ -5,12 +5,15 @@
   xdg.configFile."niri/config.kdl".text = 
     let
       palette = {
-        active_border = "313244";
-        mauve = "cba6f7";
-        crust = "11111b";
+        mauve = "cba6f7"; # Active vibrant purple halo border
+        crust = "11111b"; # Inactive border
       };
     in
     ''
+      // ── CSD Window Bleed Fix ───────────────────────────────
+      // 👇 Stops Niri from drawing a solid color box behind client-side decorated apps
+      prefer-no-csd
+
       // ── Monitor Scaling Rules ──────────────────────────────
       output "DP-6" {
           scale 1.25
@@ -77,10 +80,12 @@
       }
 
       // ── Global Window Rules (Rounded Corners) ──────────────
-      // Leaving "match" out entirely makes it apply universally
       window-rule {
-          geometry-corner-radius 12  // Rounds the borders to a 12px radius
-          clip-to-geometry true      // Prevents application backgrounds leaking out
+          geometry-corner-radius 12  
+          clip-to-geometry true      
+          
+          // 👇 Tells Niri to ONLY draw the 4px border ring outline and leave the center hollow
+          draw-border-with-background false
       }
 
       // Specific window rules
