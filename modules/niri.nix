@@ -5,7 +5,7 @@
   xdg.configFile."niri/config.kdl".text = 
     let
       palette = {
-        muted_mauve = "746292"; # Mathematically halfway between Mauve and Alacritty's background
+        muted_mauve = "746292"; # Halfway between Mauve and Alacritty background
         crust       = "11111b"; # Catppuccin Mocha Crust (Very Dark)
       };
     in
@@ -29,6 +29,15 @@
               width 4
               active-color "${"#" + palette.muted_mauve}"   // A beautiful, deep muted purple outline
               inactive-color "${"#" + palette.crust}" 
+          }
+
+          // ── Native Window Drop Shadows ──────────────────────
+          shadow {
+              on
+              softness 16
+              spread 2
+              offset x=0 y=4
+              color "rgba(0, 0, 0, 0.4)"
           }
 
           // Default size for new windows (columns)
@@ -89,6 +98,12 @@
       window-rule {
           match app-id="brave-browser"
           open-maximized true
+      }
+
+      // ── Fuzzel Launcher Layer Rule ──────────────────────────
+      layer-rule {
+          match namespace="^launcher$"
+          shadow { on; }
       }
     '';
 }
