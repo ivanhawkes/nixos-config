@@ -18,3 +18,13 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
+
+# Binary files (do not read or execute)
+.devenv/*.db
+.devenv/*.db-shm
+.devenv/*.db-wal
+.devenv/state/*.db
+.devenv/state/*.db-shm
+.devenv/state/*.db-wal
+.devenv/load-exports
+squashfs-root/
