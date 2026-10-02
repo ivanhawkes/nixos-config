@@ -3,7 +3,8 @@
 let
   # Absolute path to your AppImage — adjust to match whoami
   appImage = "/home/ivan/.local/opt/tmog/tmog.AppImage";
-in {
+in
+{
 
   # Must match (or be compatible with) your system.stateVersion ("26.05")
   home.stateVersion = "26.05";
@@ -22,12 +23,15 @@ in {
 
   # ── shows TMOG in your application menu ────────────────────
   xdg.desktopEntries.tmog = {
-    name       = "TMOG";
-    comment    = "Task Manager OG";
-    exec       = "tmog";       # resolved via the wrapper on $PATH
-    icon       = "tmog";       # optional: point to a .png/.svg if you have one
-    terminal   = false;
-    type       = "Application";
-    categories = [ "Utility" "Office" ];
+    name = "TMOG";
+    comment = "Task Manager OG";
+    exec = "tmog"; # resolved via the wrapper on $PATH
+    icon = "tmog"; # optional: point to a .png/.svg if you have one
+    terminal = false;
+    type = "Application";
+    categories = [
+      "Utility"
+      "Office"
+    ];
   };
 }

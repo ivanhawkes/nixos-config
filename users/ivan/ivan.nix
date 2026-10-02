@@ -9,8 +9,9 @@
   imports = [
     ../../roles/user.nix
     ../../roles/desktop.nix
-    ../../roles/utility.nix
     ../../roles/developer.nix
+    ../../roles/audio-production.nix
+    ../../roles/vidio-production.nix
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -23,15 +24,6 @@
       "dialout"
       "plugdev"
       "docker"
-    ];
-    packages = with pkgs; [
-      firefox
-      kicad
-      freecad
-      #libreoffice-qt
-
-      # Formatting of Nix files.
-      nixfmt
     ];
   };
 

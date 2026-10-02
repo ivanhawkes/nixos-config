@@ -28,9 +28,6 @@
     # IDE.
     vscodium
 
-    # Makes Docker far easier to manage.
-    docker-compose
-
     # Compilers.
     #gcc
     #clang
