@@ -6,7 +6,7 @@
     let
       palette = {
         muted_mauve = "746292"; # Halfway between Mauve and Alacritty background
-        crust       = "11111b"; # Catppuccin Mocha Crust (Very Dark)
+        crust       = "11111be6"; # Catppuccin Mocha Crust (Matching your Fuzzel 90% Opacity)
       };
     in
     ''
@@ -101,7 +101,7 @@
           clip-to-geometry true      
           draw-border-with-background false
           
-          // 👇 The correct syntax to enable background blur behind windows
+          // The correct syntax to enable background blur behind windows
           background-effect {
               blur true
               xray false  // Setting xray to false makes it blur windows behind it instead of just the wallpaper
@@ -114,10 +114,27 @@
           open-maximized true
       }
 
-      // ── Fuzzel Launcher Layer Rule ──────────────────────────
+      // ── Fuzzel Layer Rules (Glassmorphism & Jumbo Scale Fix) ──
       layer-rule {
-          match namespace="^launcher$"
-          shadow { on; }
+          // Fuzzel exposes its layer shell surface as "fuzzel"
+          match namespace="^fuzzel$"
+          
+          // Syncs Niri's edge rendering to your 24px Fuzzel radius
+          geometry-corner-radius 24
+          
+          // Activates background blur for the shell surface layer
+          background-effect {
+              blur true
+          }
+
+          // Deep heavy shadow profile to complement the jumbo window footprint
+          shadow {
+              on
+              softness 30
+              spread 5
+              offset x=0 y=10
+              color "rgba(17, 17, 27, 0.65)" // Dark Mocha Crust shadow
+          }
       }
     '';
 }
