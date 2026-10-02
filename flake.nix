@@ -32,6 +32,9 @@
             {
               # Use the "x86_64-linux" string directly
               environment.systemPackages = [ inputs.noctalia.packages.x86_64-linux.default ];
+
+              # This registers Niri with GDM system-wide and loads my profile.
+              programs.niri.enable = true; 
             }
 
             # ── Home Manager (per-user packages, e.g. TMOG) ──────────

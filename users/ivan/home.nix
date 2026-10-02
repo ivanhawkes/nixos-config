@@ -68,12 +68,24 @@ in
 
   # ── Niri Window Manager Tweaks ────────────────────────────
   xdg.configFile."niri/config.kdl".text = ''
+    // ── Monitor Scaling Rules ──────────────────────────────
+    output "DP-6" {
+        scale 1.25
+    }
+
     layout {
+        // Space between windows and screen edges
+        gaps 12
+
+        // Focus ring outline style
         focus-ring {
             width 2
             active-color "#d97706"    // Matches Noctalia Amber
             inactive-color "#1c1d22"  // Matches Noctalia Surface
         }
+
+        // Default size for new windows (columns)
+        default-column-width { proportion 0.5; }
     }
 
     // Auto-start your desktop layers on launch
@@ -87,16 +99,131 @@ in
         Mod+E      { spawn "nautilus"; }
         Mod+C      { spawn "codium"; }
         
-        // Safety exit key combo to close focused windows
+        // Application launch menu.
+        Mod+D      { spawn "fuzzel"; }
+
+        // Close focused windows.
         Mod+Q      { close-window; }
+
+        // Logout.
+        Mod+Shift+E { quit; }
+
+        // ── Window Navigation & Window Sizing ──────────────
+        Mod+Left  { focus-column-left; }
+        Mod+Right { focus-column-right; }
+        Mod+H     { focus-column-left; }   // Vim key style
+        Mod+L     { focus-column-right; }  // Vim key style
+
+        Mod+Ctrl+Left  { move-column-left; }
+        Mod+Ctrl+Right { move-column-right; }
+
+        Mod+R { switch-preset-column-width; } // Cycle window sizes (e.g., 50%, 100%)
+        Mod+F { maximize-column; }            // Fullscreen column toggle
+
+        // ── Workspace Switching ────────────────────────────
+        // Jump directly to sequential workspaces using numbers
+        Mod+1 { focus-workspace 1; }
+        Mod+2 { focus-workspace 2; }
+        Mod+3 { focus-workspace 3; }
+        Mod+4 { focus-workspace 4; }
+        Mod+5 { focus-workspace 5; }
+
+        // Move the active window directly to a specific workspace
+        Mod+Shift+1 { move-column-to-workspace 1; }
+        Mod+Shift+2 { move-column-to-workspace 2; }
+        Mod+Shift+3 { move-column-to-workspace 3; }
+        Mod+Shift+4 { move-column-to-workspace 4; }
+        Mod+Shift+5 { move-column-to-workspace 5; }
+
+        // Scroll through workspaces dynamically
+        Mod+Up   { focus-workspace-up; }
+        Mod+Down { focus-workspace-down; }
+    }
+
+    // ── Window Management Rules ────────────────────────────
+    window-rule {
+        match app-id="brave-browser"
+        open-maximized true
     }
   '';
+
+  # ── Alacritty Terminal Theme (Lain / NAVI Style) ──────────
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window.padding = {
+        x = 12;
+        y = 12;
+      };
+
+      colors = {
+        primary = {
+          background = "#141519";
+          foreground = "#d1d5db";
+        };
+        normal = {
+          black = "#1c1d22";
+          red = "#ef4444";
+          green = "#10b981";
+          yellow = "#f59e0b";
+          blue = "#3b82f6";
+          magenta = "#8b5cf6";
+          cyan = "#d97706";
+          white = "#e5e7eb";
+        };
+        bright = {
+          black = "#4b5563";
+          red = "#f87171";
+          green = "#34d399";
+          yellow = "#fbbf24";
+          blue = "#60a5fa";
+          magenta = "#a78bfa";
+          cyan = "#f59e0b";
+          white = "#f3f4f6";
+        };
+      };
+    };
+  };
+
+  # ── Fuzzel Application Launcher Theme (Lain Style) ────────
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "monospace:size=12";
+        terminal = "alacritty";
+        prompt = "navi> ";
+        width = 40;
+        lines = 10;
+        tabs = 4;
+        horizontal-pad = 12;
+        vertical-pad = 8;
+        inner-pad = 6;
+        image-size-ratio = 0.5;
+      };
+      
+      border = {
+        width = 2;
+        radius = 0;
+      };
+
+      colors = {
+        background = "141519f0";
+        text = "d1d5dbff";
+        match = "10b981ff";
+        selection = "1c1d22ff";
+        selection-text = "d97706ff";
+        selection-match = "10b981ff";
+        border = "d97706ff";
+      };
+    };
+  };
 
   # ── Optional Retro GTK & Icon configurations ──────────────
   gtk = {
     enable = true;
     theme = {
-      name = "Gruvbox-Dark"; # Great base color scheme for a retro rust/amber look
+      name = "Gruvbox-Dark";
       package = pkgs.gruvbox-gtk-theme;
     };
     iconTheme = {
@@ -107,22 +234,19 @@ in
 
   # ── Packages & Scripts ────────────────────────────────────
   home.packages = [
-    # puts `tmog` on your \$PATH
+    # Puts `tmog` on your \$PATH
     (pkgs.writeShellScriptBin "tmog" ''
-      # Extract-and-run avoids FUSE entirely (cleaner on NixOS).
-      # Delete this line if you prefer native FUSE.
       export APPIMAGE_EXTRACT_AND_RUN=1
       exec appImage "@"
     '')
   ];
 
   # ── Application Entries ───────────────────────────────────
-  # shows TMOG in your application menu
   xdg.desktopEntries.tmog = {
     name = "TMOG";
     comment = "Task Manager OG";
-    exec = "tmog"; # resolved via the wrapper on \$PATH
-    icon = "tmog"; # optional: point to a .png/.svg if you have one
+    exec = "tmog";
+    icon = "tmog";
     terminal = false;
     type = "Application";
     categories = [
