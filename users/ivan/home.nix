@@ -70,7 +70,6 @@ in
   xdg.configFile."niri/config.kdl".text = ''
     layout {
         focus-ring {
-            enable
             width 2
             active-color "#d97706"    // Matches Noctalia Amber
             inactive-color "#1c1d22"  // Matches Noctalia Surface
@@ -79,6 +78,18 @@ in
 
     // Auto-start your desktop layers on launch
     spawn-at-startup "noctalia"
+
+    // ── Application Keybindings ────────────────────────────
+    binds {
+        // Mod is usually the Windows / Command key
+        Mod+T      { spawn "alacritty"; }
+        Mod+B      { spawn "brave"; }
+        Mod+E      { spawn "nautilus"; }
+        Mod+C      { spawn "codium"; }
+        
+        // Safety exit key combo to close focused windows
+        Mod+Q      { close-window; }
+    }
   '';
 
   # ── Optional Retro GTK & Icon configurations ──────────────
