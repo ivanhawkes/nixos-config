@@ -1,12 +1,12 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
-  # ── Imports ───────────────────────────────────────────────
   imports = [
-    # Import Noctalia's official home-manager module from flake inputs
-    inputs.noctalia.homeModules.default
+    # Any local Home Manager sub-modules could go here
   ];
 
-  environment.systemPackages = with pkgs; [
+  # Using home.packages so Home Manager can read it correctly
+  home.packages = with pkgs; [
+    # You can add user-specific packages here later
   ];
 }

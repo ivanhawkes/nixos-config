@@ -10,17 +10,13 @@ in
   home.username = "ivan";
   home.homeDirectory = "/home/ivan";
 
-  # imports = [
-  #   ../modules/niri.nix
-  #   ../modules/noctalia.nix
-  # ];
-
   # ── Imports ───────────────────────────────────────────────
   # Import Noctalia's official home-manager module from flake inputs
   imports = [
     inputs.noctalia.homeModules.default
 
-    ../modules/alacrity.nix
+    ../../modules/alacrity.nix
+    ../../modules/noctalia.nix
   ];
 
   # ── Noctalia Shell Configuration (Lain / NAVI Theme) ──────
@@ -204,10 +200,10 @@ in
 
   # ── Packages & Scripts ────────────────────────────────────
   home.packages = [
-    # Puts `tmog` on your \$PATH
+    # Fixed script runner using standard Nix formatting and appimage-run
     (pkgs.writeShellScriptBin "tmog" ''
       export APPIMAGE_EXTRACT_AND_RUN=1
-      exec appImage "@"
+      exec ${pkgs.appimage-run}/bin/appimage-run "${appImage}" "$@"
     '')
   ];
 
