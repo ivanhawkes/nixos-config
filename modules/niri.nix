@@ -12,13 +12,17 @@
         // Space between windows and screen edges
         gaps 12
 
-        focus-ring {
-                off
-            }
+        # If you prefer a subtle border instead of a focus-ring, 
+        # make sure focus-ring is turned off so they don't overlap.
+        focus-ring.enable = false; 
 
-            border {
-                off
-            }
+        border = {
+        enable = true;
+        width = 4;
+        # A nice dark Catppuccin color (e.g., Macchiato Mantle or Mocha Crust)
+        active.color = "#1e2030"; 
+        inactive.color = "#181825";
+        };
 
         // Default size for new windows (columns)
         default-column-width { proportion 0.5; }
