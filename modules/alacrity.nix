@@ -8,6 +8,7 @@
 
       window = {
         opacity = 1.0;
+        decorations = "None"; # Eliminates the solid brown border frame
         blur = true;
         dimensions = {
           columns = 96;
@@ -62,29 +63,85 @@
 
       colors = {
         primary = {
-          background = "#141519";
-          foreground = "#d1d5db";
+          background = "#1e1e2e"; # Mocha Base
+          foreground = "#cdd6f4"; # Mocha Text
+          dim_foreground = "#7f849c"; # Mocha Subtext1
+          bright_foreground = "#cdd6f4"; # Mocha Text
+        };
 
+        cursor = {
+          text = "#1e1e2e";   # Mocha Base
+          cursor = "#f5e0dc"; # Mocha Rosewater
         };
+
+        vi_mode_cursor = {
+          text = "#1e1e2e";
+          cursor = "#b4befe"; # Mocha Lavender
+        };
+
+        search = {
+          matches = {
+            foreground = "#1e1e2e";
+            background = "#a6adc8"; # Mocha Subtext0
+          };
+          focused_match = {
+            foreground = "#1e1e2e";
+            background = "#a6e3a1"; # Mocha Green
+          };
+        };
+
+        hints = {
+          start = {
+            foreground = "#1e1e2e";
+            background = "#f9e2af"; # Mocha Yellow
+          };
+          end = {
+            foreground = "#1e1e2e";
+            background = "#a6adc8";
+          };
+        };
+
+        line_indicator = {
+          foreground = "#1e1e2e";
+          background = "#a6adc8";
+        };
+
+        selection = {
+          text = "#1e1e2e";
+          background = "#f5e0dc";
+        };
+
         normal = {
-          black = "#1c1d22";
-          blue = "#3b82f6";
-          cyan = "#d97706";
-          green = "#10b981";
-          magenta = "#8b5cf6";
-          red = "#ef4444";
-          white = "#e5e7eb";
-          yellow = "#f59e0b";
+          black   = "#45475a"; # Mocha Surface1
+          red     = "#f38ba8"; # Mocha Red
+          green   = "#a6e3a1"; # Mocha Green
+          yellow  = "#f9e2af"; # Mocha Yellow
+          blue    = "#89b4fa"; # Mocha Blue
+          magenta = "#f5c2e7"; # Mocha Pink
+          cyan    = "#94e2d5"; # Mocha Teal
+          white   = "#bac2de"; # Mocha Subtext1
         };
+
         bright = {
-          black = "#4b5563";
-          blue = "#60a5fa";
-          cyan = "#f59e0b";
-          green = "#34d399";
-          magenta = "#a78bfa";
-          red = "#f87171";
-          white = "#f3f4f6";
-          yellow = "#fbbf24";
+          black   = "#585b70"; # Mocha Surface2
+          red     = "#f38ba8";
+          green   = "#a6e3a1";
+          yellow  = "#f9e2af";
+          blue    = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan    = "#94e2d5";
+          white   = "#a6adc8";
+        };
+
+        dim = {
+          black   = "#45475a";
+          red     = "#f38ba8";
+          green   = "#a6e3a1";
+          yellow  = "#f9e2af";
+          blue    = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan    = "#94e2d5";
+          white   = "#bac2de";
         };
       };
     };
