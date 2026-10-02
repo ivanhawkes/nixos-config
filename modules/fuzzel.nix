@@ -1,37 +1,35 @@
-{ pkgs, ... }:
-
-{
-  # ── Fuzzel Application Launcher Theme (Lain / NAVI Style) ──
+{ pkgs, ... }: {
+  # ── Fuzzel Application Launcher Theme (Noctalia Jumbo Scale) ── 
   programs.fuzzel = {
     enable = true;
     settings = {
       main = {
-        font = "monospace:size=12";
+        # JetBrains Mono provides crisp high-DPI scaling and aligns with Noctalia's defaults
+        font = "JetBrains Mono:weight=medium:size=20"; 
         terminal = "alacritty";
-        prompt = "navi> "; # Keeps your custom NAVI style prompt
-        width = 40;
-        lines = 10;
+        prompt = "navi ❯ "; 
+        width = 65; # Slightly widened to account for the wider monospace character glyphs
+        lines = 8;  
         tabs = 4;
-        horizontal-pad = 12;
-        vertical-pad = 8;
-        inner-pad = 6;
-        image-size-ratio = 0.5;
+        horizontal-pad = 48; 
+        vertical-pad = 32;   
+        inner-pad = 20;      
+        image-size-ratio = 0.8; 
       };
 
       border = {
-        width = 2;
-        radius = 12; # 👈 Matches your 12px rounded Niri window rules perfectly
+        width = 2; 
+        radius = 24; 
       };
 
       colors = {
-        # Fuzzel expects 8-character HEX strings (RRGGBBAA)
-        background = "1e1e2eff";        # Alacritty deep blue-grey background (Mocha Base)
-        text = "cdd6f4ff";              # Off-white text (Mocha Text)
-        match = "746292ff";             # Muted plum accent color for matching search characters
-        selection = "313244ff";         # Muted slate selection block (Surface 0)
-        selection-text = "cba6f7ff";    # Selection text shifts to vibrant Mauve when focused
-        selection-match = "cba6f7ff";   # Highlighted search match inside active selection bar
-        border = "746292ff";            # Muted plum outline matching your Niri active window borders
+        background = "0f111ae6"; 
+        text = "f2f4f8ff"; 
+        match = "80aa99ff"; 
+        selection = "24293eff"; 
+        selection-text = "00f5d4ff"; 
+        selection-match = "00f5d4ff"; 
+        border = "00f5d44d"; 
       };
     };
   };
