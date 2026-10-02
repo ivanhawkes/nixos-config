@@ -1,52 +1,41 @@
-{
-  pkgs,
-  lib,
-  config,
-  inputs,
-  ...
-}:
+{ pkgs, lib, config, inputs, ... }:
 
 {
-  # https://devenv.sh/basics/
-  env.GREET = "devenv";
+  # 1. Project-wide Metadata & Welcome Text
+  env.GREET = "Pi Agent Configuration Workspace";
 
-  # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  # 2. Inject Required Tools (Git, Node.js, and Pi Coding Agent)
+  packages = [ 
+    pkgs.git 
+    pkgs.nodejs_latest
+    pkgs.pi-coding-agent
+  ];
 
-  # https://devenv.sh/languages/
-  # languages.rust.enable = true;
-
-  # https://devenv.sh/processes/
-  # processes.dev.exec = "${lib.getExe pkgs.watchexec} -n -- ls -la";
-
-  # https://devenv.sh/services/
-  # services.postgres.enable = true;
-
-  # https://devenv.sh/scripts/
-  scripts.hello.exec = ''
-    echo hello from $GREET
+  # 3. Helper Script to initialize your project harness
+  scripts.harness-init.exec = ''
+    echo "⚡ Initialising Pi Coding Agent Harness local to this folder..."
+    pi install -l npm:@baryonlabs/pi-agent-harness
   '';
 
-  # https://devenv.sh/basics/
+  # 4. Interactive Shell Lifecycle Hook (Preserves your Oh My Zsh configuration)
   enterShell = ''
-    hello         # Run scripts directly
-    git --version # Use packages
+    # Isolate npm paths to prevent NixOS global write permission conflicts
+    export NPM_CONFIG_PREFIX="$PWD/.pi/npm"
+    export PATH="$PWD/.pi/npm/bin:$PATH"
+
+    # Force shell to evaluate your interactive Oh My Zsh context & aliases
+    if [ -n "$ZSH_VERSION" ] && [ -f ~/.zshrc ]; then
+      source ~/.zshrc
+    fi
+
+    echo "🦾 $GREET Environment Ready!"
+    echo "👉 Run 'harness-init' or 'pi' to begin working with the agent."
   '';
 
-  # https://devenv.sh/tasks/
-  # tasks = {
-  #   "myproj:setup".exec = "mytool build";
-  #   "devenv:enterShell".after = [ "myproj:setup" ];
-  # };
-
-  # https://devenv.sh/tests/
+  # 5. Core Test Specification
   enterTest = ''
-    echo "Running tests"
-    git --version | grep --color=auto "${pkgs.git.version}"
+    echo "Verifying environment constraints..."
+    node --version
+    pi --version
   '';
-
-  # https://devenv.sh/git-hooks/
-  # git-hooks.hooks.shellcheck.enable = true;
-
-  # See full reference at https://devenv.sh/reference/options/
 }
