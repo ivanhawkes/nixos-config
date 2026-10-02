@@ -1,9 +1,5 @@
 { pkgs, inputs, lib, ... }:
 
-let
-  # Absolute path to your AppImage — adjust to match whoami
-  appImage = "/home/ivan/.local/opt/tmog/tmog.AppImage";
-in
 {
   # ── State Version & User Metadata ────────────────────────
   home.stateVersion = "26.05";
