@@ -21,37 +21,46 @@
       home-manager,
       ...
     }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
     {
+      # ── 1. Isolated Dev Shell for Pi ───────────────────────
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [
+          pkgs.nodejs_latest
+          pkgs.pi-coding-agent
+        ];
+
+        shellHook = ''
+          # Isolate npm paths to prevent NixOS global write permission issues
+          export NPM_CONFIG_PREFIX="$PWD/.pi/npm"
+          export PATH="$PWD/.pi/npm/bin:$PATH"
+          
+          echo "⚡ Pi Configuration Workspace Loaded!"
+          echo "👉 Run 'pi install -l npm:@baryonlabs/pi-agent-harness' to begin."
+        '';
+      };
+
+      # ── 2. Your Existing Configurations ────────────────────
       nixosConfigurations = {
-        # Matches the configuration for Lythir
         lythir = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             ./hosts/lythir/configuration.nix
-
-            # This ensures NixOS pulls in your actual user, groups, and shell setup!
             ./users/ivan/ivan.nix 
 
             {
-              # Use the "x86_64-linux" string directly
-              environment.systemPackages = [ inputs.noctalia.packages.x86_64-linux.default ];
-
-              # This registers Niri with GDM system-wide and loads my profile.
+              environment.systemPackages = [ inputs.noctalia.packages.${system}.default ];
               programs.niri.enable = true; 
             }
 
-            # ── Home Manager (per-user packages, e.g. TMOG) ──────────
             home-manager.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
-
-              # Cleanly inject your flake inputs straight into Home Manager modules
               home-manager.extraSpecialArgs = { inherit inputs; };
-
-              # Automatically backup conflicting files (e.g., config.kdl.backup)
               home-manager.backupFileExtension = "backup";
-
-              # Revert this back to your clean, standard import path
               home-manager.users.ivan = import ./users/ivan/home.nix;
             }
           ];
