@@ -10,6 +10,11 @@ in
   home.username = "ivan";
   home.homeDirectory = "/home/ivan";
 
+  # imports = [
+  #   ../modules/niri.nix
+  #   ../modules/noctalia.nix
+  # ];
+
   # ── Imports ───────────────────────────────────────────────
   # Import Noctalia's official home-manager module from flake inputs
   imports = [
@@ -151,6 +156,62 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
+
+      general = {
+        import = [
+          "tokyo-night.toml"
+        ];
+      };
+
+      window = {
+        opacity = 1.0;
+        blur = true;
+        dimensions = {
+          columns = 96;
+          lines = 42;
+        };
+      };
+
+      font = {
+        size = 15;
+        normal = {
+          family = "JetBrainsMono NF";
+          style = "Regular";
+        };
+        bold = {
+          family = "JetBrainsMono NF";
+          style = "Bold";
+        };
+        italic = {
+          family = "JetBrainsMono NF";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "JetBrainsMono NF";
+          style = "Bold Italic";
+        };
+      };
+
+      scrolling = {
+        history = 2000;
+        multiplier = 3;
+      };
+
+      keyboard = {
+        bindings = [
+          {
+            key = "Insert";
+            mods = "Control";
+            action = "Copy";
+          }
+          {
+            key = "Insert";
+            mods = "Shift";
+            action = "Paste";
+          }
+        ];
+      };
+
       window.padding = {
         x = 12;
         y = 12;
@@ -160,26 +221,27 @@ in
         primary = {
           background = "#141519";
           foreground = "#d1d5db";
+
         };
         normal = {
           black = "#1c1d22";
-          red = "#ef4444";
-          green = "#10b981";
-          yellow = "#f59e0b";
           blue = "#3b82f6";
-          magenta = "#8b5cf6";
           cyan = "#d97706";
+          green = "#10b981";
+          magenta = "#8b5cf6";
+          red = "#ef4444";
           white = "#e5e7eb";
+          yellow = "#f59e0b";
         };
         bright = {
           black = "#4b5563";
-          red = "#f87171";
-          green = "#34d399";
-          yellow = "#fbbf24";
           blue = "#60a5fa";
-          magenta = "#a78bfa";
           cyan = "#f59e0b";
+          green = "#34d399";
+          magenta = "#a78bfa";
+          red = "#f87171";
           white = "#f3f4f6";
+          yellow = "#fbbf24";
         };
       };
     };
@@ -201,7 +263,7 @@ in
         inner-pad = 6;
         image-size-ratio = 0.5;
       };
-      
+
       border = {
         width = 2;
         radius = 0;
