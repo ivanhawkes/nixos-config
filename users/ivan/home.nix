@@ -15,10 +15,12 @@ in
   imports = [
     inputs.noctalia.homeModules.default
 
+    # Pull these in cleanly using home manager.
     ../../modules/alacrity.nix
-    ../../modules/niri.nix # <-- Safely imported at the Home Manager layer
-    ../../modules/fuzzel.nix # <-- Added safely at the Home Manager layer
-    ../../modules/noctalia.nix # <-- Added safely at the Home Manager layer
+    ../../modules/niri.nix
+    ../../modules/fuzzel.nix
+    ../../modules/noctalia.nix
+    ../../modules/tmog.nix
   ];
 
   # ── Optional Retro GTK & Icon configurations ──────────────
@@ -32,28 +34,5 @@ in
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-  };
-
-  # ── Packages & Scripts ────────────────────────────────────
-  home.packages = [
-    # Fixed script runner using standard Nix formatting and appimage-run
-    (pkgs.writeShellScriptBin "tmog" ''
-      export APPIMAGE_EXTRACT_AND_RUN=1
-      exec ${pkgs.appimage-run}/bin/appimage-run "${appImage}" "$@"
-    '')
-  ];
-
-  # ── Application Entries ───────────────────────────────────
-  xdg.desktopEntries.tmog = {
-    name = "TMOG";
-    comment = "Task Manager OG";
-    exec = "tmog";
-    icon = "tmog";
-    terminal = false;
-    type = "Application";
-    categories = [
-      "Utility"
-      "Office"
-    ];
   };
 }
