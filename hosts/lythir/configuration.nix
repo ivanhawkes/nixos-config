@@ -36,6 +36,9 @@
     enable32Bit = true;
   };
 
+  # Enable XWayland if you need apps like Steam or Discord.
+  services.xserver.enable = true;
+
   # Tell Xserver/Wayland to use the nvidia driver alongside modesetting
   services.xserver.videoDrivers = [ "nvidia" ];
 
