@@ -28,3 +28,7 @@ devenv.local.yaml
 .devenv/state/*.db-wal
 .devenv/load-exports
 squashfs-root/
+
+# The results of querying our fastfetch will be placed in a file for
+# examinatio by pi harness.
+/hardware.json
