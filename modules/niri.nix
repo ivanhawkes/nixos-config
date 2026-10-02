@@ -44,6 +44,14 @@
           default-column-width { proportion 0.5; }
       }
 
+      // ── Global Blur Parameters ──────────────────────────────
+      // This top-level block fine-tunes how the blur handles blending
+      blur {
+          passes 2    // More passes = stronger, smoother frosting (default: 3)
+          offset 3.5  // Sample distance per pass (default: 3.0)
+          noise 0.02  // Subtle grain overlay to prevent color banding (default: 0.02)
+      }
+
       // Auto-start your desktop layers on launch
       spawn-at-startup "noctalia"
 
@@ -87,11 +95,17 @@
           Mod+Down { focus-workspace-down; }
       }
 
-      // ── Global Window Rules (Rounded Corners) ──────────────
+      // ── Global Window Rules (Rounded Corners & Effects) ─────
       window-rule {
           geometry-corner-radius 12  
           clip-to-geometry true      
           draw-border-with-background false
+          
+          // 👇 The correct syntax to enable background blur behind windows
+          background-effect {
+              blur true
+              xray false  // Setting xray to false makes it blur windows behind it instead of just the wallpaper
+          }
       }
 
       // Specific window rules
