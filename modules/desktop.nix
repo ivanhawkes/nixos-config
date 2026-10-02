@@ -8,6 +8,7 @@
 {
   imports = [
     ./fonts.nix
+    # ./codium.nix
   ];
 
   # Discord is an unfree application, covered by nixpkgs.config.allowUnfree
@@ -15,7 +16,7 @@
 
   environment.systemPackages = with pkgs; [
     # Code editor.
-    vscodium
+    # vscodium
 
     # Dotfile management.
     stow

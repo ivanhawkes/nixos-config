@@ -17,6 +17,7 @@
     ../../modules/noctalia.nix
     ../../modules/tmog.nix
     ../../modules/theme.nix
+    ../../modules/codium.nix
   ];
 
   # Define your universal user-level theme flavor right here

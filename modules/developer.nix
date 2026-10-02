@@ -7,6 +7,7 @@
 
 {
   imports = [
+    # ./codium.nix
   ];
 
   programs.direnv = {
@@ -19,7 +20,7 @@
     devenv
 
     # IDE.
-    vscodium
+    # vscodium
 
     # Compilers.
     #gcc
