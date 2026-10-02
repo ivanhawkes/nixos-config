@@ -5,13 +5,12 @@
   xdg.configFile."niri/config.kdl".text = 
     let
       palette = {
-        mauve = "cba6f7"; # Active vibrant purple halo border
-        crust = "11111b"; # Inactive border
+        muted_mauve = "746292"; # Mathematically halfway between Mauve and Alacritty's background
+        crust       = "11111b"; # Catppuccin Mocha Crust (Very Dark)
       };
     in
     ''
       // ── CSD Window Bleed Fix ───────────────────────────────
-      // 👇 Stops Niri from drawing a solid color box behind client-side decorated apps
       prefer-no-csd
 
       // ── Monitor Scaling Rules ──────────────────────────────
@@ -28,7 +27,7 @@
 
           border {
               width 4
-              active-color "${"#" + palette.mauve}"   
+              active-color "${"#" + palette.muted_mauve}"   // A beautiful, deep muted purple outline
               inactive-color "${"#" + palette.crust}" 
           }
 
@@ -83,8 +82,6 @@
       window-rule {
           geometry-corner-radius 12  
           clip-to-geometry true      
-          
-          // 👇 Tells Niri to ONLY draw the 4px border ring outline and leave the center hollow
           draw-border-with-background false
       }
 
