@@ -38,7 +38,16 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
+
+              # Cleanly inject your flake inputs straight into Home Manager modules
+              home-manager.extraSpecialArgs = { inherit inputs; };
+
+              # Automatically backup conflicting files (e.g., config.kdl.backup)
+              home-manager.backupFileExtension = "backup";
+
+              # Revert this back to your clean, standard import path
               home-manager.users.ivan = import ./users/ivan/home.nix;
+
             }
           ];
         };
