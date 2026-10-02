@@ -5,8 +5,8 @@
   xdg.configFile."niri/config.kdl".text = 
     let
       palette = {
-        muted_mauve = "746292"; # Halfway between Mauve and Alacritty background
-        crust       = "11111be6"; # Catppuccin Mocha Crust (Matching your Fuzzel 90% Opacity)
+        muted_mauve = "746292"; 
+        crust       = "11111bd9";
       };
     in
     ''
@@ -19,19 +19,15 @@
       }
 
       layout {
-          // Space between windows and screen edges
           gaps 12
-
-          // Turn off focus ring so it doesn't overlap your border
           focus-ring { off; }
 
           border {
               width 4
-              active-color "${"#" + palette.muted_mauve}"   // A beautiful, deep muted purple outline
+              active-color "${"#" + palette.muted_mauve}"  
               inactive-color "${"#" + palette.crust}" 
           }
 
-          // ── Native Window Drop Shadows ──────────────────────
           shadow {
               on
               softness 16
@@ -40,19 +36,16 @@
               color "rgba(0, 0, 0, 0.4)"
           }
 
-          // Default size for new windows (columns)
           default-column-width { proportion 0.5; }
       }
 
-      // ── Global Blur Parameters ──────────────────────────────
-      // This top-level block fine-tunes how the blur handles blending
+      // ── Global Blur Parameters (Maximized Frosting) ──────────
       blur {
-          passes 2    // More passes = stronger, smoother frosting (default: 3)
-          offset 3.5  // Sample distance per pass (default: 3.0)
-          noise 0.02  // Subtle grain overlay to prevent color banding (default: 0.02)
+          passes 2    // 👈 Increased from 2 to 4 for a heavy premium blur density
+          offset 3.8  // 👈 Expanded sample distance slightly for a smoother spread
+          noise 0.02  // 👈 Lowered grain slightly to clear up texture clutter
       }
 
-      // Auto-start your desktop layers on launch
       spawn-at-startup "noctalia"
 
       // ── Application Keybindings ────────────────────────────
@@ -66,7 +59,6 @@
           Mod+Q      { close-window; }
           Mod+Shift+E { quit; }
 
-          // ── Window Navigation & Window Sizing ──────────────
           Mod+Left  { focus-column-left; }
           Mod+Right { focus-column-right; }
           Mod+H     { focus-column-left; }   
@@ -78,7 +70,6 @@
           Mod+R { switch-preset-column-width; } 
           Mod+F { maximize-column; }            
 
-          // ── Workspace Switching ────────────────────────────
           Mod+1 { focus-workspace 1; }
           Mod+2 { focus-workspace 2; }
           Mod+3 { focus-workspace 3; }
@@ -101,14 +92,12 @@
           clip-to-geometry true      
           draw-border-with-background false
           
-          // The correct syntax to enable background blur behind windows
           background-effect {
               blur true
-              xray false  // Setting xray to false makes it blur windows behind it instead of just the wallpaper
+              xray false  
           }
       }
 
-      // Specific window rules
       window-rule {
           match app-id="brave-browser"
           open-maximized true
@@ -116,24 +105,22 @@
 
       // ── Fuzzel Layer Rules (Glassmorphism & Jumbo Scale Fix) ──
       layer-rule {
-          // Fuzzel exposes its layer shell surface as "fuzzel"
-          match namespace="^fuzzel$"
+          // 👈 Catches both "fuzzel" and standard "launcher" surface namespaces
+          match namespace="^(fuzzel|launcher)$"
           
-          // Syncs Niri's edge rendering to your 24px Fuzzel radius
           geometry-corner-radius 24
           
-          // Activates background blur for the shell surface layer
           background-effect {
               blur true
+              xray false  // 👈 CRITICAL: Turning off xray forces Niri to blur windows behind Fuzzel
           }
 
-          // Deep heavy shadow profile to complement the jumbo window footprint
           shadow {
               on
               softness 30
               spread 5
               offset x=0 y=10
-              color "rgba(17, 17, 27, 0.65)" // Dark Mocha Crust shadow
+              color "rgba(17, 17, 27, 0.65)" 
           }
       }
     '';
