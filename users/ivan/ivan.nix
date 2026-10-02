@@ -7,7 +7,6 @@
 
 {
   imports = [
-    ../../roles/desktop.nix
     ../../roles/developer.nix
     ../../roles/audio-production.nix
     ../../roles/vidio-production.nix

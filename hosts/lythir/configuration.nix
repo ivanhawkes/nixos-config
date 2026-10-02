@@ -1,12 +1,12 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # My user is included.
-    # ../../users/ivan/ivan.nix
+    # Set the role the host performs (desktop / server).
+    ../../roles/desktop-host.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.
