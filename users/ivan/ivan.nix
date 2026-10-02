@@ -7,7 +7,6 @@
 
 {
   imports = [
-    ../../roles/user.nix
     ../../roles/desktop.nix
     ../../roles/developer.nix
     ../../roles/audio-production.nix
@@ -18,6 +17,7 @@
   users.users."ivan" = {
     isNormalUser = true;
     description = "Ivan Hawkes";
+    group = "ivan"; # Fixes the second assertion error
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -25,12 +25,13 @@
       "plugdev"
       "docker"
     ];
-  };
-
-  # Set Zsh as the default shell for your user
-  users.users.ivan = {
+    # If you don't already have it here, you can also keep or add:
+    home = "/home/ivan";
     shell = pkgs.zsh;
   };
+
+  # You also need to make sure the "ivan" group actually exists:
+  users.groups.ivan = { };
 
   # Make sure Zsh is listed in valid system shells
   environment.shells = [ pkgs.zsh ];

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 
 let
   # Absolute path to your AppImage — adjust to match whoami
@@ -8,7 +8,7 @@ in
   # ── State Version & User Metadata ────────────────────────
   home.stateVersion = "26.05";
   home.username = "ivan";
-  home.homeDirectory = "/home/ivan";
+  home.homeDirectory = lib.mkForce "/home/ivan";
 
   # ── Imports ───────────────────────────────────────────────
   # Import Noctalia's official home-manager module from flake inputs

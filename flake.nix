@@ -50,7 +50,6 @@
 
               # Revert this back to your clean, standard import path
               home-manager.users.ivan = import ./users/ivan/home.nix;
-
             }
           ];
         };

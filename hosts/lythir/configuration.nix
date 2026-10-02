@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
 
     # My user is included.
-    ../../users/ivan/ivan.nix
+    # ../../users/ivan/ivan.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.
