@@ -8,7 +8,7 @@
 {
   fonts.fontconfig = {
     defaultFonts = {
-      monospace = [ "Io Mono" ];
+      monospace = [ "JetBrainsMono Nerd Font" ];
       sansSerif = [ "Noto Sans" ];
       serif = [ "Noto Serif" ];
     };

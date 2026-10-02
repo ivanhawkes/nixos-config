@@ -10,12 +10,8 @@
     ./fonts.nix
   ];
 
-  # Discord is an unfree application.
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "discord"
-    ];
+  # Discord is an unfree application, covered by nixpkgs.config.allowUnfree
+  # in the host configuration.
 
   environment.systemPackages = with pkgs; [
     # Code editor.

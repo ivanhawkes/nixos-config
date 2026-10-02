@@ -9,13 +9,6 @@
   imports = [
   ];
 
-  # Allow unfree applications.
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "vscode"
-    ];
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

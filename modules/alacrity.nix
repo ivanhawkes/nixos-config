@@ -6,12 +6,6 @@
     enable = true;
     settings = {
 
-      general = {
-        import = [
-          "tokyo-night.toml"
-        ];
-      };
-
       window = {
         opacity = 1.0;
         blur = true;

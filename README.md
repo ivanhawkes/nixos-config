@@ -1,205 +1,103 @@
-# My personal configuration files for NixOS.
+# My personal NixOS configuration.
 
-## Quick Start
+Flake-based, multi-machine configuration. The current active host is
+**lythir** (AMD + NVIDIA, niri/Noctalia desktop).
 
-Clone this repo and just switch immediately to this configuration.
+## Layout
+
+```
+flake.nix            Entry point: nixosConfigurations, devShell, inputs
+hosts/<name>/        Per-machine configuration.nix + hardware-configuration.nix
+roles/               Workload bundles (desktop, developer, audio/video production, server)
+modules/             Reusable NixOS / home-manager modules (fonts, alacritty, niri, ...)
+users/ivan/          ivan.nix (NixOS user + zsh), home.nix (home-manager entry)
+devenv.nix, devenv.yaml, .envrc   Devenv + direnv environment for the Pi agent harness
+```
+
+Layering: `flake.nix` → `hosts/<machine>/configuration.nix` (system-wide) →
+`users/ivan/ivan.nix` (user account, shell, role imports) → roles → modules.
+Per-user desktop configuration (alacritty, niri, fuzzel, noctalia, tmog,
+theme) lives in `users/ivan/home.nix` via home-manager.
+
+## Building / updating
 
 ```bash
-cd ~
-git@github.com:ivanhawkes/nixos-config.git
-cd nixos-config
+# Build and apply this configuration.
+sudo nixos-rebuild switch --flake .#lythir
+
+# Try it without making it the default boot.
+sudo nixos-rebuild test --flake .#lythir
+
+# Update nixpkgs and switch.
+nix flake update
 sudo nixos-rebuild switch --flake .#lythir
 ```
 
-## Finish installing NixOS
+The flake tracks `nixos-unstable`. Optional auto-updates:
 
-	* Open up Firefox.
-	* Log into my password manager.
-	* Use that to log into Google, Firefox.
-	* Sync my Firefox account.
-  * Check the [post](https://ivanhawkes.github.io/post/moving-into-ubuntu/) on setting up a new Ubuntu machine.
-	
-## Update the OS.
-
-Follow the steps in the [guide](https://nixos.org/manual/nixos/stable/#sec-upgrading).
-
-Alternatively - quick steps.
-
-Check which channel you are using.
-
-```
-sudo nix-channel --list
-```
-
-Upgrade it and switch.
-
-```
-sudo nixos-rebuild switch --upgrade
-```
-You can have it auto update periodically using this:
-
-```
+```nix
 system.autoUpgrade.enable = true;
 system.autoUpgrade.allowReboot = false;
 ```
 
-## Get my SSH keys.
+Rebuilding home-manager only (no OS rebuild):
 
+```bash
+home-manager rebuild
 ```
+
+## Getting my SSH keys.
+
+```bash
 cd ~
 scp ivan@<<SECRETS>>:/home/ivan/.ssh/* ~/.ssh
 ```
 
-## Start by selecting a machine name.
+## Adding a new machine.
 
-```
+```bash
 export MACHINE=<<MACHINE_NAME>>
-echo $MACHINE
 mkdir -p hosts/$MACHINE
 ```
 
-## Start a Nix shell so I can use Git and VSCodium for editing.
-```
-nix-shell -p vscodium git
-```
+1. On the new machine, run `sudo nixos-generate-config --force` and copy
+   `/etc/nixos/hardware-configuration.nix` into `hosts/$MACHINE/`.
+2. Copy an existing `hosts/<name>/configuration.nix` as a starting point,
+   change `networking.hostName`, and adjust the hardware sections
+   (NVIDIA/AMD, root device UUID, etc.).
+3. Register the new machine in `flake.nix` under `nixosConfigurations`.
+4. Build it: `sudo nixos-rebuild switch --flake .#<MACHINE>`.
 
-## Clone the repository.
-
-```
-git clone --recursive git@github.com:ivanhawkes/nixos-config.git
-cd nixos-config
-```
-
-## First run...
-
-If you don't already have a folder and configuration files for this machine you will need to make some and copy the existing configuration. It's highly reccomended you make backups of the configuration files prior to rebuilding.
-
-```
-## Force it to create new definitions if desired.
-sudo nixos-generate-config --force
-
-## Make a new configuration set for this machine.
-cp /etc/nixos/configuration.nix machines/$MACHINE/configuration.nix
-cp /etc/nixos/hardware-configuration.nix machines/$MACHINE/hardware-configuration.nix
-```
-
-## Replace the existing NixOS configuration.
-
-```
-## Just have a peek first.
-ls -al /etc/nixos/
-
-## Remove the existing files.
-sudo rm -f /etc/nixos/configuration.nix
-sudo rm -f /etc/nixos/hardware-configuration.nix
-
-## Replace with our versions.
-sudo ln -s ~/nixos-config/hosts/$MACHINE/configuration.nix /etc/nixos/configuration.nix
-sudo ln -s ~/nixos-config/hosts/$MACHINE/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
-
-## Test the new build.
-sudo nixos-rebuild test
-```
-
-##### Move in our dot files.
-
-Instructions are in the original [post](https://github.com/ivanhawkes/dotfiles) on this subject.
-
-```bash
-cd ~
-git clone git@github.com:ivanhawkes/dotfiles.git ~/.dotfiles
-
-## Remove any files that typically prevent the stow command from working.
-rm ~/.bashrc ~/.profile ~/.zshrc
-
-cd ~/.dotfiles
-stow .
-
-# Import all the ZSH environment variables into our working environment.
-source ~/.zshrc
-
-# If you want to start using it right away. You will not to log in and out again if you don't.
-zsh
-```
+Always back up `/etc/nixos/` before the first rebuild on a new machine.
 
 ## Git config
-```
+
+```bash
 git config --global user.email "ivan.hawkes@gmail.com"
 git config --global user.name "Ivan Hawkes"
 git config --global init.defaultBranch main
 ```
 
-## Reload the OS.
-```
-sudo nano /etc/nixos/hardware-configuration.nix
-cp /etc/nixos/hardware-configuration.nix ~/nixos-config/servers/$MACHINE/hardware-configuration.nix
+## Desktop (lythir)
 
-sudo nano /etc/nixos/configuration.nix
-cp /etc/nixos/configuration.nix ~/nixos-config/servers/$MACHINE/configuration.nix
+- Display manager: GDM (`services.displayManager.gdm.enable`).
+- Session: **niri** (`programs.niri.enable` in `flake.nix`), themed with
+  **Noctalia** (see `modules/noctalia.nix`).
+- GNOME is not installed as a desktop; individual GNOME apps (Nautilus) are
+  in `environment.systemPackages` in `hosts/lythir/configuration.nix`.
+- Terminal: Alacritty (`modules/alacritty.nix`), launcher: Fuzzel
+  (`modules/fuzzel.nix`).
+- Keybinding / window-manager tweaks: `modules/niri.nix`.
 
-sudo nixos-rebuild switch
+## Pi agent harness (devenv)
 
-sudo nixos-generate-config
-```
+This folder doubles as a workspace for the Pi coding agent. Enter it with
+direnv (`.envrc`) or:
 
-## Mount the drives.
-```
-sudo mkdir /mnt/b
-sudo mkdir /mnt/ce
-sudo mkdir /mnt/d
-sudo mkdir /mnt/e
-sudo mkdir /mnt/g
-#sudo mkdir /mnt/w
-
-sudo mount -t ntfs /dev/sda2 /mnt/b
-sudo mount -t ntfs /dev/sdc3 /mnt/c
-sudo mount -t ntfs /dev/nvme0n1p2 /mnt/d
-sudo mount -t ntfs /dev/sdd1 /mnt/g
-sudo mount -t ntfs /dev/sdd2 /mnt/e
-#sudo mount -t ntfs /dev/sdd3 /mnt/w
-
-
- fileSystems."/mnt/b" =
-    { device = "/dev/dev/sda2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/c" =
-    { device = "/dev/sdc3";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/d" =
-    { device = "/dev/nvme0n1p2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/g" =
-    { device = "/dev/sdd1";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
- fileSystems."/mnt/e" =
-    { device = "/dev/sdd2";
-      fsType = "ntfs-3g"; 
-      options = [ "rw" "uid=1000"];
-    };
-
+```bash
+nix develop            # devShell from flake.nix (node + pi)
+devenv shell           # or via devenv.nix
 ```
 
-## TODO:
-
-	* vscode config
-
-## Home manager.
-
-Your configuration is stored in ~/.config/nixpkgs/home.nix. Each time you modify it, rerun home-manager switch for changes to have effect.
-
-```
-nano ~/.config/nixpkgs/home.nix
-home-manager switch
-```
+Then run `harness-init` (or `pi install -l npm:@baryonlabs/pi-agent-harness`)
+once per checkout. The `.pi/` folder is local-only and gitignored.

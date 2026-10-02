@@ -83,9 +83,10 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Enable the GNOME Desktop Environment.
+  # GDM is kept as the display manager; the niri session (enabled via
+  # flake.nix) is the desktop. GNOME is not installed as a desktop manager -
+  # individual GNOME apps like Nautilus come from systemPackages below.
   services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -115,6 +116,9 @@
 
     # Modern terminal
     alacritty
+
+    # File manager (GNOME app, used with the niri session)
+    nautilus
 
     # Browsers
     brave
