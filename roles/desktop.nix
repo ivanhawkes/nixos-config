@@ -8,6 +8,5 @@
 {
   imports = [
     ../modules/desktop.nix
-    ../modules/niri.nix
   ];
 }

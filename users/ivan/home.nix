@@ -16,7 +16,6 @@ in
     inputs.noctalia.homeModules.default
 
     ../../modules/alacrity.nix
-    ../../modules/noctalia.nix
   ];
 
   # ── Noctalia Shell Configuration (Lain / NAVI Theme) ──────

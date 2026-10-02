@@ -29,6 +29,9 @@
           modules = [
             ./hosts/lythir/configuration.nix
 
+            # This ensures NixOS pulls in your actual user, groups, and shell setup!
+            ./users/ivan/ivan.nix 
+
             {
               # Use the "x86_64-linux" string directly
               environment.systemPackages = [ inputs.noctalia.packages.x86_64-linux.default ];
