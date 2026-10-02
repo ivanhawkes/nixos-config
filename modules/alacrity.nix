@@ -7,7 +7,7 @@
     settings = {
 
       window = {
-        opacity = 1.0;
+        opacity = 0.85;
         decorations = "None"; # Eliminates the solid brown border frame
         blur = true;
         dimensions = {

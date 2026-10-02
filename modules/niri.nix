@@ -12,12 +12,13 @@
         // Space between windows and screen edges
         gaps 12
 
-        // Focus ring outline style
         focus-ring {
-            width 2
-            active-color "#d97706"    // Matches Noctalia Amber
-            inactive-color "#1c1d22"  // Matches Noctalia Surface
-        }
+                off
+            }
+
+            border {
+                off
+            }
 
         // Default size for new windows (columns)
         default-column-width { proportion 0.5; }
