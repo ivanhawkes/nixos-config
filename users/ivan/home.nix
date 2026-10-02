@@ -6,12 +6,11 @@
   home.username = "ivan";
   home.homeDirectory = "/home/ivan";
 
-  # ── Imports ───────────────────────────────────────────────
-  # Import Noctalia's official home-manager module from flake inputs
   imports = [
     inputs.noctalia.homeModules.default
-
-    # Pull these in cleanly using home manager.
+    inputs.catppuccin.homeModules.catppuccin
+    
+    # Keep your existing Niri module import line
     ../../modules/alacrity.nix
     ../../modules/niri.nix
     ../../modules/fuzzel.nix
@@ -19,4 +18,12 @@
     ../../modules/tmog.nix
     ../../modules/theme.nix
   ];
+
+  # Define your universal user-level theme flavor right here
+  catppuccin.flavor = "mocha";
+  #catppuccin.enable = true;
+
+    # 👇 Add/modify these two lines to turn off the port compilation module engine
+  catppuccin.enable = false;
+  catppuccin.autoEnable = false;
 }

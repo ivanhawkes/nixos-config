@@ -1,87 +1,92 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   # ── Niri Window Manager Tweaks ────────────────────────────
-  xdg.configFile."niri/config.kdl".text = ''
-    // ── Monitor Scaling Rules ──────────────────────────────
-    output "DP-6" {
-        scale 1.25
-    }
+  xdg.configFile."niri/config.kdl".text = 
+    let
+      palette = {
+        active_border = "313244";
+        mauve = "cba6f7";
+        crust = "11111b";
+      };
+    in
+    ''
+      // ── Monitor Scaling Rules ──────────────────────────────
+      output "DP-6" {
+          scale 1.25
+      }
 
-    layout {
-        // Space between windows and screen edges
-        gaps 12
+      layout {
+          // Space between windows and screen edges
+          gaps 12
 
-        # If you prefer a subtle border instead of a focus-ring, 
-        # make sure focus-ring is turned off so they don't overlap.
-        focus-ring.enable = false; 
+          // Turn off focus ring so it doesn't overlap your border
+          focus-ring { off; }
 
-        border = {
-        enable = true;
-        width = 4;
-        # A nice dark Catppuccin color (e.g., Macchiato Mantle or Mocha Crust)
-        active.color = "#1e2030"; 
-        inactive.color = "#181825";
-        };
+          border {
+              width 4
+              active-color "${"#" + palette.mauve}"   
+              inactive-color "${"#" + palette.crust}" 
+          }
 
-        // Default size for new windows (columns)
-        default-column-width { proportion 0.5; }
-    }
+          // Default size for new windows (columns)
+          default-column-width { proportion 0.5; }
+      }
 
-    // Auto-start your desktop layers on launch
-    spawn-at-startup "noctalia"
+      // Auto-start your desktop layers on launch
+      spawn-at-startup "noctalia"
 
-    // ── Application Keybindings ────────────────────────────
-    binds {
-        // Mod is usually the Windows / Command key
-        Mod+T      { spawn "alacritty"; }
-        Mod+B      { spawn "brave"; }
-        Mod+E      { spawn "nautilus"; }
-        Mod+C      { spawn "codium"; }
-        
-        // Application launch menu.
-        Mod+D      { spawn "fuzzel"; }
+      // ── Application Keybindings ────────────────────────────
+      binds {
+          Mod+T      { spawn "alacritty"; }
+          Mod+B      { spawn "brave"; }
+          Mod+E      { spawn "nautilus"; }
+          Mod+C      { spawn "codium"; }
+          
+          Mod+D      { spawn "fuzzel"; }
+          Mod+Q      { close-window; }
+          Mod+Shift+E { quit; }
 
-        // Close focused windows.
-        Mod+Q      { close-window; }
+          // ── Window Navigation & Window Sizing ──────────────
+          Mod+Left  { focus-column-left; }
+          Mod+Right { focus-column-right; }
+          Mod+H     { focus-column-left; }   
+          Mod+L     { focus-column-right; }  
 
-        // Logout.
-        Mod+Shift+E { quit; }
+          Mod+Ctrl+Left  { move-column-left; }
+          Mod+Ctrl+Right { move-column-right; }
 
-        // ── Window Navigation & Window Sizing ──────────────
-        Mod+Left  { focus-column-left; }
-        Mod+Right { focus-column-right; }
-        Mod+H     { focus-column-left; }   // Vim key style
-        Mod+L     { focus-column-right; }  // Vim key style
+          Mod+R { switch-preset-column-width; } 
+          Mod+F { maximize-column; }            
 
-        Mod+Ctrl+Left  { move-column-left; }
-        Mod+Ctrl+Right { move-column-right; }
+          // ── Workspace Switching ────────────────────────────
+          Mod+1 { focus-workspace 1; }
+          Mod+2 { focus-workspace 2; }
+          Mod+3 { focus-workspace 3; }
+          Mod+4 { focus-workspace 4; }
+          Mod+5 { focus-workspace 5; }
 
-        Mod+R { switch-preset-column-width; } // Cycle window sizes (e.g., 50%, 100%)
-        Mod+F { maximize-column; }            // Fullscreen column toggle
+          Mod+Shift+1 { move-column-to-workspace 1; }
+          Mod+Shift+2 { move-column-to-workspace 2; }
+          Mod+Shift+3 { move-column-to-workspace 3; }
+          Mod+Shift+4 { move-column-to-workspace 4; }
+          Mod+Shift+5 { move-column-to-workspace 5; }
 
-        // ── Workspace Switching ────────────────────────────
-        Mod+1 { focus-workspace 1; }
-        Mod+2 { focus-workspace 2; }
-        Mod+3 { focus-workspace 3; }
-        Mod+4 { focus-workspace 4; }
-        Mod+5 { focus-workspace 5; }
+          Mod+Up   { focus-workspace-up; }
+          Mod+Down { focus-workspace-down; }
+      }
 
-        Mod+Shift+1 { move-column-to-workspace 1; }
-        Mod+Shift+2 { move-column-to-workspace 2; }
-        Mod+Shift+3 { move-column-to-workspace 3; }
-        Mod+Shift+4 { move-column-to-workspace 4; }
-        Mod+Shift+5 { move-column-to-workspace 5; }
+      // ── Global Window Rules (Rounded Corners) ──────────────
+      // Leaving "match" out entirely makes it apply universally
+      window-rule {
+          geometry-corner-radius 12  // Rounds the borders to a 12px radius
+          clip-to-geometry true      // Prevents application backgrounds leaking out
+      }
 
-        // Scroll through workspaces dynamically
-        Mod+Up   { focus-workspace-up; }
-        Mod+Down { focus-workspace-down; }
-    }
-
-    // ── Window Management Rules ────────────────────────────
-    window-rule {
-        match app-id="brave-browser"
-        open-maximized true
-    }
-  '';
+      // Specific window rules
+      window-rule {
+          match app-id="brave-browser"
+          open-maximized true
+      }
+    '';
 }
