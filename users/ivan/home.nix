@@ -18,6 +18,7 @@
     ../../modules/tmog.nix
     ../../modules/theme.nix
     ../../modules/codium.nix
+    ../../modules/starship.nix
   ];
 
   # Define your universal user-level theme flavor right here
