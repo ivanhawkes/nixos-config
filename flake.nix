@@ -32,6 +32,8 @@
       # ── 1. Isolated Dev Shell for Pi ───────────────────────
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
+          pkgs.git
+          pkgs.git-lfs
           pkgs.nodejs_latest
           pkgs.pi-coding-agent
         ];

@@ -4,7 +4,8 @@
   env.GREET = "Pi Agent Configuration Workspace";
 
   packages = [ 
-    pkgs.git 
+    pkgs.git
+    pkgs.git-lfs
     pkgs.nodejs_latest
     pkgs.pi-coding-agent
   ];

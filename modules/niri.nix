@@ -57,12 +57,13 @@
           
           Mod+D      { spawn "fuzzel"; }
           Mod+Q      { close-window; }
+
+          Mod+L allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
+          
           Mod+Shift+E { quit; }
 
           Mod+Left  { focus-column-left; }
           Mod+Right { focus-column-right; }
-          Mod+H     { focus-column-left; }   
-          Mod+L     { focus-column-right; }  
 
           Mod+Ctrl+Left  { move-column-left; }
           Mod+Ctrl+Right { move-column-right; }
