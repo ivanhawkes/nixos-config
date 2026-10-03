@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  # ── Noctalia Shell Configuration (Lain / NAVI Theme) ──────
+  # ── Noctalia Shell Configuration (Catppuccin Mocha Glass Style) ──────
   programs.noctalia = {
     enable = true;
     settings = {
@@ -11,19 +11,19 @@
         mode = "fill";
       };
 
-      # The Copland OS / Cyberpunk NAVI Palette
+      # The unified Catppuccin Mocha Desktop Palette
       palette = {
-        background = "#141519"; # Deep industrial charcoal
-        surface = "#1c1d22"; # Dark slate panels
-        text = "#d1d5db"; # Muted white/grey
-        accent = "#d97706"; # Cyberpunk rusty amber/orange
-        success = "#10b981"; # Classic terminal green
+        background = "#11111b"; # Catppuccin Mocha Crust (Perfect dark baseline)
+        surface    = "#1e1e2e"; # Catppuccin Mocha Base (For panels/context menus)
+        text       = "#cdd6f4"; # Catppuccin Mocha Text
+        accent     = "#cba6f7"; # Catppuccin Mocha Mauve (Syncs flawlessly with your Niri active boundaries)
+        success    = "#a6e3a1"; # Catppuccin Mocha Green
       };
 
-      # Clean, functional top bar layout
+      # Upgraded top bar layout for increased clarity on 32" screens
       bar = {
         position = "top";
-        density = "compact";
+        density = "normal"; # Swapped from compact to normal to scale nicely with your 1.25x scaling factor
         widgets = {
           left = [
             {

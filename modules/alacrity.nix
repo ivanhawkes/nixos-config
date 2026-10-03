@@ -1,43 +1,51 @@
 { pkgs, ... }:
 
 {
-  # ── Alacritty Terminal Theme (Lain / NAVI Style) ──────────
+  # ── Alacritty Terminal Theme (Catppuccin Mocha Jumbo Scale) ──────────
   programs.alacritty = {
     enable = true;
     settings = {
 
       window = {
         opacity = 0.85;
-        decorations = "None"; # Eliminates the solid brown border frame
+        decorations = "None"; # Eliminates native window decorations cleanly for Niri
         blur = true;
+        
+        # Increased initial bounds so terminal grids scale comfortably alongside 1.25x scaling
         dimensions = {
-          columns = 96;
-          lines = 42;
+          columns = 110;
+          lines = 32;
+        };
+
+        # Doubled padding fields to provide a spacious modern outline framing your shell text
+        padding = {
+          x = 24;
+          y = 24;
         };
       };
 
       font = {
-        size = 15;
+        size = 16;
         normal = {
-          family = "JetBrainsMono NF";
+          family = "JetBrainsMono Nerd Font";
           style = "Regular";
         };
         bold = {
-          family = "JetBrainsMono NF";
+          family = "JetBrainsMono Nerd Font";
           style = "Bold";
         };
         italic = {
-          family = "JetBrainsMono NF";
+          family = "JetBrainsMono Nerd Font";
           style = "Italic";
         };
         bold_italic = {
-          family = "JetBrainsMono NF";
+          family = "JetBrainsMono Nerd Font";
           style = "Bold Italic";
         };
       };
 
       scrolling = {
-        history = 2000;
+        history = 5000;
         multiplier = 3;
       };
 
@@ -56,44 +64,40 @@
         ];
       };
 
-      window.padding = {
-        x = 12;
-        y = 12;
-      };
-
+      # Perfected Catppuccin Mocha Color Maps
       colors = {
         primary = {
-          background = "#1e1e2e"; # Mocha Base
-          foreground = "#cdd6f4"; # Mocha Text
-          dim_foreground = "#7f849c"; # Mocha Subtext1
-          bright_foreground = "#cdd6f4"; # Mocha Text
+          background = "#1e1e2e"; 
+          foreground = "#cdd6f4"; 
+          dim_foreground = "#7f849c"; 
+          bright_foreground = "#cdd6f4"; 
         };
 
         cursor = {
-          text = "#1e1e2e";   # Mocha Base
-          cursor = "#f5e0dc"; # Mocha Rosewater
+          text = "#1e1e2e";   
+          cursor = "#f5e0dc"; 
         };
 
         vi_mode_cursor = {
           text = "#1e1e2e";
-          cursor = "#b4befe"; # Mocha Lavender
+          cursor = "#b4befe"; 
         };
 
         search = {
           matches = {
             foreground = "#1e1e2e";
-            background = "#a6adc8"; # Mocha Subtext0
+            background = "#a6adc8"; 
           };
           focused_match = {
             foreground = "#1e1e2e";
-            background = "#a6e3a1"; # Mocha Green
+            background = "#a6e3a1"; 
           };
         };
 
         hints = {
           start = {
             foreground = "#1e1e2e";
-            background = "#f9e2af"; # Mocha Yellow
+            background = "#f9e2af"; 
           };
           end = {
             foreground = "#1e1e2e";
@@ -112,18 +116,18 @@
         };
 
         normal = {
-          black   = "#45475a"; # Mocha Surface1
-          red     = "#f38ba8"; # Mocha Red
-          green   = "#a6e3a1"; # Mocha Green
-          yellow  = "#f9e2af"; # Mocha Yellow
-          blue    = "#89b4fa"; # Mocha Blue
-          magenta = "#f5c2e7"; # Mocha Pink
-          cyan    = "#94e2d5"; # Mocha Teal
-          white   = "#bac2de"; # Mocha Subtext1
+          black   = "#45475a"; 
+          red     = "#f38ba8"; 
+          green   = "#a6e3a1"; 
+          yellow  = "#f9e2af"; 
+          blue    = "#89b4fa"; 
+          magenta = "#f5c2e7"; 
+          cyan    = "#94e2d5"; 
+          white   = "#bac2de"; 
         };
 
         bright = {
-          black   = "#585b70"; # Mocha Surface2
+          black   = "#585b70"; 
           red     = "#f38ba8";
           green   = "#a6e3a1";
           yellow  = "#f9e2af";

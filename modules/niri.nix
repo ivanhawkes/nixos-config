@@ -36,14 +36,22 @@
               color "rgba(0, 0, 0, 0.4)"
           }
 
+          // ── 1. Perfect Side-by-Side Sizing Rules ──────────
+          // Forces every newly spawned window to occupy exactly half the available monitor width
           default-column-width { proportion 0.5; }
+
+          // Tells Niri to strictly respect your window bounds instead of shifting columns around
+          struts {
+              left 0
+              right 0
+          }
       }
 
       // ── Global Blur Parameters (Maximized Frosting) ──────────
       blur {
-          passes 2    // 👈 Increased from 2 to 4 for a heavy premium blur density
-          offset 3.8  // 👈 Expanded sample distance slightly for a smoother spread
-          noise 0.02  // 👈 Lowered grain slightly to clear up texture clutter
+          passes 2    
+          offset 3.8  
+          noise 0.02  
       }
 
       spawn-at-startup "noctalia"
@@ -68,8 +76,15 @@
           Mod+Ctrl+Left  { move-column-left; }
           Mod+Ctrl+Right { move-column-right; }
 
+          // ── 2. On-the-Fly Layout Toggles ──────────────────
           Mod+R { switch-preset-column-width; } 
           Mod+F { maximize-column; }            
+          
+          // Fast layout overrides to adjust the split ratios instantly
+          Mod+Comma  { consume-window-into-column; }
+          Mod+Period { expel-window-from-column; }
+          Mod+BracketLeft  { set-column-width "-10%"; }
+          Mod+BracketRight { set-column-width "+10%"; }
 
           Mod+1 { focus-workspace 1; }
           Mod+2 { focus-workspace 2; }
@@ -104,18 +119,21 @@
           open-maximized true
       }
 
+      // ── 3. Application Geometry Overrides ──────────────────
+      // This forces Alacritty terminal layers to explicitly conform to Niri column bounds
+      window-rule {
+          match app-id="alacritty"
+          min-width 100
+      }
+
       // ── Fuzzel Layer Rules (Glassmorphism & Jumbo Scale Fix) ──
       layer-rule {
-          // 👈 Catches both "fuzzel" and standard "launcher" surface namespaces
           match namespace="^(fuzzel|launcher)$"
-          
           geometry-corner-radius 24
-          
           background-effect {
               blur true
-              xray false  // 👈 CRITICAL: Turning off xray forces Niri to blur windows behind Fuzzel
+              xray false  
           }
-
           shadow {
               on
               softness 30
