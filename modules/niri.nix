@@ -47,8 +47,16 @@
                 color "rgba(0, 0, 0, 0.4)"
             }
 
-            // Perfect Side-by-Side Sizing Rules (Forces Brave to half-screen)
+            // ── Ultra-Wide & Large Screen Sizing Rules ──
+            // Sets the baseline width when a brand new window opens (50% of screen)
             default-column-width { proportion 0.5; }
+
+            // Cycles through these specific widths when you press your layout toggle key (Mod+R)
+            preset-column-widths {
+                proportion 0.50  // Exact half-screen split (Great for balanced side-by-side documentation/code)
+                proportion 0.62  // The "Golden Ratio" Developer Split (Prioritises Codium code view)
+                proportion 0.38  // Compact Reading Split (Perfect for a narrow documentation frame next to code)
+            }
 
             struts {
                 left 0
@@ -95,14 +103,19 @@
             Mod+Ctrl+Left  { move-column-left; }
             Mod+Ctrl+Right { move-column-right; }
 
-            // On-the-Fly Layout Toggles
+            // Cycles between 50/50 split, 62% main focus, and 38% auxiliary frame
             Mod+R { switch-preset-column-width; } 
+            
+            // Instantly maximizes a column to fill the entire monitor viewport (ideal for long code sessions)
             Mod+F { maximize-column; }            
             
+            // Fine-grained manual width adjustments (adjusts column by 5% increments)
+            Mod+BracketLeft  { set-column-width "-5%"; }
+            Mod+BracketRight { set-column-width "+5%"; }
+            
+            // Merges or splits windows into multi-window vertical columns
             Mod+Comma  { consume-window-into-column; }
             Mod+Period { expel-window-from-column; }
-            Mod+BracketLeft  { set-column-width "-10%"; }
-            Mod+BracketRight { set-column-width "+10%"; }
 
             Mod+1 { focus-workspace "1"; }
             Mod+2 { focus-workspace "2"; }
