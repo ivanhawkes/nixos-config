@@ -61,14 +61,14 @@
       // ── 2. Automated Session Launches ──────────────────────
       spawn-at-startup "noctalia"
 
-      // Workspace "1" Target Spawns (Nautilus auto-launch removed)
+      // Workspace "1" Target Spawns (Three terminal instances)
+      spawn-at-startup "alacritty"
+      spawn-at-startup "alacritty"
+      spawn-at-startup "alacritty"
+
+      // Workspace "2" Target Spawns (Nautilus auto-launch removed)
       spawn-at-startup "codium"
       spawn-at-startup "brave"
-
-      // Workspace "2" Target Spawns (Three terminal instances)
-      spawn-at-startup "alacritty"
-      spawn-at-startup "alacritty"
-      spawn-at-startup "alacritty"
 
       // ── Application Keybindings ────────────────────────────
       binds {
@@ -131,13 +131,20 @@
       
       // Workspace "1" Target Assignments
       window-rule {
-          match at-startup=true app-id="vscodium"
+          match at-startup=true app-id="Alacritty"
           open-on-workspace "1"
+          min-width 100
+      }
+
+      // Workspace "2" Target Assignments
+      window-rule {
+          match app-id="vscodium"
+          open-on-workspace "2"
       }
       
       window-rule {
           match at-startup=true app-id="brave-browser"
-          open-on-workspace "1"
+          open-on-workspace "2"
           // open-maximized rule removed here so it conforms to your 0.5 layout half-width rule
       }
       
@@ -146,13 +153,6 @@
       window-rule {
           match app-id="org.gnome.Nautilus"
           open-on-workspace "3"
-      }
-
-      // Workspace "2" Target Assignments
-      window-rule {
-          match app-id="Alacritty"
-          open-on-workspace "2"
-          min-width 100
       }
 
       // ── Fuzzel Layer Rules (Glassmorphism & Jumbo Scale Fix) ──
