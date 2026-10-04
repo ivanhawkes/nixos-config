@@ -109,9 +109,9 @@
             // Instantly maximizes a column to fill the entire monitor viewport (ideal for long code sessions)
             Mod+F { maximize-column; }            
             
-            // Fine-grained manual width adjustments (adjusts column by 5% increments)
-            Mod+BracketLeft  { set-column-width "-5%"; }
-            Mod+BracketRight { set-column-width "+5%"; }
+            // Fine-grained manual width adjustments (adjusts column by 6% increments)
+            Mod+BracketLeft  { set-column-width "-3%"; }
+            Mod+BracketRight { set-column-width "+3%"; }
             
             // Merges or splits windows into multi-window vertical columns
             Mod+Comma  { consume-window-into-column; }

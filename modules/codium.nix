@@ -14,9 +14,9 @@
 
         # ── Theme & Custom Color Overrides ──
         "workbench.colorTheme" = "Catppuccin Mocha";
-        "catppuccin.accentColor" = "mauve"; 
+        "catppuccin.accentColor" = "mauve";
         "workbench.iconTheme" = "catppuccin-mocha";
-        "window.titleBarStyle" = "custom"; 
+        "window.titleBarStyle" = "custom";
 
         # ── Customizing UI Colors to Match Your Setup ──
         "workbench.colorCustomizations" = {
@@ -32,26 +32,28 @@
         # ── Internal Element Rounding & Border Tweaks ──
         "window.dialogStyle" = "custom";
         "chat.editor.fontFamily" = "'JetBrainsMono Nerd Font'";
-        
+
         # ── Typography & Font Scaling (32" 1440p Monitor Optimization) ──
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
         "editor.fontSize" = 14;
-        "editor.lineHeight" = 26;     
+        "editor.lineHeight" = 26;
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
         "terminal.integrated.fontSize" = 14;
 
         # ── Modern UI Visual Cleanups (Minimalist Layout) ──
-        "editor.fontLigatures" = true;       
-        "editor.minimap.enabled" = false;    
-        "editor.scrollbar.vertical" = "hidden"; 
+        "editor.fontLigatures" = true;
+        "editor.minimap.enabled" = false;
+        "editor.scrollbar.vertical" = "hidden";
         "editor.scrollbar.horizontal" = "hidden";
-        "workbench.activityBar.location" = "top"; 
-        "editor.lineNumbers" = "relative";   
-        "editor.cursorBlinking" = "smooth";  
+        "workbench.activityBar.location" = "top";
+        "editor.cursorBlinking" = "smooth";
         "editor.cursorSmoothCaretAnimation" = "off";
-        
-        "workbench.sideBar.location" = "left";
-        "window.menuBarVisibility" = "classic"; 
+
+        "workbench.sideBar.location" = "right";
+        "window.menuBarVisibility" = "classic";
+        "editor.lineDecorationsWidth" = 6;
+        # "editor.lineNumbers" = "relative";
+        "editor.lineNumbers" = "off";
       };
     };
   };
