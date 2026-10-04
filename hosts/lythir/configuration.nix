@@ -120,9 +120,6 @@
     # File manager (GNOME app, used with the niri session)
     nautilus
 
-    # Browsers
-    brave
-
     # Retrieve files from the internet.
     wget
     curl

@@ -19,6 +19,7 @@
     ../../modules/theme.nix
     ../../modules/codium.nix
     ../../modules/starship.nix
+    ../../modules/brave.nix
   ];
 
   # Define your universal user-level theme flavor right here
