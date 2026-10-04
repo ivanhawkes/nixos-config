@@ -36,11 +36,9 @@
               color "rgba(0, 0, 0, 0.4)"
           }
 
-          // ── 1. Perfect Side-by-Side Sizing Rules ──────────
-          // Forces every newly spawned window to occupy exactly half the available monitor width
+          // Perfect Side-by-Side Sizing Rules
           default-column-width { proportion 0.5; }
 
-          // Tells Niri to strictly respect your window bounds instead of shifting columns around
           struts {
               left 0
               right 0
@@ -54,7 +52,18 @@
           noise 0.02  
       }
 
+      // ── 1. Automated Session Session Launches ────────────────
       spawn-at-startup "noctalia"
+
+      // Workspace 1 Core Apps
+      spawn-at-startup "codium"
+      spawn-at-startup "brave"
+      spawn-at-startup "nautilus"
+
+      // Workspace 2 Core Apps (Three individual terminals)
+      spawn-at-startup "alacritty"
+      spawn-at-startup "alacritty"
+      spawn-at-startup "alacritty"
 
       // ── Application Keybindings ────────────────────────────
       binds {
@@ -76,11 +85,10 @@
           Mod+Ctrl+Left  { move-column-left; }
           Mod+Ctrl+Right { move-column-right; }
 
-          // ── 2. On-the-Fly Layout Toggles ──────────────────
+          // On-the-Fly Layout Toggles
           Mod+R { switch-preset-column-width; } 
           Mod+F { maximize-column; }            
           
-          // Fast layout overrides to adjust the split ratios instantly
           Mod+Comma  { consume-window-into-column; }
           Mod+Period { expel-window-from-column; }
           Mod+BracketLeft  { set-column-width "-10%"; }
@@ -114,15 +122,27 @@
           }
       }
 
+      // ── 2. Absolute Workspace Routing Maps ──────────────────
+      
+      // Workspace 1 Rules (Wrapped integers in strings)
+      window-rule {
+          match app-id="vscodium"
+          open-on-workspace "1"
+      }
       window-rule {
           match app-id="brave-browser"
+          open-on-workspace "1"
           open-maximized true
       }
+      window-rule {
+          match app-id="org.gnome.Nautilus"
+          open-on-workspace "1"
+      }
 
-      // ── 3. Application Geometry Overrides ──────────────────
-      // This forces Alacritty terminal layers to explicitly conform to Niri column bounds
+      // Workspace 2 Rules
       window-rule {
           match app-id="alacritty"
+          open-on-workspace "2"
           min-width 100
       }
 
