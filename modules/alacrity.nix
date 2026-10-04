@@ -25,7 +25,7 @@
       };
 
       font = {
-        size = 16;
+        size = 15;
         normal = {
           family = "JetBrainsMono Nerd Font";
           style = "Regular";

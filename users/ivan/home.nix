@@ -20,6 +20,7 @@
     ../../modules/codium.nix
     ../../modules/starship.nix
     ../../modules/brave.nix
+    ../../modules/fast-fetch.nix
   ];
 
   # Define your universal user-level theme flavor right here

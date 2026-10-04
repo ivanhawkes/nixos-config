@@ -7,7 +7,6 @@
 
 {
   imports = [
-    # ./codium.nix
   ];
 
   programs.direnv = {
@@ -16,40 +15,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # We can install the tools ad hoc if the devenv package is available.
     devenv
-
-    # IDE.
-    # vscodium
-
-    # Compilers.
-    #gcc
-    #clang
-    #llvm
-    #gnumake
-
-    # Build utilities.
-    #cmake
-    #ninja
-
-    # Debuggers
-    #gdb
-
-    # Raspberry Pi Pico
-    #gcc-arm-embedded
-    #libtool
-    #automake
-    #autoconf
-    #texinfo
-    #libtool
-    #libftdi
-    #libusb1
-    #pkg-config
-
-    # Debugging / static analysis.
-    #valgrind
-
-    # Scripting.
-    #python3
   ];
 }
