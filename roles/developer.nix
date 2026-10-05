@@ -8,7 +8,5 @@
 {
   imports = [
     ../modules/developer.nix
-    ../modules/go.nix
-    ../modules/ai.nix
   ];
 }
