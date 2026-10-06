@@ -10,7 +10,7 @@
 
       userSettings = {
         # ── Global UI Scaling Factor ──
-        "window.zoomLevel" = 1.32; # Scales the entire UI (icons, menus, explorer) by ~1.10x (1.05^2) — 10% back from level 4
+        "window.zoomLevel" = 1.32; # Scales the entire UI (icons, menus, explorer) by ~1.27x (1.2^1.32)
 
         # ── Theme & Custom Color Overrides ──
         "workbench.colorTheme" = "Catppuccin Mocha";
