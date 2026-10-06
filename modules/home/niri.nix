@@ -155,15 +155,18 @@
       }
 
       // ── Workspace "2" Target Assignments ──
+      // open-maximized: these open at full monitor width (terminals keep the 50% default)
       window-rule {
           match app-id=r#"^codium$"#
           match app-id=r#"^com\.vscodium\.codium$"#
           open-on-workspace "2"
+          open-maximized true
       }
 
       window-rule {
           match app-id=r#"^brave-browser$"#
           open-on-workspace "2"
+          open-maximized true
       }
 
         // Workspace "3" Target Assignments
