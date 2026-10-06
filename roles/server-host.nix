@@ -7,6 +7,6 @@
 
 {
   imports = [
-    ../modules/all-hosts.nix
+    ../modules/nixos/all-hosts.nix
   ];
 }

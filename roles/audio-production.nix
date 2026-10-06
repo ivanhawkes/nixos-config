@@ -25,6 +25,6 @@
   };
 
   imports = [
-    ../modules/reaper.nix
+    ../modules/nixos/reaper.nix
   ];
 }

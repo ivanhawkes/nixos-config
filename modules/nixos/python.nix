@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    (python39.withPackages (
+    (python3.withPackages (
       ps: with ps; [
         pip
         pygments

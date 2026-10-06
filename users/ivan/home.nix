@@ -10,17 +10,17 @@
     inputs.noctalia.homeModules.default
     inputs.catppuccin.homeModules.catppuccin
     
-    # Keep your existing Niri module import line
-    ../../modules/alacrity.nix
-    ../../modules/niri.nix
-    ../../modules/fuzzel.nix
-    ../../modules/noctalia.nix
-    ../../modules/tmog.nix
-    ../../modules/theme.nix
-    ../../modules/codium.nix
-    ../../modules/starship.nix
-    ../../modules/brave.nix
-    ../../modules/fast-fetch.nix
+    # Home Manager modules (per-user desktop configuration)
+    ../../modules/home/alacrity.nix
+    ../../modules/home/niri.nix
+    ../../modules/home/fuzzel.nix
+    ../../modules/home/noctalia.nix
+    ../../modules/home/tmog.nix
+    ../../modules/home/theme.nix
+    ../../modules/home/codium.nix
+    ../../modules/home/starship.nix
+    ../../modules/home/brave.nix
+    ../../modules/home/fast-fetch.nix
   ];
 
   # Define your universal user-level theme flavor right here

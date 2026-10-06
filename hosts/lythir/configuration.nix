@@ -5,8 +5,12 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # Set the role the host performs (desktop / server).
+    # The roles this machine performs (capabilities belong to the host,
+    # not to individual users).
     ../../roles/desktop-host.nix
+    ../../roles/developer.nix
+    ../../roles/audio-production.nix
+    ../../roles/vidio-production.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.

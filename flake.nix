@@ -26,40 +26,19 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      # ── 1. Isolated Dev Shell for Pi ───────────────────────
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = [
-          pkgs.git
-          pkgs.git-lfs
-          pkgs.nodejs_latest
-          pkgs.pi-coding-agent
-        ];
+      # Dev environment for the Pi agent harness lives in devenv.nix.
 
-        shellHook = ''
-          # Isolate npm paths to prevent NixOS global write permission issues
-          export NPM_CONFIG_PREFIX="$PWD/.pi/npm"
-          export PATH="$PWD/.pi/npm/bin:$PATH"
-          
-          echo "⚡ Pi Configuration Workspace Loaded!"
-          echo "👉 Run 'pi install -l npm:@baryonlabs/pi-agent-harness' to begin."
-        '';
-      };
-
-      # ── 2. Your Existing Configurations ────────────────────
+      # ── NixOS Configurations ───────────────────────────────
       nixosConfigurations = {
         lythir = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/lythir/configuration.nix
-            ./users/ivan/ivan.nix 
-
-            {
-              environment.systemPackages = [ inputs.noctalia.packages.${system}.default ];
-              programs.niri.enable = true; 
-            }
+            ./users/ivan/ivan.nix
+            ./modules/nixos/niri.nix
 
             home-manager.nixosModules.home-manager
             {

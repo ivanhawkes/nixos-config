@@ -7,6 +7,6 @@
 
 {
   imports = [
-    ../modules/developer.nix
+    ../modules/nixos/developer.nix
   ];
 }

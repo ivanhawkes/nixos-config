@@ -6,12 +6,6 @@
 }:
 
 {
-  imports = [
-    ../../roles/developer.nix
-    ../../roles/audio-production.nix
-    ../../roles/vidio-production.nix
-  ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."ivan" = {
     isNormalUser = true;
@@ -34,9 +28,6 @@
 
   # Make sure Zsh is listed in valid system shells
   environment.shells = [ pkgs.zsh ];
-
-  # Enable the Docker daemon.
-  virtualisation.docker.enable = true;
 
   # Enable and configure Zsh + Oh My Zsh
   programs.zsh = {

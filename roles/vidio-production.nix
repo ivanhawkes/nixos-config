@@ -7,6 +7,6 @@
 
 {
   imports = [
-    ../modules/handbrake.nix
+    ../modules/nixos/handbrake.nix
   ];
 }
