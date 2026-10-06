@@ -10,7 +10,7 @@
 
       userSettings = {
         # ── Global UI Scaling Factor ──
-        "window.zoomLevel" = 1; # 👈 Scales the entire application UI layout up by exactly 1.25x
+        "window.zoomLevel" = 2; # Scales the entire UI (icons, menus, explorer) by ~1.10x (1.05^2) — 10% back from level 4
 
         # ── Theme & Custom Color Overrides ──
         "workbench.colorTheme" = "Catppuccin Mocha";
@@ -35,8 +35,8 @@
 
         # ── Typography & Font Scaling (32" 1440p Monitor Optimization) ──
         "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
-        "editor.fontSize" = 14;
-        "editor.lineHeight" = 26;
+        "editor.fontSize" = 16;
+        "editor.lineHeight" = 0;   # 0 = automatic/default spacing (~1.2x font size)
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
         "terminal.integrated.fontSize" = 14;
 
@@ -52,8 +52,7 @@
         "workbench.sideBar.location" = "right";
         "window.menuBarVisibility" = "classic";
         "editor.lineDecorationsWidth" = 6;
-        # "editor.lineNumbers" = "relative";
-        "editor.lineNumbers" = "off";
+        "editor.lineNumbers" = "on"; # "on" = absolute line numbers ("absolute" is not a valid value)
       };
     };
   };
