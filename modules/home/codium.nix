@@ -52,7 +52,10 @@
         "workbench.sideBar.location" = "right";
         "window.menuBarVisibility" = "classic";
         "editor.lineDecorationsWidth" = 6;
-        "editor.lineNumbers" = "on"; # "on" = absolute line numbers ("absolute" is not a valid value)
+        "editor.lineNumbers" = "on";
+
+        # Confirmations switched off or they ask for it every single time.
+        "explorer.confirmDelete" = false;
       };
     };
   };

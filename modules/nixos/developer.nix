@@ -8,12 +8,6 @@
 {
   # Language & hardware toolchains that come with the developer role.
   imports = [
-    ./ai.nix
-    ./arduino.nix
-    ./ffmpeg.nix
-    ./go.nix
-    ./python.nix
-    ./raspberry-pi-pico.nix
   ];
 
   programs.direnv = {

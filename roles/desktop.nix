@@ -7,7 +7,7 @@
 
 {
   imports = [
-    ../modules/nixos/all-hosts.nix
+    ../modules/nixos/all.nix
     ../modules/nixos/desktop.nix
   ];
 }
