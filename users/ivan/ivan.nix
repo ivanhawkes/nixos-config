@@ -51,4 +51,14 @@
       ];
     };
   };
+
+  # Direnv automatically opens the developer environment shell if a directory has one.
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    devenv
+  ];
 }

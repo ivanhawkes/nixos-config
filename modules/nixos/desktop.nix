@@ -33,6 +33,9 @@
 
     # Video playback.
     vlc
+
+    # Wayland clipboard copy and paste at the command line.
+    wl-clipboard
   ];
 
   hardware.enableAllFirmware = true;
