@@ -30,6 +30,10 @@
           "network"
           "battery"
           "tray"
+          "clipboard"
+          "screenshot"
+          "wallpaper"
+          "session" # power glyph → session menu (lock / log out / reboot / shutdown)
         ];
       };
 

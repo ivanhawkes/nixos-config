@@ -97,7 +97,8 @@
 
             Mod+L allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
             
-            Mod+Shift+E { quit; }
+            // Clean logout via Noctalia's session action (runs its logging_out hooks)
+            Mod+Shift+E { spawn "noctalia" "msg" "session" "logout"; }
 
             Mod+Left  { focus-column-left; }
             Mod+Right { focus-column-right; }
