@@ -17,7 +17,7 @@
         opacity = 0.85;
         decorations = "None"; # Eliminates native window decorations cleanly for Niri
         blur = true;
-        
+
         # Increased initial bounds so terminal grids scale comfortably alongside 1.25x scaling
         dimensions = {
           columns = 110;
@@ -74,37 +74,37 @@
       # Perfected Catppuccin Mocha Color Maps
       colors = {
         primary = {
-          background = "#1e1e2e"; 
-          foreground = "#cdd6f4"; 
-          dim_foreground = "#7f849c"; 
-          bright_foreground = "#cdd6f4"; 
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+          dim_foreground = "#7f849c";
+          bright_foreground = "#cdd6f4";
         };
 
         cursor = {
-          text = "#1e1e2e";   
-          cursor = "#f5e0dc"; 
+          text = "#1e1e2e";
+          cursor = "#f5e0dc";
         };
 
         vi_mode_cursor = {
           text = "#1e1e2e";
-          cursor = "#b4befe"; 
+          cursor = "#b4befe";
         };
 
         search = {
           matches = {
             foreground = "#1e1e2e";
-            background = "#a6adc8"; 
+            background = "#a6adc8";
           };
           focused_match = {
             foreground = "#1e1e2e";
-            background = "#a6e3a1"; 
+            background = "#a6e3a1";
           };
         };
 
         hints = {
           start = {
             foreground = "#1e1e2e";
-            background = "#f9e2af"; 
+            background = "#f9e2af";
           };
           end = {
             foreground = "#1e1e2e";
@@ -123,36 +123,36 @@
         };
 
         normal = {
-          black   = "#45475a"; 
-          red     = "#f38ba8"; 
-          green   = "#a6e3a1"; 
-          yellow  = "#f9e2af"; 
-          blue    = "#89b4fa"; 
-          magenta = "#f5c2e7"; 
-          cyan    = "#94e2d5"; 
-          white   = "#bac2de"; 
+          black = "#45475a";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#bac2de";
         };
 
         bright = {
-          black   = "#585b70"; 
-          red     = "#f38ba8";
-          green   = "#a6e3a1";
-          yellow  = "#f9e2af";
-          blue    = "#89b4fa";
+          black = "#585b70";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
           magenta = "#f5c2e7";
-          cyan    = "#94e2d5";
-          white   = "#a6adc8";
+          cyan = "#94e2d5";
+          white = "#a6adc8";
         };
 
         dim = {
-          black   = "#45475a";
-          red     = "#f38ba8";
-          green   = "#a6e3a1";
-          yellow  = "#f9e2af";
-          blue    = "#89b4fa";
+          black = "#45475a";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
           magenta = "#f5c2e7";
-          cyan    = "#94e2d5";
-          white   = "#bac2de";
+          cyan = "#94e2d5";
+          white = "#bac2de";
         };
       };
     };

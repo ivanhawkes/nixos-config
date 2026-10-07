@@ -39,8 +39,8 @@
 
     # Needed in order for Gnome Nautilus to browse network shares.
     nautilus
-    samba        # Provides the smbclient libraries needed for network interaction
-    cifs-utils   # Under-the-hood SMB mounting utilities
+    samba # Provides the smbclient libraries needed for network interaction
+    cifs-utils # Under-the-hood SMB mounting utilities
   ];
 
   services.gvfs = {
@@ -63,5 +63,8 @@
     smbd.enable = false;
     winbindd.enable = false;
   };
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
+  networking.firewall.allowedUDPPorts = [
+    137
+    138
+  ];
 }

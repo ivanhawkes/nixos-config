@@ -5,6 +5,15 @@
   programs.noctalia = {
     enable = true;
     settings = {
+      # Bypasses the .setup-complete marker file check on startup.
+      setup_wizard_enabled = false;
+
+      # Sets the primary font family for all shell UI text.
+      # These can also be overridden in individual settings blocks for each widget.
+      font_family = "JetBrainsMono Nerd Font";
+      font_scale = 1.25; # Multiplies text size independently of the icon (0.2–2.5)
+      font_weight = 700; # CSS weight style (100–1000)
+
       # The unified Catppuccin Mocha Desktop Palette. Noctalia 5.x ships a
       # built-in Catppuccin palette (Mocha), so we select it instead of
       # hand-rolling the colors.
@@ -37,7 +46,25 @@
         ];
       };
 
-      widget.clock.format = "%H:%M:%S // %Y-%m-%d";
+      # Clock format minimal, but functional.
+      widget.clock = {
+        format = "  %H:%M:%S";
+
+        # Full date on hover.
+        tooltip_format = "{:%A, %B %d, %Y}";
+      };
+
+      # Enable the weather service.
+      weather = {
+        enabled = true;
+        unit = "metric";
+        refresh_minutes = 30;
+      };
+
+      # Let the OS decide where I am located rather than doxing myself with a hard coded address.
+      location = {
+        auto_locate = true;
+      };
     };
   };
 }

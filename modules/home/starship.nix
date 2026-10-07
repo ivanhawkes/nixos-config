@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true; # Seamlessly hooks into your Zsh shell session
-    
+
     settings = {
       # Appends a clean, modern new line between command inputs
       add_newline = true;
@@ -54,7 +54,7 @@
       # ── Input Prompt Character ──
       character = {
         success_symbol = "[❯](bold #cba6f7)"; # Mocha Mauve matching your layout accents
-        error_symbol = "[❯](bold #f38ba8)";   # Mocha Red indicating an error exit code
+        error_symbol = "[❯](bold #f38ba8)"; # Mocha Red indicating an error exit code
       };
     };
   };

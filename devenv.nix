@@ -1,9 +1,15 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   env.GREET = "Pi Agent Configuration Workspace";
 
-  packages = [ 
+  packages = [
     pkgs.git
     pkgs.git-lfs
     pkgs.nodejs_latest
