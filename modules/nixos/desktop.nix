@@ -36,7 +36,17 @@
 
     # Wayland clipboard copy and paste at the command line.
     wl-clipboard
+
+    # Needed in order for Gnome Nautilus to browse network shares.
+    nautilus
+    samba        # Provides the smbclient libraries needed for network interaction
+    cifs-utils   # Under-the-hood SMB mounting utilities
   ];
+
+  services.gvfs = {
+    enable = true;
+    package = pkgs.gnome.gvfs; # Explicitly pulls in the GNOME version with SMB support
+  };
 
   hardware.enableAllFirmware = true;
 
