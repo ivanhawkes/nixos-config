@@ -14,34 +14,26 @@
         mode = "dark";
       };
 
-      # Upgraded top bar layout for increased clarity on 32" screens
-      bar = {
+      # Noctalia 5.2 bar schema: bars are named sections ([bar.default]) and
+      # widget lists are plain arrays of kebab-case widget ids. Per-widget
+      # settings live in top-level [widget.<name>] sections, not inline.
+      # (The old [[bar.widgets.left/right]] table format is no longer read —
+      # it silently produced an empty bar.)
+      bar.default = {
         position = "top";
-        density = "normal"; # Swapped from compact to normal to scale nicely with your 1.25x scaling factor
-        widgets = {
-          left = [
-            {
-              id = "ControlCenter";
-              useDistroLogo = true;
-            }
-            {
-              id = "Workspace";
-              labelMode = "numeric";
-            }
-          ];
-          center = [
-            {
-              id = "Clock";
-              format = "%H:%M:%S // %Y-%m-%d";
-            }
-          ];
-          right = [
-            { id = "Network"; }
-            { id = "Battery"; }
-            { id = "SystemTray"; }
-          ];
-        };
+        start = [
+          "control-center"
+          "workspaces" # numeric labels are the default (label_source = "id")
+        ];
+        center = [ "clock" ];
+        end = [
+          "network"
+          "battery"
+          "tray"
+        ];
       };
+
+      widget.clock.format = "%H:%M:%S // %Y-%m-%d";
     };
   };
 }
