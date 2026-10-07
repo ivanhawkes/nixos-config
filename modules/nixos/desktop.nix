@@ -39,5 +39,19 @@
   ];
 
   hardware.enableAllFirmware = true;
-  services.samba.enable = true;
+
+  # Nautilus' Network view browses other machines via libsmbclient (bundled
+  # with nautilus), which does its own NetBIOS queries. The default firewall
+  # drops the incoming replies (UDP 137/138) to our broadcast queries, so
+  # allow them or the Network view stays empty.
+  #
+  # Samba runs deliberately minimal: nmbd answers name queries so lythir is
+  # visible in other machines' browse lists, but smbd and winbindd stay off,
+  # so no machine can open an SMB connection to lythir or see any shares.
+  services.samba = {
+    enable = true;
+    smbd.enable = false;
+    winbindd.enable = false;
+  };
+  networking.firewall.allowedUDPPorts = [ 137 138 ];
 }
