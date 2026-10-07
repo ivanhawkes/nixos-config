@@ -6,6 +6,13 @@
     enable = true;
     settings = {
 
+      # Alacritty's default is TERM=alacritty; pin xterm-256color because some tools
+      # lack terminfo for it. May help with a subtle bug that happens when using
+      # NixOS, Niri, Alacritty, Starship and Pi Coding Harness.
+      env = {
+        TERM = "xterm-256color";
+      };
+
       window = {
         opacity = 0.85;
         decorations = "None"; # Eliminates native window decorations cleanly for Niri

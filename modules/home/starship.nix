@@ -7,9 +7,17 @@
       # Appends a clean, modern new line between command inputs
       add_newline = true;
 
-      # Customises the visual ordering of your prompt elements
+      # See comment about Pi Harness terminal bug. Disabling the module also
+      # suppresses its long-command desktop notifications (D-Bus); the explicit
+      # show_notifications = false is kept in case the module is re-enabled.
+      cmd_duration = {
+        disabled = true;
+        show_notifications = false;
+      };
+
+      # Set a modern looking terminal prompt.
       format = ''
-        [](#89b4fa)$directory[](fg:#89b4fa bg:#313244)$git_branch$git_status[](fg:#313244) 
+        [](#89b4fa)$directory[](fg:#89b4fa bg:#313244)$git_branch$git_status[](fg:#313244)
         $character
       '';
 
