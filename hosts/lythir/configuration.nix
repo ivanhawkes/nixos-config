@@ -10,6 +10,9 @@
     ../../roles/desktop.nix
     ../../roles/audio-production.nix
     ../../roles/video-production.nix
+
+    # Services every machine runs.
+    ../../modules/nixos/ssh.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.
