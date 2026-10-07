@@ -10,7 +10,6 @@
   users.users."ivan" = {
     isNormalUser = true;
     description = "Ivan Hawkes";
-    group = "ivan"; # Fixes the second assertion error
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -23,33 +22,16 @@
     shell = pkgs.zsh;
   };
 
-  # You also need to make sure the "ivan" group actually exists:
-  users.groups.ivan = { };
-
   # Make sure Zsh is listed in valid system shells
   environment.shells = [ pkgs.zsh ];
 
-  # Enable and configure Zsh + Oh My Zsh
+  # Enable and configure Zsh. The prompt is provided by Starship
+  # (see modules/home/starship.nix).
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-
-    ohMyZsh = {
-      enable = true;
-      theme = "robbyrussell";
-      plugins = [
-        "git"
-        "sudo"
-        "docker"
-        "docker-compose"
-        "history"
-        "alias-finder"
-        "colored-man-pages"
-        "command-not-found"
-      ];
-    };
   };
 
   # Direnv automatically opens the developer environment shell if a directory has one.

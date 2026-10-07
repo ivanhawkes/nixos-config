@@ -21,5 +21,6 @@
     jetbrains-mono
     nerd-fonts.jetbrains-mono
     hack-font
+    noto-fonts
   ];
 }

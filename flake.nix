@@ -12,8 +12,6 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -21,7 +19,6 @@
       self,
       nixpkgs,
       home-manager,
-      catppuccin,
       ...
     }@inputs:
     let

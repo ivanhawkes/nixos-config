@@ -49,7 +49,10 @@
     # Modesetting is required for most modern WMs/DEs (Wayland and X11)
     modesetting.enable = true;
 
-    # Enable power management (optional, but recommended for laptops/desktops)
+    # Power management (nvidia-persistenced / persistence mode) is mainly
+    # useful on laptops to manage dynamic GPU power states. On this desktop
+    # with an RTX 5060 Ti it stays disabled: the card runs at full power
+    # anyway and there is no battery to conserve.
     powerManagement.enable = false;
     powerManagement.finegrained = false;
 

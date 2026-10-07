@@ -57,6 +57,7 @@
         # Confirmations switched off or they ask for it every single time.
         "explorer.confirmDelete" = false;
         "redhat.telemetry.enabled" = false;
+        "git.openRepositoryInParentFolders" = "never";
       };
     };
   };

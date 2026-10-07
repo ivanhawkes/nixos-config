@@ -19,7 +19,9 @@
         prefer-no-csd
 
         // ── Monitor Scaling Rules ──────────────────────────────
-        output "DP-6" {
+        // Matched by EDID (make/model/serial) instead of connector name,
+        // so the rule survives the monitor being moved to another port.
+        output "LG Electronics LG HDR QHD 0x0001BF55" {
             scale 1.25
         }
 

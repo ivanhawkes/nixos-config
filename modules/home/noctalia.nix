@@ -5,19 +5,13 @@
   programs.noctalia = {
     enable = true;
     settings = {
-      # Static wallpaper path
-      wallpaper = {
-        path = "/home/ivan/Pictures/wallpapers/Anime-Girl3.png";
-        mode = "fill";
-      };
-
-      # The unified Catppuccin Mocha Desktop Palette
-      palette = {
-        background = "#11111b"; # Catppuccin Mocha Crust (Perfect dark baseline)
-        surface    = "#1e1e2e"; # Catppuccin Mocha Base (For panels/context menus)
-        text       = "#cdd6f4"; # Catppuccin Mocha Text
-        accent     = "#cba6f7"; # Catppuccin Mocha Mauve (Syncs flawlessly with your Niri active boundaries)
-        success    = "#a6e3a1"; # Catppuccin Mocha Green
+      # The unified Catppuccin Mocha Desktop Palette. Noctalia 5.x ships a
+      # built-in Catppuccin palette (Mocha), so we select it instead of
+      # hand-rolling the colors.
+      theme = {
+        source = "builtin";
+        builtin = "Catppuccin";
+        mode = "dark";
       };
 
       # Upgraded top bar layout for increased clarity on 32" screens

@@ -8,8 +8,7 @@
 
   imports = [
     inputs.noctalia.homeModules.default
-    inputs.catppuccin.homeModules.catppuccin
-    
+
     # Home Manager modules (per-user desktop configuration)
     ../../modules/home/alacrity.nix
     ../../modules/home/niri.nix
@@ -23,11 +22,4 @@
     ../../modules/home/fast-fetch.nix
   ];
 
-  # Define your universal user-level theme flavor right here
-  catppuccin.flavor = "mocha";
-  #catppuccin.enable = true;
-
-    # 👇 Add/modify these two lines to turn off the port compilation module engine
-  catppuccin.enable = false;
-  catppuccin.autoEnable = false;
 }
