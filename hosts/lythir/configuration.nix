@@ -12,6 +12,7 @@
     ../../roles/video-production.nix
 
     # Services every machine runs.
+    ../../modules/nixos/nix.nix
     ../../modules/nixos/ssh.nix
   ];
 
@@ -27,12 +28,6 @@
 
   # Hostname for this machine.
   networking.hostName = "lythir";
-
-  # Allow experimental settings so I can use flakes.
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   # Enable OpenGL / hardware graphics
   hardware.graphics = {
