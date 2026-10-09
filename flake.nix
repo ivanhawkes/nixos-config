@@ -25,10 +25,8 @@
       system = "x86_64-linux";
     in
     {
-      # Dev environment for the Pi agent harness lives in devenv.nix.
-
-      # ── NixOS Configurations ───────────────────────────────
       nixosConfigurations = {
+        # Desktop with dedicated NVIDIA GPU
         lythir = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -42,26 +40,36 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
-              home-manager.users.ivan = import ./users/ivan/home.nix;
+              
+              # 💡 Fixed: We import home.nix AND inject the Niri/Noctalia modules here!
+              home-manager.users.ivan = {
+                imports = [
+                  ./users/ivan/home.nix
+                  inputs.noctalia.homeModules.default
+                  ./modules/home/niri.nix
+                  ./modules/home/noctalia.nix
+                ];
+              };
             }
           ];
         };
 
-        # ── Added socks configuration ──────────────────────────
+        # Laptop/Secondary machine with Intel graphics
         socks = nixpkgs.lib.nixosSystem {
-          inherit system; # Assumes socks is also an x86_64-linux machine
+          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/socks/configuration.nix # You'll need to create this file
+            ./hosts/socks/configuration.nix
             ./users/ivan/ivan.nix
-            # Add or remove other modules specific to socks here
-            
+
             home-manager.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
-              home-manager.users.ivan = import ./users/ivan/home.nix;
+              
+              # 💡 Fixed: Socks only imports the basic configurations
+              home-manager.users.ivan = ./users/ivan/home.nix;
             }
           ];
         };

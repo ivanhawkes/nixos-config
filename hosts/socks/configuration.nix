@@ -74,6 +74,9 @@
   # individual GNOME apps like Nautilus come from systemPackages below.
   services.displayManager.gdm.enable = true;
 
+  # Add standard GNOME as your bulletproof fallback session.
+  services.xserver.desktopManager.gnome.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "au";
