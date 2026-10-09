@@ -58,6 +58,7 @@
         "explorer.confirmDelete" = false;
         "redhat.telemetry.enabled" = false;
         "git.openRepositoryInParentFolders" = "never";
+        "git.confirmSync" = false;
       };
     };
   };
