@@ -34,6 +34,12 @@
   # Hostname for this machine.
   networking.hostName = "socks";
 
+  # Enable networking
+  networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.wireless.iwd.enable = true;
+  hardware.enableRedistributableFirmware = true;
+
   # Enable OpenGL / hardware graphics
   hardware.graphics = {
     enable = true;
@@ -44,9 +50,6 @@
 
   # Enable XWayland if you need apps like Steam or Discord.
   services.xserver.enable = true;
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
