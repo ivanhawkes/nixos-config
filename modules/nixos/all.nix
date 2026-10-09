@@ -12,10 +12,5 @@
     # Monitor the system.
     htop
     btop
-
-    # Manage code and configuration files.
-    git
-    git-lfs
-    github-cli
   ];
 }

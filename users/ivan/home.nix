@@ -27,4 +27,26 @@
     ../../modules/home/fast-fetch.nix
   ];
 
+  # ── Permanently Configure Git & Git-LFS (Forcing LF Endings) ──
+  programs.git = {
+    enable = true;
+    
+    # Enables and automatically sets up git-lfs hooks for Ivan
+    lfs.enable = true; 
+    
+    extraConfig = {
+      core = {
+        autocrlf = "input";
+        eol = "lf";
+      };
+    };
+  };
+
+  # ── Elegantly Manage and Configure GitHub CLI (gh) ──
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh"; # Preferred protocol for Git operations
+    };
+  };
 }
