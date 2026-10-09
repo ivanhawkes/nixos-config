@@ -31,13 +31,17 @@
   programs.git = {
     enable = true;
     
+    # Your global git identity details
+    userName = "Ivan Hawkes";
+    userEmail = "ivan@google.com";
+
     # Enables and automatically sets up git-lfs hooks for Ivan
     lfs.enable = true; 
     
     extraConfig = {
       core = {
-        autocrlf = "input";
-        eol = "lf";
+        autocrlf = "input"; # Safety net: turns CRLF -> LF on commit
+        eol = "lf";         # Enforces Linux line endings for new files
       };
     };
   };
