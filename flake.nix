@@ -40,7 +40,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
-              
+
               # 💡 Fixed: We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
@@ -67,8 +67,28 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
-              
-              # 💡 Fixed: Socks only imports the basic configurations
+
+              # Socks only imports the basic configurations
+              home-manager.users.ivan = ./users/ivan/home.nix;
+            }
+          ];
+        };
+
+        # Laptop/Secondary machine with Intel graphics
+        veronica = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/veronica/configuration.nix
+            ./users/ivan/ivan.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.backupFileExtension = "backup";
+
+              # Veronica only imports the basic configurations
               home-manager.users.ivan = ./users/ivan/home.nix;
             }
           ];

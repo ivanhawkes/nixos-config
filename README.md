@@ -30,45 +30,53 @@ Where things go:
 - A module lives in exactly one of `modules/nixos/` or `modules/home/`
   depending on which option namespace it sets — never both.
 
-## Building / updating
+## Getting Started
+
+We need to establish a foothold first, bring in some useful commands and
+this repository as well.
 
 ```bash
-# Build and apply this configuration.
-sudo nixos-rebuild switch --flake .#lythir
-
-# Try it without making it the default boot.
-sudo nixos-rebuild test --flake .#lythir
-
-# Update nixpkgs and switch.
-nix flake update
-sudo nixos-rebuild switch --flake .#lythir
-```
-
-The flake tracks `nixos-unstable`. Optional auto-updates:
-
-```nix
-system.autoUpgrade.enable = true;
-system.autoUpgrade.allowReboot = false;
-```
-
-Rebuilding home-manager only (no OS rebuild):
-
-```bash
-home-manager rebuild
+# Give yourself access to a Nix shell with flakes enabled. This requires the
+# extra experimental features flag to be set.
+nix --extra-experimental-features "nix-command flakes" shell nixpkgs#git nixpkgs#vscodium nixpkgs#brave
 ```
 
 ## Getting my SSH keys.
 
 ```bash
-cd ~
-scp ivan@{MACHINE_NAME}:/home/ivan/.ssh/* ~/.ssh
+# Start in the home folder. Grab my SSH keys from a local machine.
+cd ~ && scp $USER@{HOST_WITH_SSH_KEYS}:/home/$USER/.ssh/* ~/.ssh
+```
+
+## Git config
+
+The next step is usually to set some defaults for Git. These will be overridden
+once the full Nix flake setup is installed, but it's best to have these for
+pulling the repository from Github.
+
+```bash
+git config --global user.email "ivan.hawkes@gmail.com"
+git config --global user.name "Ivan Hawkes"
+git config --global init.defaultBranch main
+```
+
+## Get this repository
+
+Clone a copy of [this repository](https://github.com/ivanhawkes/nixos-config).
+
+```bash
+git clone git@github.com:ivanhawkes/nixos-config.git
 ```
 
 ## Adding a new machine.
 
 ```bash
-# Set the new machine name in the environment to save some cut and paste.
-export MACHINE={MACHINE_NAME}
+# Set the new machine name in the environment to save some cut and paste - default
+# to using the host name set on installation.
+export MACHINE=$HOST
+
+# These next commands should be executed from a local copy of the repository.
+cd ~nixos-config
 
 # Make a new config folder for the new machine.
 mkdir -p hosts/$MACHINE
@@ -77,31 +85,93 @@ mkdir -p hosts/$MACHINE
 cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.backup
 cp /etc/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix.backup
 
-# Get Nixos to generate a new default config for that machine.
-# NOTE: This step might actually be redundant. Check next time I run this installation process.
+# You should have a good working hardware-configuration.nix file from the installation.
+# If you need to regenerate it at any time you can run:
 sudo nixos-generate-config --force
 
 # Take a copy of the generated hardware config as our base.
 cp /etc/nixos/hardware-configuration.nix hosts/$MACHINE/
 
-# Use the first config, Lythir, as a template for other machines.
+# By default, use the first config 'lythir' as a template for other machines.
+# You may wish to change this, for example, 'socks' for a server installation.
 cp hosts/lythir/configuration.nix hosts/$MACHINE/
 ```
+
+### Make sure you...
 
 - Change 'networking.hostName', and adjust the hardware sections (NVIDIA/AMD, root device UUID, etc.).
 - Register the new machine in `flake.nix` under `nixosConfigurations`.
 
+You will likely need to make changes to the following files:
 
-```
-sudo nixos-rebuild switch --flake .$MACHINE
-```
+- flake.nix
+- home.nix
+- hosts/$MACHINE/configuration.nix
 
-## Git config
+If your machine is a laptop, be sure to check it has the right drivers available,
+especially for wifi, power control, and screen control.
+
+## Adding Home Comforts
+
+You can do this while the OS is building, or before, or after - the choice is yours.
+
+Login is a brutal cycle of second factor authentication and other assorted bullshit.
+Make sure you have your phone on hand.
+
+- [primary mail provider](https://mail.google.com/)
+- [secrets manager](https://bitwarden.com/)
+
+Now get BitWarden extension working in your browser. It provides passkey implementation.
+
+- [BitWarden Downloads](https://bitwarden.com/download/)
+
+On with the hustle:
+
+- [your main repository](https://github.com/ivanhawkes)
+- [bookmarks](https://app.raindrop.io/)
+- [to-do list](https://app.todoist.com/)
+
+## Building
+
+With the config files in place it's time to pray to the outer gods. They will neither
+hear your prayers, nor acknowledge them if they do, and they will certainly never intercede
+on your behalf. The universe is a cold, dark, uncaring place...best of luck.
 
 ```bash
-git config --global user.email "ivan.hawkes@gmail.com"
-git config --global user.name "Ivan Hawkes"
-git config --global init.defaultBranch main
+# Only build the configuration, no testing, no adding to the boot menu.
+sudo nixos-rebuild build --flake .#$MACHINE
+
+# Optionally, try it without making it the default boot.
+sudo nixos-rebuild test --flake .#$MACHINE
+
+# Build and apply this configuration.
+sudo nixos-rebuild switch --flake .#$MACHINE
+```
+
+## Updating
+
+The Nixos package are pinned using flake.lock - a lockfile with version numbers within.
+If you are feeling brave you might want to try and upgrade to a newer version of the
+packages. It is recommended you do this on a machine that is easy to control and revert
+if needed.
+
+Nixos is a fast moving target that does break things, so be advised you are taking a risk
+every time you perform an update.
+
+```bash
+# Update nixpkgs and switch if it all looks good.
+nix flake update
+sudo nixos-rebuild build --flake .#$MACHINE
+sudo nixos-rebuild switch --flake .#$MACHINE
+```
+
+## Home Manager
+
+I don't normally need to rebuild Home Manager on it's own, but it's useful to have
+the command available just in case:
+
+```bash
+home-manager rebuild
 ```
 
 ## Desktop (lythir)
