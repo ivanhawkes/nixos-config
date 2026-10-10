@@ -32,7 +32,7 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   # Hostname for this machine.
-  networking.hostName = "socks";
+  networking.hostName = "veronica";
 
   # Enable networking
   networking.networkmanager.enable = true;
