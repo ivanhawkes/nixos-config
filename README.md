@@ -76,7 +76,7 @@ git clone git@github.com:ivanhawkes/nixos-config.git
 export MACHINE=$HOST
 
 # These next commands should be executed from a local copy of the repository.
-cd ~nixos-config
+cd ~/nixos-config
 
 # Make a new config folder for the new machine.
 mkdir -p hosts/$MACHINE
