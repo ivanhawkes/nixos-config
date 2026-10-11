@@ -15,6 +15,8 @@
     ../../modules/home/starship.nix
     ../../modules/home/brave.nix
     ../../modules/home/fast-fetch.nix
+    ../../modules/home/aliases.nix
+    ../../modules/home/dotfiles.nix
   ];
 
   programs.git = {
