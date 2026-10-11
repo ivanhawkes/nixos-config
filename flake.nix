@@ -41,7 +41,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
 
-              # 💡 Fixed: We import home.nix AND inject the Niri/Noctalia modules here!
+              # We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
                   ./users/ivan/home.nix
@@ -73,7 +73,7 @@
 #              home-manager.users.ivan = ./users/ivan/home.nix;
 
 
-              # 💡 Experiment: We import home.nix AND inject the Niri/Noctalia modules here!
+              # Experiment: We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
                   ./users/ivan/home.nix

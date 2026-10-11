@@ -13,6 +13,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "video"
       "dialout"
       "plugdev"
       "docker"
@@ -25,13 +26,29 @@
   # Make sure Zsh is listed in valid system shells
   environment.shells = [ pkgs.zsh ];
 
-  # Enable and configure Zsh. The prompt is provided by Starship
-  # (see modules/home/starship.nix).
+  # Enable and configure Zsh.
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "sudo"
+        "git"
+        "history"
+        "alias-finder"
+        "docker"
+        "docker-compose"
+        "colored-man-pages"
+        "command-not-found"
+      ];
+      
+      # Starship and Alacritty are setting the theme. 
+      theme = "";
+    };    
   };
 
   # Direnv automatically opens the developer environment shell if a directory has one.

@@ -79,22 +79,23 @@
     # Trailing arguments pass through, so `veronica -Y user@host` works
     # exactly as the old script's `ssh <name> $*` did.
     shellAliases = {
-      daphne = "ssh daphne";
-      de10-nano = "ssh de10-nano";
-      dns-server = "ssh dns-server";
-      homeassistant = "ssh root@homeassistant";
-      mercury = "ssh mercury";
-      mister = "ssh mister";
-      odroid-hc2 = "ssh odroid-hc2";
-
-      # OPNSense is reached by IP; the firewall has no resolvable name.
-      opnsense = "ssh 10.0.0.10";
-
-      veronica = "ssh veronica";
-      venus = "ssh venus";
-
-      # Velma only answers to root; the old script hardcoded `ssh root@velma`.
+      # Velma and opnsense are root access only.
       velma = "ssh root@velma";
+      opnsense = "ssh root@10.0.0.10";
+
+      # Servers.
+      veronica = "ssh veronica";
+      daphne = "ssh daphne";
+
+      # Clients.
+      lythir = "ssh lythir";
+      socks = "ssh socks";
+      
+      # Assorted.
+      mister = "ssh mister";
+      de10-nano = "ssh de10-nano";
+      volumio = "ssh volumio-lounge";
+      homeassistant = "ssh root@homeassistant";
     };
   };
 
@@ -113,12 +114,6 @@
     ".venv/bin"
   ];
 
-  # ── Overwriting the old rc files ──────────────────────────
-  # programs.zsh writes its own home.file entries, and activation refused to
-  # start because ~/.zshrc, ~/.zprofile and ~/.zshenv are still the hand-written
-  # ones. force = true here is the same rm -f the deleted install-scripts.sh
-  # used; those three files were saved by hand before this switch.
-  #
   # The "./" prefix is not a typo: the zsh module keys the entries
   # home.file."${dotDirRel}/.zshrc", and dotDirRel is "." while dotDir is the
   # plain home directory. A different key would register a second file with the
