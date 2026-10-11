@@ -36,9 +36,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
-  networking.wireless.iwd.enable = true;
   hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
+
+  # Enable loading the wireless regulatory database at boot
+  hardware.wirelessRegulatoryDatabase = true;
+
+  # Force the cfg80211 driver to enforce the Australian regulatory region
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="AU"
+  '';
 
   # Enable OpenGL / hardware graphics
   hardware.graphics = {

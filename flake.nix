@@ -70,18 +70,18 @@
               home-manager.backupFileExtension = "backup";
 
               # Socks only imports the basic configurations
-              home-manager.users.ivan = ./users/ivan/home.nix;
+#              home-manager.users.ivan = ./users/ivan/home.nix;
 
 
               # 💡 Experiment: We import home.nix AND inject the Niri/Noctalia modules here!
-#              home-manager.users.ivan = {
-#                imports = [
-#                  ./users/ivan/home.nix
-#                  inputs.noctalia.homeModules.default
-#                  ./modules/home/niri.nix
-#                  ./modules/home/noctalia.nix
-#                ];
-#              };
+              home-manager.users.ivan = {
+                imports = [
+                  ./users/ivan/home.nix
+                  inputs.noctalia.homeModules.default
+                  ./modules/home/niri.nix
+                  ./modules/home/noctalia.nix
+                ];
+              };
 
 
             }
