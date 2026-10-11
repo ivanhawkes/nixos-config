@@ -112,4 +112,18 @@
     "vendor/bin"
     ".venv/bin"
   ];
+
+  # ── Overwriting the old rc files ──────────────────────────
+  # programs.zsh writes its own home.file entries, and activation refused to
+  # start because ~/.zshrc, ~/.zprofile and ~/.zshenv are still the hand-written
+  # ones. force = true here is the same rm -f the deleted install-scripts.sh
+  # used; those three files were saved by hand before this switch.
+  #
+  # The "./" prefix is not a typo: the zsh module keys the entries
+  # home.file."${dotDirRel}/.zshrc", and dotDirRel is "." while dotDir is the
+  # plain home directory. A different key would register a second file with the
+  # same target, which home-manager rejects.
+  home.file."./.zshrc".force = true;
+  home.file."./.zprofile".force = true;
+  home.file."./.zshenv".force = true;
 }
