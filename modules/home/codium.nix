@@ -56,9 +56,10 @@
 
         # Confirmations switched off or they ask for it every single time.
         "explorer.confirmDelete" = false;
-        "redhat.telemetry.enabled" = false;
+        "explorer.confirmDragAndDrop" = false;
         "git.openRepositoryInParentFolders" = "never";
         "git.confirmSync" = false;
+        "redhat.telemetry.enabled" = false;
       };
     };
   };
