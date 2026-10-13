@@ -60,6 +60,7 @@
         "git.openRepositoryInParentFolders" = "never";
         "git.confirmSync" = false;
         "redhat.telemetry.enabled" = false;
+        "cSpell.language" = "en-GB";
       };
     };
   };

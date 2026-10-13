@@ -15,6 +15,11 @@
       };
     in
     ''
+        // Suppress showing the hotkey hints at launch.
+        hotkey-overlay {
+            skip-at-startup
+        }
+
         // ── CSD Window Bleed Fix ───────────────────────────────
         prefer-no-csd
 
