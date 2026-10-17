@@ -7,7 +7,7 @@
 
   imports = [
     # Core system tools and universal application configs
-    ../../modules/home/alacrity.nix
+    ../../modules/home/alacritty.nix
     ../../modules/home/fuzzel.nix
     ../../modules/home/tmog.nix
     ../../modules/home/theme.nix
