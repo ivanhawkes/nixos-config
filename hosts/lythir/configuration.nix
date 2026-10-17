@@ -19,6 +19,10 @@
     # Services every machine runs.
     ../../modules/nixos/nix.nix
     ../../modules/nixos/ssh.nix
+
+    # Machine-specific applications.
+    ../../modules/nixos/inkscape.nix
+    ../../modules/nixos/bambu-studio.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.
