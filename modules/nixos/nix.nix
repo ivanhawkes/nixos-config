@@ -7,6 +7,9 @@
       "flakes"
     ];
 
+    # Fixes the build prompt by permanently allowing Import From Derivation
+    allow-import-from-derivation = true;
+
     # Automatically hard-link identical files in the store to save space
     # (runs continuously in the background for new derivations).
     auto-optimise-store = true;

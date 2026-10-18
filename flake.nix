@@ -12,6 +12,9 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Required by Codex.
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -19,6 +22,9 @@
       self,
       nixpkgs,
       home-manager,
+
+      # Required by Codex.
+      llm-agents,
       ...
     }@inputs:
     let
@@ -35,17 +41,26 @@
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
 
+            # Inject Codex.
+            # Overrides the package to grant rustc extra stack space so it doesn't segfault.
+            {
+              environment.systemPackages = [
+                (llm-agents.packages.${system}.codex.overrideAttrs (oldAttrs: {
+                  # Increases rustc stack limit from default to 128MB to prevent the SIGSEGV
+                  RUST_MIN_STACK = "134217728";
+                }))
+              ];
+            }
+
             home-manager.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
 
-              # We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
                   inputs.noctalia.homeModules.default
-
                   ./users/ivan/home.nix
                   ./modules/home/niri.nix
                   ./modules/home/noctalia.nix
@@ -64,28 +79,27 @@
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
 
+            # Inject Codex.
+            {
+              environment.systemPackages = [
+                llm-agents.packages.${system}.codex
+              ];
+            }
+
             home-manager.nixosModules.home-manager
             {
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
 
-              # Socks only imports the basic configurations
-#              home-manager.users.ivan = ./users/ivan/home.nix;
-
-
-              # Experiment: We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
                   inputs.noctalia.homeModules.default
-
                   ./users/ivan/home.nix
                   ./modules/home/niri.nix
                   ./modules/home/noctalia.nix
                 ];
               };
-
-
             }
           ];
         };
@@ -104,7 +118,6 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.backupFileExtension = "backup";
 
-              # Veronica only imports the basic configurations
               home-manager.users.ivan = ./users/ivan/home.nix;
             }
           ];
