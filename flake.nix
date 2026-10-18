@@ -44,8 +44,9 @@
               # We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
-                  ./users/ivan/home.nix
                   inputs.noctalia.homeModules.default
+
+                  ./users/ivan/home.nix
                   ./modules/home/niri.nix
                   ./modules/home/noctalia.nix
                 ];
@@ -76,8 +77,9 @@
               # Experiment: We import home.nix AND inject the Niri/Noctalia modules here!
               home-manager.users.ivan = {
                 imports = [
-                  ./users/ivan/home.nix
                   inputs.noctalia.homeModules.default
+
+                  ./users/ivan/home.nix
                   ./modules/home/niri.nix
                   ./modules/home/noctalia.nix
                 ];

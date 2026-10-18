@@ -23,6 +23,13 @@
     # Machine-specific applications.
     ../../modules/nixos/inkscape.nix
     ../../modules/nixos/bambu-studio.nix
+    ../../modules/nixos/orca-slicer.nix
+
+    # Services machines can utilise.
+    ../../modules/nixos/brother-hl-l8260-cdw.nix
+
+    # AI agent / harness.
+    ../../modules/nixos/claude.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.

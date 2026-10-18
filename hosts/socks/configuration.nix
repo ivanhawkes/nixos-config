@@ -19,6 +19,12 @@
     # Services every machine runs.
     ../../modules/nixos/nix.nix
     ../../modules/nixos/ssh.nix
+
+    # Services machines can utilise.
+    ../../modules/nixos/brother-hl-l8260-cdw.nix
+
+    # AI agent / harness.
+    ../../modules/nixos/claude.nix
   ];
 
   # NOTE: The following configuration will be applied to every machine.
