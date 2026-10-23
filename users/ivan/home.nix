@@ -58,5 +58,8 @@
     [global]
     hide_env_diff = true
     log_filter = "^$"
+
+    [whitelist]
+    prefix = [ "$(expand_path ~/projects)", "$(expand_path ~/worktrees)" ]
   '';
 }
