@@ -21,7 +21,7 @@
 
   programs.git = {
     enable = true;
-    lfs.enable = true; 
+    lfs.enable = true;
 
     settings = {
       user = {
@@ -46,4 +46,17 @@
       git_protocol = "ssh";
     };
   };
+
+  # Direnv automatically opens the developer environment shell if a directory has one.
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  # Manually tell Nix to place the TOML configuration file
+  xdg.configFile."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+    log_filter = "^$"
+  '';
 }

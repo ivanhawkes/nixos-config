@@ -45,16 +45,10 @@
         "colored-man-pages"
         "command-not-found"
       ];
-      
-      # Starship and Alacritty are setting the theme. 
-      theme = "";
-    };    
-  };
 
-  # Direnv automatically opens the developer environment shell if a directory has one.
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+      # Starship and Alacritty are setting the theme.
+      theme = "";
+    };
   };
 
   environment.systemPackages = with pkgs; [
