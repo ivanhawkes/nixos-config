@@ -18,6 +18,15 @@
   programs.zsh = {
     enable = true;
 
+    # ── Shell Integration Hooks ─────────────────────────────
+    # This replaces the interactive 'wt config shell install' utility 
+    # by declaratively evaluation code directly during Zsh startup blocks.
+    initContent = ''
+      if command -v wt &>/dev/null; then
+        eval "$(wt config shell init zsh)"
+      fi
+    '';
+
     # ── Session variables ───────────────────────────────────
     # Ported from the legacy users/ivan/.bashrc, users/ivan/.profile and the
     # previous hand-written ~/.zprofile. Values are emitted as `export NAME="value"`,

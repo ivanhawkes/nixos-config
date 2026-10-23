@@ -15,6 +15,9 @@
 
     # Required by Codex.
     llm-agents.url = "github:numtide/llm-agents.nix";
+
+    # Worktrunk, improved workflow for git worktrees.
+    worktrunk.url = "github:max-sixty/worktrunk";
   };
 
   outputs =
@@ -25,6 +28,7 @@
 
       # Required by Codex.
       llm-agents,
+      worktrunk,
       ...
     }@inputs:
     let

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -12,5 +12,8 @@
     # Monitor the system.
     htop
     btop
-  ];
+ 
+    # Install Worktrunk across all configurations via its flake input
+    inputs.worktrunk.packages.${pkgs.system}.default
+ ];
 }

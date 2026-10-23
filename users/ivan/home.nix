@@ -33,6 +33,10 @@
         autocrlf = "input";
         eol = "lf";
       };
+
+      submodule.recurse = true;
+      fetch.recurseSubmodules = "on-demand";
+      protocol.file.allow = "always";
     };
   };
 
