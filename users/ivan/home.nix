@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.stateVersion = "26.05";
@@ -60,6 +60,6 @@
     log_filter = "^$"
 
     [whitelist]
-    prefix = [ "$(expand_path ~/projects)", "$(expand_path ~/worktrees)" ]
+    prefix = [ "${config.home.homeDirectory}/projects", "${config.home.homeDirectory}/worktrees" ]
   '';
 }
