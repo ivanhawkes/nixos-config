@@ -34,7 +34,9 @@
           "control-center"
           "workspaces" # numeric labels are the default (label_source = "id")
         ];
-        center = [ "clock" ];
+        center = [ 
+          "clock"
+           ];
         end = [
           "network"
           "battery"
