@@ -15,6 +15,7 @@
     ../../roles/desktop.nix
     ../../roles/audio-production.nix
     ../../roles/video-production.nix
+    ../../roles/gaming.nix
 
     # Services every machine runs.
     ../../modules/nixos/nix.nix

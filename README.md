@@ -8,7 +8,7 @@ Flake-based, multi-machine configuration. The current active host is
 ```
 flake.nix            Entry point: nixosConfigurations + inputs (wiring only)
 hosts/<name>/        Per-machine configuration.nix + hardware-configuration.nix
-roles/               Workload bundles (desktop, developer, audio/video production, server)
+roles/               Workload bundles (desktop, developer, gaming, audio/video production, server)
 modules/nixos/       Reusable NixOS modules (fonts, desktop, developer, ...)
 modules/home/        Reusable home-manager modules (alacritty, niri, codium, ...)
 users/ivan/          ivan.nix (NixOS user + zsh), home.nix (home-manager entry)
@@ -184,6 +184,9 @@ home-manager rebuild
 - Terminal: Alacritty (`modules/home/alacritty.nix`), launcher: Fuzzel
   (`modules/home/fuzzel.nix`).
 - Keybinding / window-manager tweaks: `modules/home/niri.nix`.
+- Gaming: `roles/gaming.nix` → `modules/nixos/steam.nix` (Steam, Proton-GE,
+  GameScope, GameMode). Controller input on Wayland needs
+  `programs.steam.extest.enable`, which that module sets.
 
 ## Pi Coding Harness
 
