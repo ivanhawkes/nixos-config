@@ -63,8 +63,17 @@
     smbd.enable = false;
     winbindd.enable = false;
   };
+
+  # SAMBA ports.
   networking.firewall.allowedUDPPorts = [
     137
     138
   ];
+
+  # Open ports for testing apps and allowing access to the AI LLM.
+  networking.firewall.allowedTCPPorts = [ 
+    80    # HTTP
+    443   # Secure HTTPS
+    8080  # Strata AI LLM
+    ];
 }
