@@ -43,6 +43,9 @@
   # Keeps only the latest 10 generations.
   boot.loader.systemd-boot.configurationLimit = 10;
 
+  # I want NTFS on this machine.
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Hostname for this machine.
   networking.hostName = "lythir";
 
