@@ -61,7 +61,7 @@
             // Cycles through these specific widths when you press your layout toggle key (Mod+R)
             preset-column-widths {
                 proportion 0.50  // Exact half-screen split (Great for balanced side-by-side documentation/code)
-                proportion 0.62  // The "Golden Ratio" Developer Split (Prioritises Codium code view)
+                proportion 0.62  // The "Golden Ratio" Developer Split (Prioritises VS Code code view)
                 proportion 0.38  // Compact Reading Split (Perfect for a narrow documentation frame next to code)
             }
 
@@ -87,15 +87,15 @@
         spawn-at-startup "alacritty"
 
         // Workspace "2" Target Spawns (Nautilus auto-launch removed)
-        spawn-at-startup "codium"
         spawn-at-startup "brave"
+        spawn-at-startup "code"
 
         // ── Application Keybindings ────────────────────────────
         binds {
             Mod+T      { spawn "alacritty"; }
             Mod+B      { spawn "brave"; }
             Mod+E      { spawn "nautilus"; }
-            Mod+C      { spawn "codium"; }
+            Mod+C      { spawn "code"; }
             
             Mod+D      { spawn "fuzzel"; }
             Mod+Q      { close-window; }
@@ -165,8 +165,8 @@
       // ── Workspace "2" Target Assignments ──
       // open-maximized: these open at full monitor width (terminals keep the 50% default)
       window-rule {
-          match app-id=r#"^codium$"#
-          match app-id=r#"^com\.vscodium\.codium$"#
+          match app-id=r#"^code$"#
+          match app-id=r#"^com\.vscode\.code$"#
           open-on-workspace "2"
           open-maximized true
       }

@@ -61,6 +61,9 @@
         "git.confirmSync" = false;
         "redhat.telemetry.enabled" = false;
         "cSpell.language" = "en-GB";
+
+        # CLangd support.
+        "clangd.path" = "/home/ivan/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/23.1.0/clangd_23.1.0/bin/clangd";
       };
     };
   };

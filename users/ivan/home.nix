@@ -11,7 +11,8 @@
     ../../modules/home/fuzzel.nix
     ../../modules/home/tmog.nix
     ../../modules/home/theme.nix
-    ../../modules/home/codium.nix
+    #../../modules/home/codium.nix
+    ../../modules/home/vscode.nix
     ../../modules/home/starship.nix
     ../../modules/home/brave.nix
     ../../modules/home/fast-fetch.nix
