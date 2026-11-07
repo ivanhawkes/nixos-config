@@ -57,6 +57,9 @@
     enable32Bit = true;
   };
 
+  # Enable LACT and its systemd daemon service
+  services.lact.enable = true;
+
   # Enable XWayland if you need apps like Steam or Discord.
   services.xserver.enable = true;
 
@@ -67,11 +70,7 @@
     # Modesetting is required for most modern WMs/DEs (Wayland and X11)
     modesetting.enable = true;
 
-    # Power management (nvidia-persistenced / persistence mode) is mainly
-    # useful on laptops to manage dynamic GPU power states. On this desktop
-    # with an RTX 5060 Ti it stays disabled: the card runs at full power
-    # anyway and there is no battery to conserve.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
 
     # Set to false to use the fully proprietary kernel module instead of the open-source kernel module variant.
@@ -143,6 +142,9 @@
 
     # Makes Docker far easier to manage.
     docker-compose
+
+    # Add the GUI package for LACTto your user environment.
+    lact
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,

@@ -5,7 +5,7 @@ AllowShortCaseLabelsOnASingleLine: true
 BinPackArguments: true
 BinPackParameters: BinPack
 BreakBeforeBraces: Allman
-ColumnLimit: 120
+ColumnLimit: 104
 ContinuationIndentWidth: 4
 DisableFormat: false
 IndentCaseLabels: true
