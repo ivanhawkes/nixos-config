@@ -88,7 +88,6 @@
 
         // Workspace "2" Target Spawns (Nautilus auto-launch removed)
         spawn-at-startup "brave"
-        spawn-at-startup "code"
 
         // ── Application Keybindings ────────────────────────────
         binds {
