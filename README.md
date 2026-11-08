@@ -38,7 +38,7 @@ this repository as well.
 ```bash
 # Give yourself access to a Nix shell with flakes enabled. This requires the
 # extra experimental features flag to be set.
-nix --extra-experimental-features "nix-command flakes" shell nixpkgs#git nixpkgs#vscodium nixpkgs#brave
+nix --extra-experimental-features "nix-command flakes" shell nixpkgs#git nixpkgs#vscodium nixpkgs#google-chrome
 ```
 
 ## Getting my SSH keys.
@@ -267,13 +267,13 @@ I would prefer.
 I am weary, and the struggle was far longer than I anticipated, but the result is
 spectacular.
 
-My new desktop is very responsive. Memory use is sitting at 6.8 GB with Codium, Brave, Nautilus
+My new desktop is very responsive. Memory use is sitting at 6.8 GB with Codium, Chrome, Nautilus
 and three Alacritty windows open.
 
 The infinite scrollbar workspace idea is phenomenal. NixOS opens up my most-used software on the
 desktops I designated as I log into the desktop. I went with a 3x grid setup, with Alacritty
 taking up three slots on workspace 1 - each window taking exactly half the screen real estate.
-Brave and Codium sit side-by-side at full screen in the middle, on workspace 2. Nautilus leaps
+Chrome and VS Code sit side-by-side at full screen in the middle, on workspace 2. Nautilus leaps
 into life on workspace 3 when I launch it. Everything else just launches on the workspace I
 am currently using.
 

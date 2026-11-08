@@ -87,12 +87,12 @@
         spawn-at-startup "alacritty"
 
         // Workspace "2" Target Spawns (Nautilus auto-launch removed)
-        spawn-at-startup "brave"
+        spawn-at-startup "google-chrome"
 
         // ── Application Keybindings ────────────────────────────
         binds {
             Mod+T      { spawn "alacritty"; }
-            Mod+B      { spawn "brave"; }
+            Mod+B      { spawn "google-chrome"; }
             Mod+E      { spawn "nautilus"; }
             Mod+C      { spawn "code"; }
             
@@ -171,7 +171,7 @@
       }
 
       window-rule {
-          match app-id=r#"^brave-browser$"#
+          match app-id=r#"^google-chrome$"#
           open-on-workspace "2"
           open-maximized true
       }

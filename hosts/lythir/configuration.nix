@@ -140,6 +140,9 @@
     # File manager (GNOME app, used with the niri session)
     nautilus
 
+    # Chrome web browser.
+    google-chrome
+
     # Makes Docker far easier to manage.
     docker-compose
 
