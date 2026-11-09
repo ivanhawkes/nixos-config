@@ -49,6 +49,9 @@
   # Hostname for this machine.
   networking.hostName = "lythir";
 
+  # Lock the DRM device for Wayland compositors.
+  environment.variables.WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:0c:00.0-card";
+
   # Enable OpenGL / hardware graphics
   hardware.graphics = {
     enable = true;
