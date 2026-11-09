@@ -150,6 +150,16 @@
     lact
   ];
 
+  # 1. Enable GPU Screen Recorder system-wide
+  programs.gpu-screen-recorder.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    
+    # Use mkForce to resolve the option collision cleanly
+    config.common.default = lib.mkForce [ "gnome" "gtk" ];
+  };
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #

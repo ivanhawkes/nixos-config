@@ -99,6 +99,13 @@
             Mod+D      { spawn "fuzzel"; }
             Mod+Q      { close-window; }
 
+            // ── Screen Recording Hotkeys via Noctalia IPC ──
+            // Mod + F10: Toggles a full standard video screen capture
+            Mod+F10 { spawn "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "toggle"; }
+            
+            // Mod + F9: Saves the last 30 seconds of high-FPS replay buffer instantly to your storage
+            Mod+F9  { spawn "noctalia" "msg" "plugin" "noctalia/screen_recorder:service" "all" "replay-save"; }
+
             Mod+L allow-inhibiting=false { spawn "noctalia" "msg" "session" "lock"; }
             
             // Clean logout via Noctalia's session action (runs its logging_out hooks)

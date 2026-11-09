@@ -48,6 +48,19 @@
         ];
       };
 
+      # ── Noctalia Screen Recorder Plugin Configuration ──
+      plugins = {
+        enabled = [ "noctalia/screen_recorder" ];
+      };
+
+      "plugins.screen_recorder" = {
+        audio_source = "default_output";
+        audio_codec = "opus";
+        replay_enabled = true;
+        replay_duration = 30;
+        replay_storage = "ram";
+      };
+
       # Clock format minimal, but functional.
       widget.clock = {
         format = "  %H:%M:%S";
