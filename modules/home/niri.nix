@@ -58,6 +58,9 @@
             // Sets the baseline width when a brand new window opens (50% of screen)
             default-column-width { proportion 0.5; }
 
+            // Keeps side-by-side columns static, but centers windows that "overflow" the screen space
+            center-focused-column "on-overflow"
+
             // Cycles through these specific widths when you press your layout toggle key (Mod+R)
             preset-column-widths {
                 proportion 0.50  // Exact half-screen split (Great for balanced side-by-side documentation/code)
@@ -91,10 +94,9 @@
 
         // ── Application Keybindings ────────────────────────────
         binds {
-            Mod+T      { spawn "alacritty"; }
+            Mod+T      { spawn "sh" "-c" "alacritty & niri msg action set-column-width 50%"; }
             Mod+B      { spawn "google-chrome"; }
             Mod+E      { spawn "nautilus"; }
-            Mod+C      { spawn "code"; }
             
             Mod+D      { spawn "fuzzel"; }
             Mod+Q      { close-window; }
@@ -111,9 +113,14 @@
             // Clean logout via Noctalia's session action (runs its logging_out hooks)
             Mod+Shift+E { spawn "noctalia" "msg" "session" "logout"; }
 
+            // Column Focus Hotkeys.
             Mod+Left  { focus-column-left; }
             Mod+Right { focus-column-right; }
 
+            // Centers the currently focused terminal/column on your screen
+            Mod+C { center-column; }
+
+            // Moves the currently focused column to the left or right within the layout.
             Mod+Ctrl+Left  { move-column-left; }
             Mod+Ctrl+Right { move-column-right; }
 
@@ -166,6 +173,9 @@
           match app-id="Alacritty"
           open-on-workspace "1"
           min-width 100
+
+          // At 60%, it overflows a 50/50 split and niri automatically slides it to the center
+          default-column-width { proportion 0.6; } 
       }
 
       // ── Workspace "2" Target Assignments ──
