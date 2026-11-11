@@ -41,7 +41,12 @@
     nautilus
     samba # Provides the smbclient libraries needed for network interaction
     cifs-utils # Under-the-hood SMB mounting utilities
+
+    # Give the desktop a proper sound theme.
+    sound-theme-freedesktop
   ];
+
+  environment.pathsToLink = [ "/share/sounds" ];
 
   services.gvfs = {
     enable = true;

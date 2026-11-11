@@ -38,9 +38,11 @@
       nixosConfigurations = {
         # Desktop with dedicated NVIDIA GPU
         lythir = nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
+            # Set the host platform cleanly to resolve the evaluation warning
+            { nixpkgs.hostPlatform = system; }
+
             ./hosts/lythir/configuration.nix
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
@@ -76,9 +78,11 @@
 
         # Laptop/Secondary machine with Intel graphics
         socks = nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
+            # Set the host platform cleanly to resolve the evaluation warning
+            { nixpkgs.hostPlatform = system; }
+
             ./hosts/socks/configuration.nix
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
@@ -110,9 +114,11 @@
 
         # Server running in a VM on Proxmox.
         veronica = nixpkgs.lib.nixosSystem {
-          inherit system;
           specialArgs = { inherit inputs; };
           modules = [
+            # Set the host platform cleanly to resolve the evaluation warning
+            { nixpkgs.hostPlatform = system; }
+
             ./hosts/veronica/configuration.nix
             ./users/ivan/ivan.nix
 
