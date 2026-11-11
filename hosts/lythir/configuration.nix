@@ -120,6 +120,22 @@
     variant = "";
   };
 
+  # Enable Bluetooth support.
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+    input = {
+      General = {
+        UserspaceHID = true;
+      };
+    };
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -158,9 +174,12 @@
 
   xdg.portal = {
     enable = true;
-    
+
     # Use mkForce to resolve the option collision cleanly
-    config.common.default = lib.mkForce [ "gnome" "gtk" ];
+    config.common.default = lib.mkForce [
+      "gnome"
+      "gtk"
+    ];
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
