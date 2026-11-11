@@ -59,7 +59,8 @@
             default-column-width { proportion 0.5; }
 
             // Set globally to on-overflow so large/enlarged columns center out nicely
-            center-focused-column "on-overflow"
+            // center-focused-column "on-overflow"
+            center-focused-column "never"
 
             // Cycles through these specific widths when you press your layout toggle key (Mod+R)
             preset-column-widths {
@@ -217,7 +218,7 @@
                 on
                 softness 30
                 spread 5
-                offset x=0 y=10
+                offset x=6 y=6
                 color "rgba(17, 17, 27, 0.65)" 
             }
         }
