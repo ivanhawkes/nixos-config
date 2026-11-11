@@ -40,25 +40,25 @@
             gaps 12
             focus-ring { off; }
 
+            // ── Remove the Hard Border ──
             border {
-                width 4
-                active-color "${"#" + palette.muted_mauve}"  
-                inactive-color "${"#" + palette.crust}" 
+                off // Disables the hard border lines
             }
 
+            // ── Dense, Tighter Light-Blue Glow ──
             shadow {
                 on
-                softness 16
-                spread 2
-                offset x=0 y=4
-                color "rgba(0, 0, 0, 0.4)"
+                softness 12   // Halved from 24 to keep the halo tight and clean
+                spread 3      // Slightly reduced to prevent over-stretching
+                offset x=0 y=0 
+                color "rgba(137, 180, 250, 0.95)" // Opacity bumped from 0.6 to 0.95 for a dense, vibrant look
             }
 
             // ── Ultra-Wide & Large Screen Sizing Rules ──
             // Sets the baseline width when a brand new window opens (50% of screen)
             default-column-width { proportion 0.5; }
 
-            // Keeps side-by-side columns static, but centers windows that "overflow" the screen space
+            // Set globally to on-overflow so large/enlarged columns center out nicely
             center-focused-column "on-overflow"
 
             // Cycles through these specific widths when you press your layout toggle key (Mod+R)
@@ -69,8 +69,10 @@
             }
 
             struts {
-                left 0
-                right 0
+                left 12
+                right 12
+                top 12
+                bottom 12
             }
         }
 
@@ -166,38 +168,41 @@
             }
         }
 
-      // ── 3. High-Precision Target Routing Overrides ──────────
-
-      // Workspace "1" Target Assignments
+      // Terminals.
       window-rule {
           match app-id="Alacritty"
           open-on-workspace "1"
           min-width 100
 
-          // At 60%, it overflows a 50/50 split and niri automatically slides it to the center
-          default-column-width { proportion 0.6; } 
+          // At 50%, it stays split. When manually enlarged via Mod+R/Mod+F, global "on-overflow" will center it.
+          default-column-width { proportion 0.5; } 
       }
 
-      // ── Workspace "2" Target Assignments ──
-      // open-maximized: these open at full monitor width (terminals keep the 50% default)
+      // Browser (Chrome & VS Code) Target Assignments.
       window-rule {
           match app-id=r#"^code$"#
           match app-id=r#"^com\.vscode\.code$"#
           open-on-workspace "2"
           open-maximized true
+          default-column-width { proportion 0.5; } 
       }
 
       window-rule {
           match app-id=r#"^google-chrome$"#
           open-on-workspace "2"
           open-maximized true
+          default-column-width { proportion 0.5; } 
       }
 
-        // Workspace "3" Target Assignments
-        // Always captures Nautilus at runtime and forces it to slide onto Workspace 3
+        // File explorer (Nautilus)
         window-rule {
-            match app-id="org.gnome.Nautilus"
+            match app-id=r#"^(org\.gnome\.)?[Nn]autilus$"#
             open-on-workspace "3"
+            
+            // Fixed 1024 logical pixel constraint prevents Nautilus from dropping 
+            // beneath half-screen width on your 1440p monitor (2048 / 2 = 1024).
+            min-width 1024
+            default-column-width { proportion 0.5; }
         }
 
         // ── Fuzzel Layer Rules (Glassmorphism & Jumbo Scale Fix) ──
