@@ -24,7 +24,5 @@
     jack.enable = true;
   };
 
-  imports = [
-    ../modules/nixos/reaper.nix
-  ];
+  environment.systemPackages = [ pkgs.reaper ];
 }

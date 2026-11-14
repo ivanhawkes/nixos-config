@@ -12,8 +12,8 @@
     # Monitor the system.
     htop
     btop
- 
+
     # Install Worktrunk across all configurations via its flake input
-    inputs.worktrunk.packages.${pkgs.system}.default
- ];
+    inputs.worktrunk.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 }

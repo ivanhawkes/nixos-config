@@ -17,4 +17,3 @@ rclone bisync "/data/home/ivan/OneDrive" "OneDrive:/" \
     --exclude ".cache"
 
 echo "Backup completed successfully!"
-

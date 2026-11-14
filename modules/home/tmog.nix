@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  # Absolute path to your AppImage — adjust to match whoami
-  appImage = "/home/ivan/.local/opt/tmog/tmog.AppImage";
+  # No nixpkgs/upstream Nix package found (2026-11-14); see docs/maintenance.md.
+  appImage = "${config.home.homeDirectory}/.local/opt/tmog/tmog.AppImage";
 in
 {
   # ── Packages & Scripts ────────────────────────────────────

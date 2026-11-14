@@ -1,84 +1,25 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
-  imports = [
-    ./fonts.nix
-  ];
-
-  # Discord is an unfree application, covered by nixpkgs.config.allowUnfree
-  # in the host configuration.
-
+{ pkgs, ... }: {
+  imports = [ ./fonts.nix ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.enableAllFirmware = true;
+  services.xserver = {
+    enable = true;
+    xkb.layout = "au";
+  };
+  programs.firefox.enable = true;
+  # Battery reporting is needed by Noctalia without the GNOME desktop.
+  services.upower.enable = true;
   environment.systemPackages = with pkgs; [
-    # Dotfile management.
     stow
-
-    # Communications.
     discord
-
-    # Artwork.
-    krita
-    inkscape
-
-    # Modelling.
-    blender
-    freecad
-
-    # Electronic design.
-    kicad
-
-    # Video playback.
     vlc
-
-    # Wayland clipboard copy and paste at the command line.
     wl-clipboard
-
-    # Needed in order for Gnome Nautilus to browse network shares.
     nautilus
-    samba # Provides the smbclient libraries needed for network interaction
-    cifs-utils # Under-the-hood SMB mounting utilities
-
-    # Give the desktop a proper sound theme.
+    google-chrome
     sound-theme-freedesktop
   ];
-
   environment.pathsToLink = [ "/share/sounds" ];
-
-  services.gvfs = {
-    enable = true;
-    package = pkgs.gnome.gvfs; # Explicitly pulls in the GNOME version with SMB support
-  };
-
-  hardware.enableAllFirmware = true;
-
-  # Nautilus' Network view browses other machines via libsmbclient (bundled
-  # with nautilus), which does its own NetBIOS queries. The default firewall
-  # drops the incoming replies (UDP 137/138) to our broadcast queries, so
-  # allow them or the Network view stays empty.
-  #
-  # Samba runs deliberately minimal: nmbd answers name queries so lythir is
-  # visible in other machines' browse lists, but smbd and winbindd stay off,
-  # so no machine can open an SMB connection to lythir or see any shares.
-  services.samba = {
-    enable = true;
-    smbd.enable = false;
-    winbindd.enable = false;
-  };
-
-  # SAMBA ports.
-  networking.firewall.allowedUDPPorts = [
-    137
-    138
-  ];
-
-  # Open ports for testing apps and allowing access to the AI LLM.
-  networking.firewall.allowedTCPPorts = [ 
-    80    # HTTP
-    443   # Secure HTTPS
-    8080  # Strata AI LLM
-    ];
 }

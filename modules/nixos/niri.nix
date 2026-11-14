@@ -12,7 +12,7 @@
 
   # Noctalia lock screen / shell, spawned by the niri config.
   environment.systemPackages = [
-    inputs.noctalia.packages.${pkgs.system}.default
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Niri integrates with xwayland-satellite automatically: it creates the
     # X11 socket, exports $DISPLAY, and spawns xwayland-satellite on demand
@@ -20,10 +20,16 @@
     pkgs.xwayland-satellite
   ];
 
-  # Optional: Add required plumbing for Wayland screen sharing / portals
+  # Use Niri's GNOME screencast backend and GTK for ordinary app dialogs.
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-    config.common.default = [ "gnome" "wlr" ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = [
+      "gnome"
+      "gtk"
+    ];
   };
 }

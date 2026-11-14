@@ -3,8 +3,6 @@
 {
   # Install the package.
   environment.systemPackages = with pkgs; [
-    handbrake
-
     # Wrap HandBrake so it can find the NixOS NVIDIA drivers at runtime
     (symlinkJoin {
       name = "handbrake-nvenc";

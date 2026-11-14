@@ -36,4 +36,3 @@ rclone sync "$UPLOAD_LOCATION" "$ONEDRIVE_REMOTE" \
     --verbose
 
 echo "Backup completed successfully!"
-

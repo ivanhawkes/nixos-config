@@ -6,18 +6,9 @@
   home.homeDirectory = "/home/ivan";
 
   imports = [
-    # Core system tools and universal application configs
-    ../../modules/home/alacritty.nix
-    ../../modules/home/fuzzel.nix
-    ../../modules/home/tmog.nix
-    ../../modules/home/theme.nix
-    #../../modules/home/codium.nix
-    ../../modules/home/vscode.nix
-    ../../modules/home/starship.nix
-    #../../modules/home/brave.nix
-    ../../modules/home/fast-fetch.nix
-    ../../modules/home/aliases.nix
-    ../../modules/home/dotfiles.nix
+    ../../../modules/home/starship.nix
+    ../../../modules/home/fast-fetch.nix
+    ./shell.nix
   ];
 
   programs.git = {

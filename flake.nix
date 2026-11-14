@@ -27,101 +27,30 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-
-      # Required by Codex.
-      llm-agents,
-      worktrunk,
-      ...
-    }@inputs:
+    { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
+      mkHost =
+        name:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ (./hosts + "/${name}/configuration.nix") ];
+        };
+      hosts = {
+        lythir = mkHost "lythir";
+        socks = mkHost "socks";
+      };
+      pkgs = import nixpkgs { inherit system; };
     in
     {
-      nixosConfigurations = {
-        # Desktop with dedicated NVIDIA GPU
-        lythir = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            # Set the host platform cleanly to resolve the evaluation warning
-            { nixpkgs.hostPlatform = system; }
-
-            ./hosts/lythir/configuration.nix
-            ./users/ivan/ivan.nix
-            ./modules/nixos/niri.nix
-            ./modules/nixos/codex.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.users.ivan = {
-                imports = [
-                  inputs.noctalia.homeModules.default
-                  ./users/ivan/home.nix
-                  ./modules/home/niri.nix
-                  ./modules/home/noctalia.nix
-                ];
-              };
-            }
-          ];
-        };
-
-        # Laptop/Secondary machine with Intel graphics
-        socks = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            # Set the host platform cleanly to resolve the evaluation warning
-            { nixpkgs.hostPlatform = system; }
-
-            ./hosts/socks/configuration.nix
-            ./users/ivan/ivan.nix
-            ./modules/nixos/niri.nix
-            ./modules/nixos/codex.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.users.ivan = {
-                imports = [
-                  inputs.noctalia.homeModules.default
-                  ./users/ivan/home.nix
-                  ./modules/home/niri.nix
-                  ./modules/home/noctalia.nix
-                ];
-              };
-            }
-          ];
-        };
-
-        # Server running in a VM on Proxmox.
-        veronica = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            # Set the host platform cleanly to resolve the evaluation warning
-            { nixpkgs.hostPlatform = system; }
-
-            ./hosts/veronica/configuration.nix
-            ./users/ivan/ivan.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.users.ivan = ./users/ivan/home.nix;
-            }
-          ];
-        };
+      nixosConfigurations = hosts;
+      formatter.${system} = pkgs.nixfmt-tree;
+      checks.${system} = builtins.mapAttrs (_: host: host.config.system.build.toplevel) hosts // {
+        formatting = pkgs.runCommand "nix-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
+          cd ${self}
+          find . -name '*.nix' -type f -print0 | xargs -0 nixfmt --check
+          touch $out
+        '';
       };
     };
 }

@@ -1,70 +1,26 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
+{ config, pkgs, ... }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    # The roles this machine performs (capabilities belong to the host,
-    # not to individual users).
+    ../../roles/common.nix
+    ../../modules/nixos/uefi-boot.nix
     ../../roles/desktop.nix
+    ../../roles/development.nix
+    ../../roles/creative.nix
+    ../../roles/fabrication.nix
     ../../roles/audio-production.nix
     ../../roles/video-production.nix
     ../../roles/gaming.nix
-
-    # Services every machine runs.
-    ../../modules/nixos/nix.nix
-    ../../modules/nixos/ssh.nix
-
-    # Machine-specific applications.
-    ../../modules/nixos/inkscape.nix
-    ../../modules/nixos/bambu-studio.nix
-    ../../modules/nixos/orca-slicer.nix
-
-    # Services machines can utilise.
+    ../../modules/nixos/network-browsing.nix
+    ../../modules/nixos/development-network.nix
     ../../modules/nixos/brother-hl-l8260-cdw.nix
-
-    # AI agent / harness.
-    ../../modules/nixos/claude.nix
   ];
-
-  # NOTE: The following configuration will be applied to every machine.
-  # Only put something here if it is universally needed.
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Keeps only the latest 10 generations.
-  boot.loader.systemd-boot.configurationLimit = 10;
-
-  # I want NTFS on this machine.
-  boot.supportedFilesystems = [ "ntfs" ];
-
-  # Hostname for this machine.
   networking.hostName = "lythir";
-
+  boot.supportedFilesystems = [ "ntfs" ];
   # Lock the DRM device for Wayland compositors.
   environment.variables.WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:0c:00.0-card";
 
-  # Enable OpenGL / hardware graphics
-  hardware.graphics = {
-    enable = true;
-
-    # Recommended for Steam / wine 32-bit games
-    enable32Bit = true;
-  };
-
   # Enable LACT and its systemd daemon service
   services.lact.enable = true;
-
-  # Enable XWayland if you need apps like Steam or Discord.
-  services.xserver.enable = true;
 
   # Tell Xserver/Wayland to use the nvidia driver alongside modesetting
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -88,38 +44,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Australia/Brisbane";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_AU.UTF-8";
-    LC_IDENTIFICATION = "en_AU.UTF-8";
-    LC_MEASUREMENT = "en_AU.UTF-8";
-    LC_MONETARY = "en_AU.UTF-8";
-    LC_NAME = "en_AU.UTF-8";
-    LC_NUMERIC = "en_AU.UTF-8";
-    LC_PAPER = "en_AU.UTF-8";
-    LC_TELEPHONE = "en_AU.UTF-8";
-    LC_TIME = "en_AU.UTF-8";
-  };
-
-  # GDM is kept as the display manager; the niri session (enabled via
-  # flake.nix) is the desktop. GNOME is not installed as a desktop manager -
-  # individual GNOME apps like Nautilus come from systemPackages below.
-  services.displayManager.gdm.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "au";
-    variant = "";
-  };
-
   # Enable Bluetooth support.
   hardware.bluetooth = {
     enable = true;
@@ -136,68 +60,8 @@
     };
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Enable the Docker daemon.
-  virtualisation.docker.enable = true;
-
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Install software every machine requires.
-  environment.systemPackages = with pkgs; [
-    # Formatting of Nix files.
-    nixfmt
-
-    # File manager (GNOME app, used with the niri session)
-    nautilus
-
-    # Chrome web browser.
-    google-chrome
-
-    # Makes Docker far easier to manage.
-    docker-compose
-
-    # Add the GUI package for LACTto your user environment.
-    lact
-  ];
-
-  # 1. Enable GPU Screen Recorder system-wide
   programs.gpu-screen-recorder.enable = true;
-
-  xdg.portal = {
-    enable = true;
-
-    # Use mkForce to resolve the option collision cleanly
-    config.common.default = lib.mkForce [
-      "gnome"
-      "gtk"
-    ];
-  };
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "26.05"; # Did you read the comment?
+  environment.systemPackages = [ pkgs.lact ];
+  # Installation compatibility baseline; do not bump on upgrades.
+  system.stateVersion = "26.05";
 }
