@@ -16,6 +16,12 @@
     # Required by Codex.
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    codex-desktop-linux = {
+      url = "github:ilysenko/codex-desktop-linux";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "worktrunk/flake-utils";
+    };
+
     # Worktrunk, improved workflow for git worktrees.
     worktrunk.url = "github:max-sixty/worktrunk";
   };
@@ -46,17 +52,7 @@
             ./hosts/lythir/configuration.nix
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
-
-            # Inject Codex.
-            # Overrides the package to grant rustc extra stack space so it doesn't segfault.
-            {
-              environment.systemPackages = [
-                (llm-agents.packages.${system}.codex.overrideAttrs (oldAttrs: {
-                  # Increases rustc stack limit from default to 128MB to prevent the SIGSEGV
-                  RUST_MIN_STACK = "134217728";
-                }))
-              ];
-            }
+            ./modules/nixos/codex.nix
 
             home-manager.nixosModules.home-manager
             {
@@ -86,13 +82,7 @@
             ./hosts/socks/configuration.nix
             ./users/ivan/ivan.nix
             ./modules/nixos/niri.nix
-
-            # Inject Codex.
-            {
-              environment.systemPackages = [
-                llm-agents.packages.${system}.codex
-              ];
-            }
+            ./modules/nixos/codex.nix
 
             home-manager.nixosModules.home-manager
             {

@@ -188,6 +188,39 @@ home-manager rebuild
   GameScope, GameMode). Controller input on Wayland needs
   `programs.steam.extest.enable`, which that module sets.
 
+## Codex (lythir and socks)
+
+`modules/nixos/codex.nix` installs the standalone `codex` CLI from the existing
+`numtide/llm-agents.nix` pin and the graphical `codex-desktop` application from
+[ilysenko/codex-desktop-linux](https://github.com/ilysenko/codex-desktop-linux).
+The latter is a community distribution of OpenAI's Linux desktop package;
+its launcher entry is named **ChatGPT Community**. Veronica does not import
+this module.
+
+The desktop input exports `nixosModules.default` and
+`homeManagerModules.default`, using `programs.codexDesktopLinux`. We use only
+the NixOS module, avoiding a second Home Manager installation. Its `enable`
+option installs the desktop entry; optional `linuxFeatures`, `computerUseUi`,
+`remoteMobileControl`, and `remoteControl` remain at their defaults. Desktop
+keeps its version-matched bundled app-server; `cliPackage` is deliberately
+unset rather than assuming compatibility with the separately pinned CLI.
+
+`CODEX_OZONE_PLATFORM=auto` enables the pinned launcher's live Wayland socket
+detection under Niri, with X11 fallback and explicit Electron flags taking
+precedence. The current Nix wrapper otherwise defaults to X11, despite the
+upstream Nix documentation describing `NIXOS_OZONE_WL` support. Existing Niri,
+Noctalia, portals, and Alacritty configuration is retained. Graphical behavior
+still needs testing in a logged-in session after activation.
+
+Both hosts use lythir's existing build-time `RUST_MIN_STACK=134217728`
+override. The unmodified CLI derivation has a recorded rustc SIGSEGV while
+building `codex-app-server-transport`; sharing the workaround also avoids
+building two CLI variants. This is not a global runtime environment variable.
+
+Update only the desktop pin with `nix flake update codex-desktop-linux`.
+Validate without activation using `nix flake check` and
+`nixos-rebuild build --flake .#lythir` (or `.#socks`).
+
 ## Pi Coding Harness
 
 This folder doubles as a workspace for the [Pi Coding Harness](https://pi.dev/). 
