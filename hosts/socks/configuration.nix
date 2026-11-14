@@ -9,7 +9,6 @@
     ../../roles/audio-production.nix
     ../../roles/video-production.nix
     ../../modules/nixos/network-browsing.nix
-    ../../modules/nixos/development-network.nix
     ../../modules/nixos/brother-hl-l8260-cdw.nix
   ];
   networking.hostName = "socks";

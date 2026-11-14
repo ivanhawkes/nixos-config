@@ -1,0 +1,50 @@
+name: Validate NixOS configuration
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '23 19 * * 0'
+  workflow_dispatch:
+    inputs:
+      build_systems:
+        description: Build both complete systems (may require substantial time and disk)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@3dc140bfc76c49fbd4dd958429132e3746bcb086 # v31
+      - name: Evaluate both supported hosts and checks
+        run: nix flake check --no-build --no-update-lock-file
+      - name: Check formatting and build shell-checked helper scripts
+        run: >-
+          nix build --no-link --no-update-lock-file
+          .#checks.x86_64-linux.formatting
+          .#checks.x86_64-linux.helper-scripts
+          .#checks.x86_64-linux.configuration-policy
+  build:
+    if: github.event_name == 'workflow_dispatch' && inputs.build_systems
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix:
+        host: [lythir, socks]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@3dc140bfc76c49fbd4dd958429132e3746bcb086 # v31
+      - run: nix build --no-link --no-update-lock-file .#checks.x86_64-linux.${{ matrix.host }}

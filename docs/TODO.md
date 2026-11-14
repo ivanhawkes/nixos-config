@@ -16,12 +16,14 @@ Before enabling it:
   draft imports only the common baseline and no graphical/production workloads.
 - Register it in `flake.nix`, build it and test boot and SSH access on the VM.
 
-## Development environments
+## Project development environments
 
 Move manually installed Vulkan, Quartus, Node tooling and Pico SDK environments
 into their owning projects' development shells where practical. The existing
 compatibility exports live in `users/ivan/home/development.nix`; versions and
-project requirements need to be established before replacing them.
+project requirements need to be established before replacing them. A separate
+Python/Rust/Go scratch environment now lives at `~/projects/workbench`; it does
+not replace project-specific devenv configurations.
 
 ## TMOG
 

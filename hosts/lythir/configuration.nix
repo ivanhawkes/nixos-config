@@ -14,6 +14,7 @@
     ../../modules/nixos/development-network.nix
     ../../modules/nixos/brother-hl-l8260-cdw.nix
   ];
+  home-manager.users.ivan.imports = [ ./home.nix ];
   networking.hostName = "lythir";
   boot.supportedFilesystems = [ "ntfs" ];
   # Lock the DRM device for Wayland compositors.

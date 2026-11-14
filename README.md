@@ -16,6 +16,9 @@ hosts/<host>/            Explicit role selection and machine-specific settings
 roles/                   Common baseline and workload bundles
 modules/nixos/           Reusable services, desktop integration and hardware policy
 modules/home/            Reusable per-user application configuration
+packages/                Packaged personal helper scripts
+environments/workbench/  Scratch devenv template for ~/projects/workbench
+.github/workflows/       Automated configuration validation
 users/ivan/account.nix   Account and system shell support
 users/ivan/home/         Common, desktop and development Home Manager profiles
 users/ivan/files/        Personal dotfiles
@@ -30,7 +33,8 @@ tuning and `system.stateVersion` in the host; keep `home.stateVersion` with the 
 
 The desktop role enables Niri, GDM, Nautilus and portal support. Individual GNOME
 applications work without enabling the full GNOME desktop. Network browsing,
-printing, creative applications and development listeners are separate imports.
+printing, creative applications and development access are separate imports.
+Only Lythir provides `dev-ports open|close|status`; ports start closed.
 
 ## Routine commands
 
@@ -57,3 +61,7 @@ There is no standalone Home Manager flake output.
 The optional Pi harness environment is defined in `devenv.nix` and entered using
 `devenv shell` or direnv. Run `harness-init` to initialize its local packages;
 `.pi/` is ignored. This environment is independent of the system flake lock.
+
+The scratch environment is installed at `~/projects/workbench`; enter it with
+`devenv shell`. Git worktrees remain under `~/worktrees`. See
+[Workbench](environments/workbench/README.md) for details.

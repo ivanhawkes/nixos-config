@@ -32,10 +32,24 @@ The video role installs only the NVIDIA-capable HandBrake wrapper, avoiding two
 competing copies of the same executables. Its driver path remains usable on
 non-NVIDIA hosts, but NVENC requires NVIDIA hardware and driver support.
 
-Both workstations explicitly select `modules/nixos/development-network.nix` to
-retain their existing TCP 80/443/8080 listener policy. A desktop alone does not
-open these ports. Move each opening beside a declarative service if those
-manually launched development/Strata services are added to this repository.
+Only Lythir imports `modules/nixos/development-network.nix`. Development ports
+start closed on boot; open them temporarily when running a listener:
+
+```sh
+dev-ports open      # sudo starts the service: TCP 80, 443 and 8080, IPv4 and IPv6
+dev-ports status    # inspect the service; inactive status returns a nonzero exit
+dev-ports close     # sudo stops the service and removes its rules
+```
+
+The rules allow inbound traffic from any source while open. They are removed on
+stop or reboot. An active service follows firewall restarts and reloads so state and rules
+remain consistent. Socks has neither the command nor the development port rules.
+The module explicitly requires the iptables firewall backend. This does not
+launch web/Strata services; start the required listener separately.
+
+Lythir's monitor EDID and 1.25 scaling live in `hosts/lythir/home.nix`. Shared Niri
+configuration contains no monitor-specific output rule; add a Socks home module
+if it needs a display override later.
 
 ## Codex
 
@@ -68,6 +82,38 @@ These are documented in the development profile and should migrate into the
 respective projects as their requirements become clear. The obsolete apt-based
 `pico_setup.sh` has been deleted; cloning Pico libraries remains available.
 
-Personal helper scripts are in `users/ivan/scripts/`. Only scripts declared by
-`users/ivan/home/dotfiles.nix` are installed. Existing backup scripts retain their
-original behavior and need separate restore testing before being relied upon.
+## Helper scripts and OneDrive
+
+Personal helper scripts live in `users/ivan/scripts/` and are packaged by
+`packages/helper-scripts.nix` using `writeShellApplication`. Build-time ShellCheck
+and syntax checks run automatically, and the wrappers supply their runtime tools
+such as rclone, rsync, git/SSH and mnamer. The development Home Manager profile
+installs all five commands, retaining their `.sh` names. The three previously
+managed `~/.local/bin` paths point to the packaged versions for compatibility.
+
+`home-to-onedrive.sh` deliberately retains **bidirectional `rclone bisync`** because
+OneDrive is updated by multiple applications and devices. Its filters and transfer
+settings are unchanged. `immich-to-onedrive.sh` retains its media-only sync behavior;
+it does not create a database dump. Backup and rename commands are available but
+are never run by builds or activation.
+
+## Scratch environment
+
+[Workbench](../environments/workbench/README.md) is copied to
+`~/projects/workbench`, with Python/venv/uv, Rust/Cargo and Go, plus common shell
+and native build tools. Enter it with `cd ~/projects/workbench && devenv shell`.
+Its own `devenv.lock` pins the toolchains. Real projects retain their own devenv
+shells; Git worktrees stay under `~/worktrees`.
+
+## Continuous integration
+
+`.github/workflows/validate.yml` runs on main pushes, pull requests, and weekly.
+It evaluates both supported hosts, checks formatting, builds the ShellCheck-checked
+helper scripts, and asserts that GNOME stays off, monitor settings are host-specific,
+and development ports are closed by default and controllable only on Lythir.
+Actions are pinned to commit IDs and the workflow has read-only repository access.
+
+Full builds remain available locally with `nix flake check`. To run both host
+builds on GitHub, select **Run workflow** and enable **Build both complete systems**.
+Those builds require substantially more runner time and disk than routine checks.
+The workflow must be pushed to GitHub before it can run.

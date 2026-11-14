@@ -41,11 +41,50 @@
         socks = mkHost "socks";
       };
       pkgs = import nixpkgs { inherit system; };
+      helperScripts = import ./packages/helper-scripts.nix { inherit pkgs; };
     in
     {
       nixosConfigurations = hosts;
       formatter.${system} = pkgs.nixfmt-tree;
+      packages.${system} = helperScripts;
       checks.${system} = builtins.mapAttrs (_: host: host.config.system.build.toplevel) hosts // {
+        helper-scripts = pkgs.linkFarm "helper-scripts" (
+          nixpkgs.lib.mapAttrsToList (name: path: {
+            inherit name path;
+          }) helperScripts
+        );
+        configuration-policy =
+          let
+            lythir = hosts.lythir.config;
+            socks = hosts.socks.config;
+          in
+          assert builtins.all (h: !h.services.desktopManager.gnome.enable && h.programs.niri.enable) [
+            lythir
+            socks
+          ];
+          assert builtins.all
+            (
+              h:
+              builtins.all (port: !(builtins.elem port h.networking.firewall.allowedTCPPorts)) [
+                80
+                443
+                8080
+              ]
+            )
+            [
+              lythir
+              socks
+            ];
+          assert lythir.systemd.services ? development-ports;
+          assert !(socks.systemd.services ? development-ports);
+          assert lythir.systemd.services.development-ports.wantedBy == [ ];
+          assert
+            !(nixpkgs.lib.hasInfix "LG Electronics"
+              socks.home-manager.users.ivan.xdg.configFile."niri/config.kdl".text
+            );
+          assert nixpkgs.lib.hasInfix "LG Electronics"
+            lythir.home-manager.users.ivan.xdg.configFile."niri/config.kdl".text;
+          pkgs.runCommand "configuration-policy" { } "touch $out";
         formatting = pkgs.runCommand "nix-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
           cd ${self}
           find . -name '*.nix' -type f -print0 | xargs -0 nixfmt --check

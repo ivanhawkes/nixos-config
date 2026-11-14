@@ -1,5 +1,8 @@
 # Dotfiles and helper scripts that home-manager symlinks into the home directory.
-{ ... }:
+{ pkgs, ... }:
+let
+  scripts = import ../../../packages/helper-scripts.nix { inherit pkgs; };
+in
 
 {
   # ── Home directory dotfiles ───────────────────────────────
@@ -16,22 +19,18 @@
       source = ../files/clang-format;
     };
 
-    # Offsite backup to OneDrive.
-    ".local/bin/home-to-onedrive.sh" = {
-      source = ../scripts/home-to-onedrive.sh;
-      executable = true;
-    };
-
-    # Offsite backup to OneDrive.
-    ".local/bin/immich-to-onedrive.sh" = {
-      source = ../scripts/immich-to-onedrive.sh;
-      executable = true;
-    };
-
-    ".local/bin/clone-pico-libraries.sh" = {
-      source = ../scripts/clone-pico-libraries.sh;
-      executable = true;
-    };
-
-  };
+  }
+  // builtins.listToAttrs (
+    map
+      (name: {
+        name = ".local/bin/${name}.sh";
+        value.source = "${scripts.${name}}/bin/${name}.sh";
+      })
+      [
+        "home-to-onedrive"
+        "immich-to-onedrive"
+        "clone-pico-libraries"
+      ]
+  );
+  home.packages = builtins.attrValues scripts;
 }
