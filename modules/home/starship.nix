@@ -17,9 +17,15 @@
 
       # Set a modern looking terminal prompt.
       format = ''
-        [](#89b4fa)$directory[](fg:#89b4fa bg:#313244)$git_branch$git_status[](fg:#313244)
+        [](#cba6f7)$hostname[](fg:#cba6f7 bg:#89b4fa)$directory[](fg:#89b4fa bg:#313244)$git_branch$git_status[](fg:#313244)
         $character
       '';
+
+      hostname = {
+        ssh_only = false;
+        format = "[ $hostname ]($style)";
+        style = "fg:#1e1e2e bg:#cba6f7 bold";
+      };
 
       # ── Present Working Directory Sizing ──
       directory = {
