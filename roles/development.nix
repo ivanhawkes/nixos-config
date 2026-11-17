@@ -41,8 +41,9 @@
 
   environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
     sandbox.enabled = true;
-    # Builds in the sandbox compile through ccache, which fails without write access to its cache.
-    sandbox.filesystem.allowWrite = [ "/home/ivan/.cache/ccache" ];
+    # Xvfb writes its lock (/tmp/.X<n>-lock) and socket (/tmp/.X11-unix) under /tmp itself, and the
+    # headless test scripts wait on that lock, so a narrower path cannot work.
+    sandbox.filesystem.allowWrite = [ "/home/ivan/.cache/ccache" "/tmp" ];
   };
 
   home-manager.users.ivan.imports = [ ../users/ivan/home/development.nix ];
