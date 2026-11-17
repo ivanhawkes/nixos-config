@@ -13,6 +13,13 @@
         TERM = "xterm-256color";
       };
 
+      bell = {
+        command = {
+          program = "${pkgs.pipewire}/bin/pw-play";
+          args = [ "${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/bell.oga" ];
+        };
+      };
+
       window = {
         opacity = 0.85;
         decorations = "None"; # Eliminates native window decorations cleanly for Niri
