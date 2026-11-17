@@ -16,6 +16,15 @@
   ];
   home-manager.users.ivan.imports = [ ./home.nix ];
   networking.hostName = "lythir";
+  nix.settings = {
+    max-jobs = 1;
+    cores = 8;
+  };
+  systemd.services.nix-daemon.serviceConfig.OOMScoreAdjust = 500;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
   boot.supportedFilesystems = [ "ntfs" ];
   # Lock the DRM device for Wayland compositors.
   environment.variables.WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:0c:00.0-card";

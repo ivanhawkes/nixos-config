@@ -17,6 +17,26 @@ sudo nixos-rebuild switch --flake .#lythir
 Use `socks` when targeting the laptop. Review the lockfile diff before activation.
 The devenv harness uses its own lockfile and is updated separately.
 
+## Build memory on Lythir
+
+Lythir limits local builds to one derivation at a time and requests eight cores
+per build. Builders can ignore the core limit, and neither setting caps memory.
+The host also enables zram swap at 50% of RAM and gives the Nix daemon a higher
+kernel OOM score. Zram uses compressed RAM, not additional physical memory;
+OOM scoring does not guarantee that a build is killed before the desktop.
+
+The current system retains its old settings until activation. For the first
+rebuild, use a stricter per-command limit:
+
+```sh
+sudo nixos-rebuild switch --flake .#lythir --max-jobs 1 --cores 4
+```
+
+After activation, check `swapon --show` and `nix config show` to confirm the
+running settings. If memory pressure persists, consider disk-backed swap as a
+slower additional buffer and inspect the failing build before setting a memory
+limit; an overly low limit can cause builds to fail.
+
 ## Desktop and applications
 
 Niri and GDM are selected by `roles/desktop.nix`. Full GNOME desktop sessions are

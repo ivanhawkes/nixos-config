@@ -78,6 +78,9 @@
           assert lythir.systemd.services ? development-ports;
           assert !(socks.systemd.services ? development-ports);
           assert lythir.systemd.services.development-ports.wantedBy == [ ];
+          assert lythir.nix.settings.max-jobs == 1 && lythir.nix.settings.cores == 8;
+          assert lythir.zramSwap.enable && lythir.zramSwap.memoryPercent == 50;
+          assert lythir.systemd.services.nix-daemon.serviceConfig.OOMScoreAdjust == 500;
           assert
             !(nixpkgs.lib.hasInfix "LG Electronics"
               socks.home-manager.users.ivan.xdg.configFile."niri/config.kdl".text
