@@ -43,7 +43,12 @@
     sandbox.enabled = true;
     # Xvfb writes its lock (/tmp/.X<n>-lock) and socket (/tmp/.X11-unix) under /tmp itself, and the
     # headless test scripts wait on that lock, so a narrower path cannot work.
-    sandbox.filesystem.allowWrite = [ "/home/ivan/.cache/ccache" "/tmp" ];
+    # Manifest is the sibling game repository Jettison's sessions also edit, commit and push.
+    sandbox.filesystem.allowWrite = [ "/home/ivan/.cache/ccache" "/tmp" "/home/ivan/projects/manifest" ];
+    # Xvfb's listening socket and the ssh agent (for git push) are Unix sockets; any socket is allowed.
+    sandbox.network.allowAllUnixSockets = true;
+    # git push over ssh.
+    sandbox.network.allowedDomains = [ "github.com" ];
   };
 
   home-manager.users.ivan.imports = [ ../users/ivan/home/development.nix ];
