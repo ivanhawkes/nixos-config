@@ -17,8 +17,8 @@
   home-manager.users.ivan.imports = [ ./home.nix ];
   networking.hostName = "lythir";
   nix.settings = {
-    max-jobs = 1;
-    cores = 8;
+    max-jobs = 2;
+    cores = 12;
   };
   systemd.services.nix-daemon.serviceConfig.OOMScoreAdjust = 500;
   zramSwap = {

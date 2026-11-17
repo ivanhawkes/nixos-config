@@ -41,6 +41,8 @@
 
   environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
     sandbox.enabled = true;
+    # Builds in the sandbox compile through ccache, which fails without write access to its cache.
+    sandbox.filesystem.allowWrite = [ "/home/ivan/.cache/ccache" ];
   };
 
   home-manager.users.ivan.imports = [ ../users/ivan/home/development.nix ];

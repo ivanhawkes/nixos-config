@@ -19,8 +19,9 @@ The devenv harness uses its own lockfile and is updated separately.
 
 ## Build memory on Lythir
 
-Lythir limits local builds to one derivation at a time and requests eight cores
-per build. Builders can ignore the core limit, and neither setting caps memory.
+Lythir allows two local derivations at a time and requests 12 cores per build.
+Builders can ignore the core limit, and neither setting caps memory. Concurrent
+builds can increase memory pressure; reduce these limits if builds cause OOMs.
 The host also enables zram swap at 50% of RAM and gives the Nix daemon a higher
 kernel OOM score. Zram uses compressed RAM, not additional physical memory;
 OOM scoring does not guarantee that a build is killed before the desktop.
