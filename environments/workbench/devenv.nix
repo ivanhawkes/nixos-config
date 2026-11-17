@@ -14,6 +14,7 @@
     git
     git-lfs
     gh
+    lazygit
     openssh
     curl
     wget

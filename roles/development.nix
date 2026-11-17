@@ -1,15 +1,47 @@
 { pkgs, ... }: {
   imports = [ ../modules/nixos/codex.nix ];
   virtualisation.docker.enable = true;
+
   environment.systemPackages = with pkgs; [
-    docker-compose
+    # Git and GitHub CLI for version control and repository management.
+    git
+    git-lfs
+    gh
+
+    # LazyGit for an enhanced Git experience on the command line.
+    lazygit
+    
+    # Claude Code requires bubblewrap and socat for sandboxing.
     claude-code
-    # Both agents use bubblewrap for Linux sandboxing; Claude also needs socat.
     bubblewrap
     socat
+
+    # Pi Coding Agent - simple, light, customise for the project.
+    pi-coding-agent
+
+    # Bring worktrunk into the project.
+    worktrunk
+
+    # Go programming language.
+    go
+
+    # Useful command-line utilities for searching, filtering, and viewing files.
+    ripgrep
+    fd
+    fzf
+    bat
+    eza
+    tree
+    jq
+    yq-go
+
+    # Docker Compose for managing multi-container Docker applications.
+    docker-compose
   ];
+
   environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
     sandbox.enabled = true;
   };
+
   home-manager.users.ivan.imports = [ ../users/ivan/home/development.nix ];
 }

@@ -9,11 +9,11 @@
 {
   env.GREET = "Pi Agent Configuration Workspace";
 
-  packages = [
-    pkgs.git
-    pkgs.git-lfs
-    pkgs.nodejs_latest
-    pkgs.pi-coding-agent
+  packages = with pkgs;[
+    git
+    git-lfs
+    nodejs_latest
+    pi-coding-agent
   ];
 
   scripts.harness-init.exec = ''
