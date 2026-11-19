@@ -2,6 +2,10 @@
   imports = [ ../modules/nixos/codex.nix ];
   virtualisation.docker.enable = true;
 
+  # VS Code extensions ship binaries built for generic Linux (CodeLLDB's adapter, the C/C++
+  # extension's debugger); nix-ld gives them a loader and the common libraries they link.
+  programs.nix-ld.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Git and GitHub CLI for version control and repository management.
     git
