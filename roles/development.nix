@@ -38,6 +38,11 @@
     tree
     jq
     yq-go
+  
+    # Record the terminal and produce video from it.
+    asciinema
+    asciinema-agg
+    ffmpeg
 
     # Docker Compose for managing multi-container Docker applications.
     docker-compose
