@@ -15,7 +15,7 @@
   environment.systemPackages = with pkgs; [
     stow
     discord
-    vlc
+    mpv
     wl-clipboard
     nautilus
     google-chrome
