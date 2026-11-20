@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [ ../modules/nixos/codex.nix ];
   virtualisation.docker.enable = true;
 
@@ -15,8 +15,11 @@
     # LazyGit for an enhanced Git experience on the command line.
     lazygit
 
+    # Claude Code - using overlays
+#    claude-code
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+
     # Claude Code requires bubblewrap and socat for sandboxing.
-    claude-code
     bubblewrap
     socat
 
