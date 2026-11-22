@@ -52,16 +52,10 @@
   ];
 
   environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
-    sandbox.enabled = true;
-    # Xvfb writes its lock (/tmp/.X<n>-lock) and socket (/tmp/.X11-unix) under /tmp itself, and the
-    # headless test scripts wait on that lock, so a narrower path cannot work.
-    # Manifest is the sibling game repository Jettison's sessions also edit, commit and push.
-    sandbox.filesystem.allowWrite = [
-      "/home/ivan/.cache/ccache"
-      "/home/ivan/.cache/jettison"
-      "/tmp"
-      "/home/ivan/projects/manifest"
-    ];
+    # sandbox.enabled and sandbox.filesystem.allowWrite live in ~/.claude/settings.json, so
+    # /sandbox can change them; managed settings would override it. allowWrite there: Xvfb needs
+    # all of /tmp for its lock and socket, and Manifest is the sibling repository Jettison
+    # sessions edit.
 
     # Xvfb's listening socket and the ssh agent (for git push) are Unix sockets; any socket is allowed.
     sandbox.network.allowAllUnixSockets = true;
