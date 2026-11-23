@@ -46,6 +46,8 @@
     asciinema
     asciinema-agg
     ffmpeg
+    # Author .ass subtitles to burn in with ffmpeg's ass filter.
+    aegisub
 
     # Docker Compose for managing multi-container Docker applications.
     docker-compose
