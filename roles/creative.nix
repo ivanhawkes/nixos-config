@@ -1,8 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
+  imports = [ ../modules/nixos/blender.nix ];
   environment.systemPackages = with pkgs; [
     krita
     inkscape
-    blender
     freecad
     kicad
   ];
