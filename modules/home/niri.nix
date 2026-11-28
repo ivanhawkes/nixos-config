@@ -85,7 +85,7 @@
       binds {
           Mod+T      { spawn "sh" "-c" "alacritty & niri msg action set-column-width 50%"; }
           Mod+B      { spawn "google-chrome"; }
-          Mod+E      { spawn "nautilus"; }
+          Mod+E      { spawn "nautilus" "-w"; }
 
           Mod+D      { spawn "fuzzel"; }
           Mod+Q      { close-window; }
